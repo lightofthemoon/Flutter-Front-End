@@ -1,19 +1,23 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quanlyquantrasua/api/create_accounts.dart';
+import 'package:quanlyquantrasua/screens/account_list_screen.dart';
 
-import 'screens/admin/profile_screens/admin_settings.dart';
-import 'screens/customer/profile_screens/customer_settings.dart';
-import 'screens/delivery/profile_screens/delivery_settings.dart';
-
-// ngôn ngữ tiếng Việt
+import 'controller/get_ip.dart';
 
 void main() async {
-  runApp(MaterialApp(
-    initialRoute: 'delivery_settings',
-    debugShowCheckedModeBanner: false,
-    routes: {
-      'customer_settings': (context) => const CustomerSettingProfile(),
-      'delivery_settings': (context) => const DeliverySettingProfile(),
-      'admin_settings': (context) => const AdminSettingProfile(),
-    },
-  ));
+  Get.put(AccountController());
+  final ipv4 = await getCurrentIPv4Address();
+
+  runApp(
+    MaterialApp(
+      initialRoute: 'introduction_screen',
+      debugShowCheckedModeBanner: false,
+      routes: {
+        'introduction_screen': (context) => AccountsListScreen(),
+      },
+    ),
+  );
 }
