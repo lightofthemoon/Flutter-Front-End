@@ -47,11 +47,12 @@ TextFormField BuildUsername() {
   return TextFormField(
     cursorColor: Colors.black,
     decoration: const InputDecoration(
-        hintText: 'Enter your username',
-        labelText: 'Username',
-        suffixIcon: CustomSuffix(
-          svgIcon: 'assets/icons/User.svg',
-        )),
+      hintText: 'Enter your username',
+      labelText: 'Username',
+      // suffixIcon: CustomSuffix(
+      //   svgIcon: 'assets/icons/User.svg',
+      // )
+    ),
   );
 }
 
@@ -60,11 +61,9 @@ TextFormField BuildConfirmPassword() {
     obscureText: true,
     cursorColor: Colors.black,
     decoration: const InputDecoration(
-        hintText: 'Re-enter your password',
-        labelText: 'Confirm password',
-        suffixIcon: CustomSuffix(
-          svgIcon: 'assets/icons/Lock.svg',
-        )),
+      hintText: 'Re-enter your password',
+      labelText: 'Confirm password',
+    ),
   );
 }
 
@@ -73,10 +72,8 @@ TextFormField BuildFormPassword() {
     obscureText: true,
     cursorColor: Colors.black,
     decoration: const InputDecoration(
-        hintText: 'Enter your password',
-        labelText: 'Password',
-        suffixIcon: CustomSuffix(
-          svgIcon: 'assets/icons/Lock.svg',
-        )),
+      hintText: 'Enter your password',
+      labelText: 'Password',
+    ),
   );
 }

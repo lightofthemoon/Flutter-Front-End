@@ -19,38 +19,41 @@ class AccountsListScreen extends StatelessWidget {
       ),
       body: Obx(() {
         if (controller.accounts.value != null) {
-          return ListView.builder(
-            itemCount: controller.accounts.value!.length,
-            itemBuilder: (context, index) {
-              final account = controller.accounts.value![index];
+          return RefreshIndicator(
+            onRefresh: controller.getAllAccounts,
+            child: ListView.builder(
+              itemCount: controller.accounts.value!.length,
+              itemBuilder: (context, index) {
+                final account = controller.accounts.value![index];
 
-              return ListTile(
-                title: Text(account.username ?? ''),
-                subtitle: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text('Quyền: ${account.accounttypeid}'),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(account.email ?? ''),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        account.birthday != null
-                            ? Text(DateFormat('dd/MM/yyyy')
-                                .format(account.birthday!.toLocal()))
-                            : const Text('Chưa cập nhật'),
-                      ],
-                    ),
-                  ],
-                ),
-                trailing: Text(account.phoneNumber ?? ''),
-              );
-            },
+                return ListTile(
+                  title: Text(account.username ?? ''),
+                  subtitle: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text('Quyền: ${account.accounttypeid}'),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(account.email ?? ''),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          account.birthday != null
+                              ? Text(DateFormat('dd/MM/yyyy')
+                                  .format(account.birthday!.toLocal()))
+                              : const Text('Chưa cập nhật'),
+                        ],
+                      ),
+                    ],
+                  ),
+                  trailing: Text(account.phoneNumber ?? ''),
+                );
+              },
+            ),
           );
         }
         return const Center(child: CircularProgressIndicator());

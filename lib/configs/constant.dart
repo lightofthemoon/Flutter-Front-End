@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const kPrimaryColor = Color(0xFF39C5C8);
 const kPrimaryLightColor = Color(0xFFFFECDF);
@@ -9,7 +10,8 @@ const kPrimaryGradientColor = LinearGradient(
 );
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
-
+TextStyle kHelperTextStyle =
+    GoogleFonts.nunito(fontSize: 13, color: Colors.red);
 const kAnimationDuration = Duration(milliseconds: 200);
 
 const headingStyle = TextStyle(
