@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 import 'package:quanlyquantrasua/screens/create_account_screen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import 'package:intl/intl.dart';
-import '../api/create_accounts.dart';
+import '../api/user/create_accounts.dart';
 import '../model/account_model.dart';
 
 class AccountsListScreen extends StatelessWidget {
   AccountsListScreen({super.key});
-  final controller = Get.find<AccountController>();
+  final controller = Get.find<FetchApiController>();
   @override
   Widget build(BuildContext context) {
+    controller.getAllAccounts();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Accounts'),
