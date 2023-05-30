@@ -8,7 +8,7 @@ class ApiUrl {
   ///// Api của Đạt
   ///
   ///
-
+  static const apiCreateCategory = '${baseUrl}user/id/';
   ///// Api của Tính
   static const apiGetAllCategory = '${baseUrl}categories/list';
 

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:quanlyquantrasua/api/create_accounts.dart';
+import 'package:quanlyquantrasua/api/user/create_accounts.dart';
 
 import '../model/account_model.dart';
 import '../widgets/custom_widgets/messages_widget.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({super.key});
-  final controller = Get.find<AccountController>();
+  final controller = Get.find<FetchApiController>();
   @override
   Widget build(BuildContext context) {
     TextEditingController usernameController = TextEditingController();
@@ -116,9 +116,9 @@ class CreateAccountScreen extends StatelessWidget {
           },
           backgroundColor: Colors.blue,
           shape: const StadiumBorder(),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Icon(Icons.add),
               SizedBox(width: 5.0),
               Text("Tạo"),
