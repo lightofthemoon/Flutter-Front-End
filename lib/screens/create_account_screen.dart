@@ -116,9 +116,9 @@ class CreateAccountScreen extends StatelessWidget {
           },
           backgroundColor: Colors.blue,
           shape: const StadiumBorder(),
-          child: const Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: const [
               Icon(Icons.add),
               SizedBox(width: 5.0),
               Text("Tạo"),
