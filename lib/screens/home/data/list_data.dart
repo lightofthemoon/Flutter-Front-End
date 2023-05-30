@@ -45,14 +45,14 @@ class ListDataTemp {
     {
       "photo": "https://i.imgur.com/NnnzQ0d.jpg",
       "product_name": "Trà hồng đào",
-      "price": 33,
+      "price": 32000,
       "category": "Trà",
       "description": "Trà nhà làm, ngon như nhà làm",
     },
     {
       "photo": "https://i.imgur.com/L7zFXZT.jpg",
       "product_name": "Trà đào cam xả",
-      "price": 31,
+      "price": 31000,
       "category": "Trà",
       "description": "Trà nhà làm, ngon như nhà làm",
     },
