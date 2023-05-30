@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:quanlyquantrasua/api/user/create_accounts.dart';
-import 'package:quanlyquantrasua/screens/account_list_screen.dart';
+import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 
 import 'controller/get_ip.dart';
 
@@ -15,7 +13,7 @@ void main() async {
       initialRoute: 'introduction_screen',
       debugShowCheckedModeBanner: false,
       routes: {
-        'introduction_screen': (context) => AccountsListScreen(),
+        'introduction_screen': (context) => HomeScreenView(),
       },
     ),
   );
