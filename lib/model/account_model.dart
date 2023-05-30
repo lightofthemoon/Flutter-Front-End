@@ -38,8 +38,6 @@ class Accounts {
   Map<String, dynamic> toJson() {
     String birthdayDate =
         DateFormat('dd/MM/yyyy').format(birthday ?? DateTime.now());
-    // format the date as an ISO 8601 string
-
     return {
       'fullName': username,
       'password': password,
