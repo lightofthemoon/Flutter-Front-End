@@ -1,87 +1,186 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quanlyquantrasua/configs/constant.dart';
+import 'package:quanlyquantrasua/model/account_model.dart';
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/gender_chose.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
+import '../../../api/account_api/account_api.dart';
+import '../../../widgets/custom_widgets/custom_input_textformfield.dart';
+import '../../../widgets/custom_widgets/datetime_picker.dart';
 import '../../../widgets/custom_widgets/default_button.dart';
 import '../../../widgets/custom_widgets/transition.dart';
 
-class SignUpCompleteForm extends StatelessWidget {
-  const SignUpCompleteForm({super.key});
+class SignUpCompleteForm extends StatefulWidget {
+  SignUpCompleteForm({Key? key, required this.email, required this.password});
+  final String email;
+  final String password;
+
+  @override
+  State<SignUpCompleteForm> createState() => _SignUpCompleteFormState();
+}
+
+class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
+  final controller = Get.find<AccountController>();
+
+  late TextEditingController fullNameController;
+
+  late TextEditingController phonenumberController;
+
+  late TextEditingController addressController;
+  final fullnameFocusNode = FocusNode();
+
+  final phonenumberFocusNode = FocusNode();
+
+  final addressFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    fullNameController = TextEditingController();
+    phonenumberController = TextEditingController();
+    addressController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    DateTime? date;
+    String? selectedGender;
     return Form(
       child: Column(children: [
-        buildFullNameField(),
+        BirthdayDatePickerWidget(
+          initialDate: DateTime.now(),
+          onChanged: (value) {
+            date = value;
+          },
+        ),
         const SizedBox(
           height: 30,
         ),
-        buildPhoneNumberField(),
+        CustomInputTextField(
+          validator: (value) {
+            if (fullNameController.text.isEmpty ||
+                fullNameController.text == '') {
+              return 'This field is required';
+            }
+            return null;
+          },
+          controller: fullNameController,
+          focusNode: fullnameFocusNode,
+          nextfocusNode: phonenumberFocusNode,
+          labelText: 'Họ và tên',
+          hintText: 'Nhập họ và tên',
+        ),
         const SizedBox(
           height: 30,
         ),
+        CustomInputTextField(
+            controller: phonenumberController,
+            focusNode: phonenumberFocusNode,
+            nextfocusNode: addressFocusNode,
+            labelText: 'Nhập số điện thoại',
+            hintText: 'Số điện thoại'),
         GenderSelectionWidget(
-          gender: 'Nam',
           size: 1.7,
+          onChanged: (value) {
+            selectedGender = value;
+          },
         ),
-        buildAddressField(),
+        CustomInputTextField(
+            controller: addressController,
+            focusNode: addressFocusNode,
+            nextfocusNode: null,
+            labelText: 'Nhập địa chỉ',
+            hintText: 'Địa chỉ'),
         const SizedBox(
           height: 30,
-        ),
-        buildBirthDayField(),
-        const SizedBox(
-          height: 20,
         ),
         DefaultButton(
-          text: 'Tiếp tục',
-          press: () {
-            slideinTransition(context, const SignInScreen());
+          text: 'Đăng ký',
+          press: () async {
+            Accounts accounts = Accounts();
+            accounts.email = widget.email;
+            accounts.password = widget.password;
+            if (selectedGender != null) {
+              accounts.gender = selectedGender;
+            } else {
+              CustomSnackBar.showCustomSnackBar(
+                  context, 'Bạn chưa chọn giới tính', 1,
+                  backgroundColor: Colors.red);
+              return;
+            }
+            accounts.address = addressController.text;
+            accounts.username = fullNameController.text;
+            accounts.phoneNumber = phonenumberController.text;
+            accounts.accounttypeid = 3;
+            if (date != null) {
+              accounts.birthday = date;
+            } else {
+              CustomSnackBar.showCustomSnackBar(
+                  context, 'vui lòng kiểm tra ngày sinh đã chọn', 1,
+                  backgroundColor: Colors.red);
+              return;
+            }
+            print(accounts.toJson());
+            await controller.createAccount(context, accounts.toJson());
           },
         )
       ]),
     );
   }
+
+  String? _validateFullname(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Vui lòng nhập tên';
+    }
+    // Add additional validation logic here, if needed
+    return '';
+  }
 }
 
-TextFormField buildFullNameField() {
-  return TextFormField(
-    cursorColor: Colors.black,
-    decoration: const InputDecoration(
-      hintText: 'Nhập họ và tên',
-      labelText: 'Họ và tên',
-    ),
-  );
-}
+// TextFormField buildFullNameField() {
+//   return TextFormField(
+//     cursorColor: Colors.black,
+//     decoration: const InputDecoration(
+//       hintText: 'Nhập họ và tên',
+//       labelText: 'Họ và tên',
+//     ),
+//   );
+// }
 
-TextFormField buildBirthDayField() {
-  return TextFormField(
-    cursorColor: Colors.black,
-    decoration: InputDecoration(
-      hintText: 'Nhập ngày sinh',
-      labelText: 'Ngày sinh',
-      helperText: 'Ngày sinh phải có định dạng là ngày/tháng/năm',
-      helperStyle: kHelperTextStyle,
-    ),
-  );
-}
+// TextFormField buildBirthDayField() {
+//   return TextFormField(
+//     cursorColor: Colors.black,
+//     decoration: InputDecoration(
+//       hintText: 'Nhập ngày sinh',
+//       labelText: 'Ngày sinh',
+//       helperText: 'Ngày sinh phải có định dạng là ngày/tháng/năm',
+//       helperStyle: kHelperTextStyle,
+//     ),
+//   );
+// }
 
-TextFormField buildPhoneNumberField() {
-  return TextFormField(
-    cursorColor: Colors.black,
-    decoration: const InputDecoration(
-      hintText: 'Nhập số điện thoại',
-      labelText: 'Số điện thoại',
-    ),
-  );
-}
+// TextFormField buildPhoneNumberField() {
+//   return TextFormField(
+//     cursorColor: Colors.black,
+//     decoration: const InputDecoration(
+//       hintText: 'Nhập số điện thoại',
+//       labelText: 'Số điện thoại',
+//     ),
+//   );
+// }
 
-TextFormField buildAddressField() {
-  return TextFormField(
-    cursorColor: Colors.black,
-    decoration: const InputDecoration(
-      hintText: 'Nhập địa chỉ',
-      labelText: 'Địa chỉ',
-    ),
-  );
-}
+// TextFormField buildAddressField() {
+//   return TextFormField(
+//     cursorColor: Colors.black,
+//     decoration: const InputDecoration(
+//       hintText: 'Nhập địa chỉ',
+//       labelText: 'Địa chỉ',
+//     ),
+//   );
+// }

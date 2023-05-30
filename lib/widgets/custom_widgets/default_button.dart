@@ -7,10 +7,11 @@ class DefaultButton extends StatelessWidget {
     Key? key,
     required this.text,
     required this.press,
+    this.enabled = true,
   }) : super(key: key);
   final String text;
   final VoidCallback press;
-
+  final bool enabled;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -22,7 +23,7 @@ class DefaultButton extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           backgroundColor: kPrimaryColor,
         ),
-        onPressed: press,
+        onPressed: enabled ? press : null,
         child: Text(
           text,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),

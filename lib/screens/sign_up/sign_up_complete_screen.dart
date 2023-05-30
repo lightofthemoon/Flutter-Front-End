@@ -5,7 +5,11 @@ import 'components/sign_up_complete_body.dart';
 
 class SignUpCompleteScreen extends StatelessWidget {
   static String routeName = "/sign_in";
-  const SignUpCompleteScreen({super.key});
+
+  const SignUpCompleteScreen(
+      {super.key, required this.email, required this.password});
+  final String email;
+  final String password;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,10 @@ class SignUpCompleteScreen extends StatelessWidget {
         },
         title: 'Đăng ký',
       ),
-      body: const SignUpCompleteBody(),
+      body: SignUpCompleteBody(
+        email: email,
+        password: password,
+      ),
     );
   }
 }

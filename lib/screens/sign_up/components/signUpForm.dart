@@ -1,79 +1,106 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quanlyquantrasua/api/account_api/account_api.dart';
 import 'package:quanlyquantrasua/screens/sign_up/sign_up_complete_screen.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/custom_input_textformfield.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 
-import '../../../configs/constant.dart';
-
 import '../../../widgets/custom_widgets/default_button.dart';
-import '../../../widgets/custom_widgets/form_err.dart';
-import '../../sign_in/components/customSuffixIcon.dart';
 
-class SignUpForm extends StatelessWidget {
-  const SignUpForm({super.key});
+class SignUpForm extends StatefulWidget {
+  SignUpForm({super.key});
+
+  @override
+  State<SignUpForm> createState() => _SignUpFormState();
+}
+
+class _SignUpFormState extends State<SignUpForm> {
+  final controller = Get.find<AccountController>();
+
+  late TextEditingController emailController;
+
+  late TextEditingController passwordController;
+
+  late TextEditingController reenterpassController;
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    reenterpassController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  final emailFocusNode = FocusNode();
+
+  final passwordFocusNode = FocusNode();
+
+  final reenterpassFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return Form(
       child: Column(children: [
-        BuildUsername(),
+        CustomInputTextField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Email không được trống';
+              }
+              return null;
+            },
+            controller: emailController,
+            focusNode: emailFocusNode,
+            nextfocusNode: passwordFocusNode,
+            labelText: 'Email',
+            hintText: 'Nhập Email'),
         const SizedBox(
           height: 20,
         ),
-        BuildFormPassword(),
+        CustomInputTextField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Bạn chưa nhập mật khẩu';
+              }
+              return null;
+            },
+            controller: passwordController,
+            focusNode: passwordFocusNode,
+            nextfocusNode: reenterpassFocusNode,
+            labelText: 'Mật khẩu',
+            hintText: 'Nhập mật khẩu'),
         const SizedBox(
           height: 20,
         ),
-        BuildConfirmPassword(),
+        CustomInputTextField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Bạn phải xác nhận mật khẩu';
+              }
+              return null;
+            },
+            controller: reenterpassController,
+            focusNode: reenterpassFocusNode,
+            nextfocusNode: null,
+            labelText: 'Xác nhận mật khẩu',
+            hintText: 'Nhập lại mật khẩu'),
         const SizedBox(
           height: 40,
         ),
         DefaultButton(
           text: 'Tiếp tục',
           press: () {
-            slideinTransition(context, const SignUpCompleteScreen());
-            // if (_formKey.currentState!.validate() == true) {
-            //   _formKey.currentState?.save();
-            //   Navigator.pushNamed(context, CompleteProfileScreen.routeName,
-            //       arguments: {'username': username, 'password': password});
-            // }
+            slideinTransition(
+                context,
+                SignUpCompleteScreen(
+                    email: emailController.text,
+                    password: passwordController.text));
           },
         )
       ]),
     );
   }
-}
-
-TextFormField BuildUsername() {
-  return TextFormField(
-    cursorColor: Colors.black,
-    decoration: const InputDecoration(
-      hintText: 'Enter your username',
-      labelText: 'Username',
-      // suffixIcon: CustomSuffix(
-      //   svgIcon: 'assets/icons/User.svg',
-      // )
-    ),
-  );
-}
-
-TextFormField BuildConfirmPassword() {
-  return TextFormField(
-    obscureText: true,
-    cursorColor: Colors.black,
-    decoration: const InputDecoration(
-      hintText: 'Re-enter your password',
-      labelText: 'Confirm password',
-    ),
-  );
-}
-
-TextFormField BuildFormPassword() {
-  return TextFormField(
-    obscureText: true,
-    cursorColor: Colors.black,
-    decoration: const InputDecoration(
-      hintText: 'Enter your password',
-      labelText: 'Password',
-    ),
-  );
 }

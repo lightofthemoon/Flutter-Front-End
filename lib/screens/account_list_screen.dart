@@ -5,7 +5,7 @@ import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/screens/sign_up/signUpScreen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import 'package:intl/intl.dart';
-import '../api/account_api.dart';
+import '../api/account_api/account_api.dart';
 
 class AccountsListScreen extends StatelessWidget {
   AccountsListScreen({super.key});
@@ -18,13 +18,13 @@ class AccountsListScreen extends StatelessWidget {
         title: const Text('Accounts'),
       ),
       body: Obx(() {
-        if (controller.accounts.value != null) {
+        if (controller.listaccounts.value != null) {
           return RefreshIndicator(
             onRefresh: controller.getAllAccounts,
             child: ListView.builder(
-              itemCount: controller.accounts.value!.length,
+              itemCount: controller.listaccounts.value!.length,
               itemBuilder: (context, index) {
-                final account = controller.accounts.value![index];
+                final account = controller.listaccounts.value![index];
 
                 return ListTile(
                   title: Text(account.username ?? ''),
