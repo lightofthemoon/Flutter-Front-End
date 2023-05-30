@@ -13,7 +13,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
 
 import '../controller/get_ip.dart';
 import '../model/account_model.dart';
@@ -26,8 +25,8 @@ class AccountController extends GetxController {
   Future<List<Accounts>> getAllAccounts() async {
     final ipv4 = await getCurrentIPv4Address();
     try {
-      final response = await http
-          .get(Uri.parse('http://10.14.112.191:7071/api/accounts/all'));
+      final response =
+          await http.get(Uri.parse('http://192.168.1.166/api/accounts/all'));
       if (response.statusCode == 200) {
         //Code lỏd
         // final jsonData = jsonDecode(response.body) as List<dynamic>;
@@ -45,7 +44,7 @@ class AccountController extends GetxController {
   Future<Accounts?> createAccount(
       BuildContext context, Map<String, dynamic> accountDTO) async {
     final response = await http.post(
-      Uri.parse('http://10.14.112.191:7071/api/accounts/createAccount'),
+      Uri.parse('http://192.168.1.166/api/accounts/createAccount'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
