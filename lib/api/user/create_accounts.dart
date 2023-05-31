@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quanlyquantrasua/api/base-url-api.dart';
+import 'package:quanlyquantrasua/model/account_response.dart';
 
 import '../../model/account_model.dart';
 import 'dart:convert';
@@ -7,13 +8,13 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class FetchApiController extends GetxController {
-  Future<List<Accounts>> getAllAccounts() async {
+  Future<List<ListAccountResponse>> getAllAccounts() async {
     try {
       final response = await http.get(Uri.parse(ApiUrl.apiCreateCategory));
       if (response.statusCode == 200) {
         final jsonData =
             jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
-        return jsonData.map((data) => Accounts.fromJson(data)).toList();
+        return jsonData.map((data) => ListAccountResponse.fromJson(data)).toList();
       } else {
         throw Exception('Failed to load accounts: ${response.body}');
       }

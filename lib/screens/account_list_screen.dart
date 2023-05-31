@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quanlyquantrasua/model/account_response.dart';
 import 'package:quanlyquantrasua/screens/create_account_screen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +17,7 @@ class AccountsListScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Accounts'),
       ),
-      body: FutureBuilder<List<Accounts>>(
+      body: FutureBuilder<List<ListAccountResponse>>(
         future: controller.getAllAccounts(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -26,12 +27,12 @@ class AccountsListScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final account = accounts[index];
                 return ListTile(
-                  title: Text(account.username ?? ''),
+                  title: Text(account.email ?? ''),
                   subtitle: Column(
                     children: [
                       Row(
                         children: [
-                          Text('Quyền: ${account.accounttypeid}'),
+                          Text('Quyền: ${account.accountTypeId}'),
                         ],
                       ),
                       Row(
@@ -69,9 +70,9 @@ class AccountsListScreen extends StatelessWidget {
           },
           backgroundColor: Colors.blue,
           shape: const StadiumBorder(),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Icon(Icons.add),
               SizedBox(width: 5.0),
               Text("Tạo tài khoản mới"),
