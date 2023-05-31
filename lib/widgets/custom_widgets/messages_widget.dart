@@ -32,7 +32,7 @@ class CustomErrorMessage {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Color.fromARGB(255, 255, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 255, 0, 0),
       textColor: Colors.white,
       fontSize: 16.0,
     );
