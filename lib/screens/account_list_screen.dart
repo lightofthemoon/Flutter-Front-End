@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quanlyquantrasua/model/account_response.dart';
 import 'package:quanlyquantrasua/screens/create_account_screen.dart';
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/screens/sign_up/signUpScreen.dart';
@@ -54,12 +53,12 @@ class AccountsListScreen extends StatelessWidget {
                 final account = controller.listaccounts.value![index];
 
                 return ListTile(
-                  title: Text(account.email ?? ''),
+                  title: Text(account.username ?? ''),
                   subtitle: Column(
                     children: [
                       Row(
                         children: [
-                          Text('Quyền: ${account.accountTypeId}'),
+                          Text('Quyền: ${account.accounttypeid}'),
                         ],
                       ),
                       Row(
@@ -94,9 +93,9 @@ class AccountsListScreen extends StatelessWidget {
           },
           backgroundColor: Colors.blue,
           shape: const StadiumBorder(),
-          child: const Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: const [
               Icon(Icons.add),
               SizedBox(width: 5.0),
               Text("Tạo tài khoản mới"),
