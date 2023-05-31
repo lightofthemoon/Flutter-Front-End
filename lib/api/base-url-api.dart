@@ -12,6 +12,8 @@ class ApiUrl {
   ///// Api của Tính
   static const apiGetAllCategory = '${baseUrl}categories/list';
 
+  static const apiGetAllProduct = '${baseUrl}product/list';
+
   ///
   ///
   ///
