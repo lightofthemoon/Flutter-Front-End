@@ -9,7 +9,7 @@ import '../widgets/custom_widgets/messages_widget.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({super.key});
-  final controller = Get.find<FetchApiController>();
+  final controller = Get.find<AccountController>();
   @override
   Widget build(BuildContext context) {
     TextEditingController usernameController = TextEditingController();
@@ -120,9 +120,9 @@ class CreateAccountScreen extends StatelessWidget {
           },
           backgroundColor: Colors.blue,
           shape: const StadiumBorder(),
-          child: const Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: const [
               Icon(Icons.add),
               SizedBox(width: 5.0),
               Text("Tạo"),

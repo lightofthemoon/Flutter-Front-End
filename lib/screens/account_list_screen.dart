@@ -9,7 +9,7 @@ import '../api/account_api/account_api.dart';
 
 class AccountsListScreen extends StatelessWidget {
   AccountsListScreen({super.key});
-  final controller = Get.put(FetchApiController());
+  final controller = Get.put(AccountController());
   @override
   Widget build(BuildContext context) {
     controller.getAllAccounts();
