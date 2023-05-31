@@ -29,9 +29,9 @@ class AccountsListScreen extends StatelessWidget {
                   onPressed: () {
                     slideinTransition(context, const SignInScreen());
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Icon(Icons.login),
                       SizedBox(width: 5.0),
                       Text("Đăng nhập"),
@@ -93,9 +93,9 @@ class AccountsListScreen extends StatelessWidget {
           },
           backgroundColor: Colors.blue,
           shape: const StadiumBorder(),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Icon(Icons.add),
               SizedBox(width: 5.0),
               Text("Tạo tài khoản mới"),
