@@ -1,5 +1,5 @@
 class ApiUrl {
-  static const baseUrl = 'http://10.14.112.191:7071/api/';
+  static const baseUrl = 'http://localhost:7071/api/';
 
   static const apiLogin = baseUrl;
 
@@ -9,6 +9,10 @@ class ApiUrl {
   static const apiCreateAccount = '${baseUrl}accounts';
   static const apiCreateCategory = '${baseUrl}user/id/';
   ///// Api của Tính
+  static const apiGetAllCategory = '${baseUrl}categories/list';
+
+  static const apiGetAllProduct = '${baseUrl}product/list';
+
   ///
   ///
   ///
