@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final bool showLeading;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   const CustomAppBar(
-      {super.key,
-      this.title,
-      this.showLeading = true,
-      required this.onPressed});
+      {super.key, this.title, this.showLeading = true, this.onPressed});
 
   @override
   Widget build(BuildContext context) {

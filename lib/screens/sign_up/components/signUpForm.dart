@@ -22,12 +22,31 @@ class _SignUpFormState extends State<SignUpForm> {
   late TextEditingController passwordController;
 
   late TextEditingController reenterpassController;
+  bool isValidEmail = false;
+  bool isValidPassword = false;
+  bool isValidReenterPassword = false;
   @override
   void initState() {
     super.initState();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     reenterpassController = TextEditingController();
+    emailController.addListener(() {
+      setState(() {
+        isValidEmail = _validateEmail(emailController.text);
+      });
+    });
+    passwordController.addListener(() {
+      setState(() {
+        isValidPassword = _validatePassword(passwordController.text);
+      });
+    });
+    reenterpassController.addListener(() {
+      setState(() {
+        isValidReenterPassword = _validateReenterPassword(
+            passwordController.text, reenterpassController.text);
+      });
+    });
   }
 
   @override
@@ -48,9 +67,19 @@ class _SignUpFormState extends State<SignUpForm> {
         CustomInputTextField(
             validator: (value) {
               if (value == null || value.isEmpty) {
+                isValidEmail = false;
+
                 return 'Email không được trống';
               }
+
+              isValidEmail = true;
+
               return null;
+            },
+            onChanged: (value) {
+              setState(() {
+                isValidEmail = _validateEmail(value ?? '');
+              });
             },
             controller: emailController,
             focusNode: emailFocusNode,
@@ -63,9 +92,19 @@ class _SignUpFormState extends State<SignUpForm> {
         CustomInputTextField(
             validator: (value) {
               if (value == null || value.isEmpty) {
+                isValidPassword = false;
+
                 return 'Bạn chưa nhập mật khẩu';
               }
+
+              isValidPassword = true;
+
               return null;
+            },
+            onChanged: (value) {
+              setState(() {
+                isValidEmail = _validatePassword(value ?? '');
+              });
             },
             controller: passwordController,
             focusNode: passwordFocusNode,
@@ -78,9 +117,18 @@ class _SignUpFormState extends State<SignUpForm> {
         CustomInputTextField(
             validator: (value) {
               if (value == null || value.isEmpty) {
+                isValidReenterPassword = false;
+
                 return 'Bạn phải xác nhận mật khẩu';
               }
+              isValidReenterPassword = true;
               return null;
+            },
+            onChanged: (value) {
+              setState(() {
+                isValidEmail =
+                    _validateReenterPassword(value, reenterpassController.text);
+              });
             },
             controller: reenterpassController,
             focusNode: reenterpassFocusNode,
@@ -91,6 +139,7 @@ class _SignUpFormState extends State<SignUpForm> {
           height: 40,
         ),
         DefaultButton(
+          enabled: isValidEmail && isValidPassword && isValidReenterPassword,
           text: 'Tiếp tục',
           press: () {
             slideinTransition(
@@ -102,5 +151,26 @@ class _SignUpFormState extends State<SignUpForm> {
         )
       ]),
     );
+  }
+
+  bool _validateEmail(String? email) {
+    if (email == null || email.isEmpty) {
+      return false;
+    }
+    return true;
+  }
+
+  bool _validatePassword(String? password) {
+    if (password == null || password.isEmpty) {
+      return false;
+    }
+    return true;
+  }
+
+  bool _validateReenterPassword(String? password, String? reenterPassword) {
+    if (reenterPassword == null || reenterPassword.isEmpty) {
+      return false;
+    }
+    return true;
   }
 }

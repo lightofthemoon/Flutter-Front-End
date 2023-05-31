@@ -33,13 +33,30 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
   final phonenumberFocusNode = FocusNode();
 
   final addressFocusNode = FocusNode();
-
+  bool isValidFullName = false;
+  bool isValidPhoneNumber = false;
+  bool isValidAdress = false;
   @override
   void initState() {
     super.initState();
     fullNameController = TextEditingController();
     phonenumberController = TextEditingController();
     addressController = TextEditingController();
+    fullNameController.addListener(() {
+      setState(() {
+        isValidFullName = _validateFullName(fullNameController.text);
+      });
+    });
+    phonenumberController.addListener(() {
+      setState(() {
+        isValidPhoneNumber = _validatePhoneNumber(phonenumberController.text);
+      });
+    });
+    addressController.addListener(() {
+      setState(() {
+        isValidAdress = _validateAddress(addressController.text);
+      });
+    });
   }
 
   @override
@@ -64,11 +81,15 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
         ),
         CustomInputTextField(
           validator: (value) {
-            if (fullNameController.text.isEmpty ||
-                fullNameController.text == '') {
-              return 'This field is required';
+            if (value == null || value.isEmpty) {
+              return 'Họ tên không được trống';
             }
             return null;
+          },
+          onChanged: (value) {
+            setState(() {
+              isValidFullName = _validateFullName(value);
+            });
           },
           controller: fullNameController,
           focusNode: fullnameFocusNode,
@@ -80,6 +101,17 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
           height: 30,
         ),
         CustomInputTextField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Số điện thoại không được trống';
+              }
+              return null;
+            },
+            onChanged: (value) {
+              setState(() {
+                isValidPhoneNumber = _validatePhoneNumber(value);
+              });
+            },
             controller: phonenumberController,
             focusNode: phonenumberFocusNode,
             nextfocusNode: addressFocusNode,
@@ -92,6 +124,17 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
           },
         ),
         CustomInputTextField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Vui lòng nhập địa chỉ';
+              }
+              return null;
+            },
+            onChanged: (value) {
+              setState(() {
+                isValidAdress = _validateAddress(value);
+              });
+            },
             controller: addressController,
             focusNode: addressFocusNode,
             nextfocusNode: null,
@@ -101,6 +144,7 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
           height: 30,
         ),
         DefaultButton(
+          enabled: isValidFullName && isValidAdress && isValidPhoneNumber,
           text: 'Đăng ký',
           press: () async {
             Accounts accounts = Accounts();
@@ -127,19 +171,36 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
               return;
             }
             print(accounts.toJson());
-            await controller.createAccount(context, accounts.toJson());
+            await controller
+                .createAccount(context, accounts.toJson())
+                .whenComplete(() {
+              slideinTransition(context, SignInScreen());
+            });
           },
         )
       ]),
     );
   }
 
-  String? _validateFullname(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Vui lòng nhập tên';
+  bool _validateFullName(String? fullname) {
+    if (fullname == null || fullname.isEmpty) {
+      return false;
     }
-    // Add additional validation logic here, if needed
-    return '';
+    return true;
+  }
+
+  bool _validatePhoneNumber(String? phonenumber) {
+    if (phonenumber == null || phonenumber.isEmpty) {
+      return false;
+    }
+    return true;
+  }
+
+  bool _validateAddress(String? address) {
+    if (address == null || address.isEmpty) {
+      return false;
+    }
+    return true;
   }
 }
 

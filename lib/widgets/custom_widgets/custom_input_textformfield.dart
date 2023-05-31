@@ -13,9 +13,10 @@ class CustomInputTextField extends StatefulWidget {
     this.labelText,
     this.validator,
     required this.controller,
+    this.onChanged,
   }) : super(key: key);
   final String? Function(String?)? validator;
-
+  final Function(String?)? onChanged;
   final String? hintText;
 
   final String? labelText;
@@ -36,15 +37,15 @@ class _CustomInputTextFieldState extends State<CustomInputTextField> {
     _errorText = '';
   }
 
+  void checkOnchangedValidate(String? value) {
+    setState(() {
+      _errorText = widget.onChanged?.call(value);
+    });
+  }
+
   @override
   void dispose() {
     super.dispose();
-  }
-
-  void _validateInput(String? value) {
-    setState(() {
-      _errorText = widget.validator?.call(value);
-    });
   }
 
   @override
@@ -57,7 +58,7 @@ class _CustomInputTextFieldState extends State<CustomInputTextField> {
           FocusScope.of(context).requestFocus(widget.nextfocusNode);
         }
       },
-      onChanged: _validateInput,
+      onChanged: checkOnchangedValidate,
       validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: _controller,

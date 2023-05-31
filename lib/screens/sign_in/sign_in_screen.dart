@@ -8,15 +8,13 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
-        onPressed: () {
-          Navigator.pop(context);
-        },
+        showLeading: false,
         title: 'Đăng nhập',
       ),
-      body: const Body(),
+      body: Body(),
     );
   }
 }

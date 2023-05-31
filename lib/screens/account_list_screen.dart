@@ -16,6 +16,32 @@ class AccountsListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Accounts'),
+        actions: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(50)),
+                height: 35,
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: () {
+                    slideinTransition(context, const SignInScreen());
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.login),
+                      SizedBox(width: 5.0),
+                      Text("Đăng nhập"),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: Obx(() {
         if (controller.listaccounts.value != null) {
