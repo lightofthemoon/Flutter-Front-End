@@ -50,4 +50,11 @@ class Accounts {
       'accountTypeId': accounttypeid,
     };
   }
+
+  Map<String, dynamic> loginToJson() {
+    return {
+      'username': email,
+      'password': password,
+    };
+  }
 }

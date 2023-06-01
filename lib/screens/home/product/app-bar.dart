@@ -1,26 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quanlyquantrasua/api/account_api/account_api.dart';
+import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 
 import 'draw_header_bar.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-
-  const CustomAppBar({Key? key, required this.scaffoldKey}) : super(key: key);
+  final controller = Get.find<AccountController>();
+  CustomHomeAppBar({Key? key, required this.scaffoldKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      leading: IconButton(
-        icon: const Icon(
-          Icons.menu,
-          size: 24.0,
-        ),
-        onPressed: () {
-          scaffoldKey.currentState?.openDrawer();
-        },
-      ),
+      leading: Obx(() {
+        if (controller.accountRespone.value == null) {
+          return Container(
+            height: 30,
+            width: 30,
+            margin: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: DecorationImage(
+                image: Image.asset(
+                  'assets/images/profile.png',
+                  scale: 1,
+                ).image,
+                fit: BoxFit.fill,
+              ),
+            ),
+            child: InkWell(
+              onTap: () {
+                slideinTransition(context, const SignInScreen());
+              },
+            ),
+          );
+        } else {
+          return IconButton(
+            icon: const Icon(
+              Icons.menu,
+              size: 24.0,
+            ),
+            onPressed: () {},
+          );
+        }
+      }),
+
+      // scaffoldKey.currentState?.openDrawer();
       backgroundColor: const Color(0xff06AB8D),
       title: Text(
         "Home",

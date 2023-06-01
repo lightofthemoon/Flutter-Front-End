@@ -1,4 +1,4 @@
-class ListAccountResponse {
+class AccountResponse {
   int? accountId;
   String? fullName;
   String? phoneNumber;
@@ -9,7 +9,7 @@ class ListAccountResponse {
   int? accountTypeId;
   String? status;
 
-  ListAccountResponse(
+  AccountResponse(
       {this.accountId,
       this.fullName,
       this.phoneNumber,
@@ -20,7 +20,7 @@ class ListAccountResponse {
       this.accountTypeId,
       this.status});
 
-  ListAccountResponse.fromJson(Map<String, dynamic> json) {
+  AccountResponse.fromJson(Map<String, dynamic> json) {
     accountId = json['accountId'];
     fullName = json['fullName'];
     phoneNumber = json['phoneNumber'];

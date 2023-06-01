@@ -1,5 +1,7 @@
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:quanlyquantrasua/api/account_api/account_api.dart';
 
 import 'product/app-bar.dart';
 import 'product/listproduct_container.dart';
@@ -14,13 +16,13 @@ class HomeScreenView extends StatefulWidget {
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _HomeScreenViewState extends State<HomeScreenView> {
+  final controller = Get.put(AccountController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       ////////////////MENU NAVIGATION BAR BEN TRAI O DAY//////////////
-      appBar: CustomAppBar(scaffoldKey: scaffoldKey),
-      drawer: CustomAppBar(scaffoldKey: scaffoldKey).buildDrawer(context),
+      appBar: CustomHomeAppBar(scaffoldKey: scaffoldKey),
+      drawer: CustomHomeAppBar(scaffoldKey: scaffoldKey).buildDrawer(context),
       body: ListView(
         children: [
           Column(

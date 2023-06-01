@@ -171,9 +171,7 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
               return;
             }
             print(accounts.toJson());
-            await controller
-                .createAccount(context, accounts.toJson())
-                .whenComplete(() {
+            await controller.createAccount(accounts.toJson()).whenComplete(() {
               slideinTransition(context, SignInScreen());
             });
           },
