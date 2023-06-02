@@ -9,9 +9,11 @@ class Accounts {
   String? gender;
   String? phoneNumber;
   String? address;
+  String? imageUrl;
   int? accounttypeid;
   Accounts(
       {this.id,
+      this.imageUrl,
       this.password,
       this.birthday,
       this.gender,
@@ -24,6 +26,7 @@ class Accounts {
   factory Accounts.fromJson(Map<String, dynamic> json) {
     return Accounts(
       id: json['accountId'] as int,
+      imageUrl: json['imageUrl'],
       username: json['fullName'] as String,
       email: json['email'] as String,
       gender: json['gender'] as String,
@@ -41,6 +44,7 @@ class Accounts {
         DateFormat('dd/MM/yyyy').format(birthday ?? DateTime.now());
     return {
       'fullName': username,
+      'imageUrl': imageUrl,
       'password': password,
       'phoneNumber': phoneNumber,
       'email': email,

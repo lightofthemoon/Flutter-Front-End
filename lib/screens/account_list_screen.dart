@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quanlyquantrasua/screens/create_account_screen.dart';
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/screens/sign_up/signUpScreen.dart';
+import 'package:quanlyquantrasua/utils/save_image.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import 'package:intl/intl.dart';
 import '../api/account_api/account_api.dart';
@@ -54,24 +56,32 @@ class AccountsListScreen extends StatelessWidget {
 
                 return ListTile(
                   title: Text(account.username ?? ''),
-                  subtitle: Column(
+                  subtitle: Row(
                     children: [
-                      Row(
-                        children: [
-                          Text('Quyền: ${account.accounttypeid}'),
-                        ],
+                      Image.file(
+                        File('${account.imageUrl}'),
+                        scale: 20,
                       ),
-                      Row(
+                      Column(
                         children: [
-                          Text(account.email ?? ''),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          account.birthday != null
-                              ? Text(DateFormat('dd/MM/yyyy')
-                                  .format(account.birthday!.toLocal()))
-                              : const Text('Chưa cập nhật'),
+                          Row(
+                            children: [
+                              Text('Quyền: ${account.accounttypeid}'),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(account.email ?? ''),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              account.birthday != null
+                                  ? Text(DateFormat('dd/MM/yyyy')
+                                      .format(account.birthday!.toLocal()))
+                                  : const Text('Chưa cập nhật'),
+                            ],
+                          ),
                         ],
                       ),
                     ],

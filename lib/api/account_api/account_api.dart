@@ -1,9 +1,12 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:quanlyquantrasua/api/base-url-api.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
-
+import 'package:image/image.dart' as img;
 import '../../model/account_model.dart';
 import 'dart:convert';
 import 'package:get/get.dart';
