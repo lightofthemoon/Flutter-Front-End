@@ -44,12 +44,12 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               Icons.menu,
               size: 24.0,
             ),
-            onPressed: () {},
+            onPressed: () {
+              scaffoldKey.currentState?.openDrawer();
+            },
           );
         }
       }),
-
-      // scaffoldKey.currentState?.openDrawer();
       backgroundColor: const Color(0xff06AB8D),
       title: Text(
         "Home",
@@ -126,14 +126,15 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   Widget buildDrawer(BuildContext context) {
+    final accounts = controller.accountRespone.value;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const MyDrawerHeader(
-            fullName: "Nguyen Trong Quy",
-            email: "nguyentrongquy@gmail.com",
-            avatarUrl: "assets/icon/avatar.png",
+          MyDrawerHeader(
+            fullName: '${accounts?.fullName}',
+            email: '${accounts?.email}',
+            avatarUrl: '${accounts?.birthday}',
           ),
           ListTile(
             title: const Text('Cập nhật thông tin'),
