@@ -11,6 +11,7 @@ void main() async {
       debugShowCheckedModeBanner: false,
       routes: {
         'introduction_screen': (context) => HomeScreenView(),
+        'list_accounts': (context) => Account(),
       },
     ),
   );
