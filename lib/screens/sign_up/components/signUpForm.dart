@@ -1,17 +1,15 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quanlyquantrasua/api/account_api/account_api.dart';
 import 'package:quanlyquantrasua/screens/sign_up/sign_up_complete_screen.dart';
-import 'package:quanlyquantrasua/test/select_image_constant/image_select.dart';
+
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_input_textformfield.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 
 import '../../../widgets/custom_widgets/default_button.dart';
 
 class SignUpForm extends StatefulWidget {
-  SignUpForm({super.key});
+  const SignUpForm({super.key});
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();

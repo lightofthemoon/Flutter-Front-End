@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../../configs/mediaquery.dart';
-
 class CustomInputTextField extends StatefulWidget {
   const CustomInputTextField({
     Key? key,
