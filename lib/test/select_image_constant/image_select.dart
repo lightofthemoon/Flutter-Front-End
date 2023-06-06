@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-// ignore_for_file: avoid_print
-
-=======
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -14,28 +9,17 @@ import 'package:quanlyquantrasua/configs/mediaquery.dart';
 import '../selectphoto/select_photo_options_screen.dart';
 
 class ImagePickerWidget extends StatefulWidget {
-<<<<<<< HEAD
   final Function(File?) onImageSelected;
-=======
-  final Function(XFile?) onImageSelected;
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
   final String? currentImageUrl;
   const ImagePickerWidget(
       {Key? key, required this.onImageSelected, this.currentImageUrl})
       : super(key: key);
 
   @override
-<<<<<<< HEAD
-  ImagePickerWidgetState createState() => ImagePickerWidgetState();
-}
-
-class ImagePickerWidgetState extends State<ImagePickerWidget>
-=======
   _ImagePickerWidgetState createState() => _ImagePickerWidgetState();
 }
 
 class _ImagePickerWidgetState extends State<ImagePickerWidget>
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
     with SingleTickerProviderStateMixin {
   File? image;
   late AnimationController _animationController;
@@ -50,11 +34,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget>
       setState(() {
         this.image = img;
       });
-<<<<<<< HEAD
       widget.onImageSelected(img);
-=======
-      widget.onImageSelected(image);
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
       _animationController.forward(from: 0.0);
       Navigator.of(context).pop();
     } on PlatformException catch (e) {
@@ -109,11 +89,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-<<<<<<< HEAD
-      duration: const Duration(milliseconds: 1000),
-=======
       duration: Duration(milliseconds: 1000),
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
     );
     _inanimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(

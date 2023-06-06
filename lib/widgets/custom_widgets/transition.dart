@@ -44,22 +44,3 @@ void slideinTransitionNoBack(BuildContext context, Widget widget) async {
     ),
   );
 }
-<<<<<<< HEAD
-
-void fadeinTransitionNoBack(BuildContext context, Widget widget) async {
-  Navigator.pushReplacement(
-    context,
-    PageRouteBuilder(
-      transitionDuration: const Duration(milliseconds: 500),
-      pageBuilder: (context, animation, secondaryAnimation) => widget,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
-      },
-    ),
-  );
-}
-=======
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
