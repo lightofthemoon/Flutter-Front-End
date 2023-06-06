@@ -2,38 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quanlyquantrasua/api/account_api/account_api.dart';
-<<<<<<< HEAD:lib/screens/home/components/home_appbar.dart
 
-import 'package:quanlyquantrasua/screens/home/home_screens.dart';
-=======
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983:lib/screens/home/product/home_appbar.dart
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 
+import '../../../controller/account_controller.dart';
 import 'draw_header_bar.dart';
 
 class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-<<<<<<< HEAD:lib/screens/home/components/home_appbar.dart
   final controller = Get.find<AccountApi>();
-=======
-  final controller = Get.find<AccountController>();
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983:lib/screens/home/product/home_appbar.dart
   CustomHomeAppBar({Key? key, required this.scaffoldKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-<<<<<<< HEAD:lib/screens/home/components/home_appbar.dart
-      leading: GestureDetector(
-          onTap: () => slideinTransition(context, const HomeScreenView()),
-          child: const Icon(
-            Icons.home_outlined,
-            color: Color.fromARGB(255, 229, 199, 111),
-            size: 30,
-          )),
-=======
       leading: Obx(() {
         if (controller.accountRespone.value == null) {
           return Container(
@@ -68,20 +52,12 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           );
         }
       }),
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983:lib/screens/home/product/home_appbar.dart
       backgroundColor: const Color(0xff06AB8D),
       title: Text(
         "Home",
         style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
       ),
       actions: [
-<<<<<<< HEAD:lib/screens/home/components/home_appbar.dart
-        const SizedBox(
-          width: 23.0,
-        ),
-        const Stack(
-          children: [
-=======
         const Icon(
           Icons.message,
           size: 24.0,
@@ -92,7 +68,6 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         Stack(
           children: const [
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983:lib/screens/home/product/home_appbar.dart
             Align(
               alignment: Alignment.center,
               child: Icon(
@@ -118,13 +93,8 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         const SizedBox(
           width: 23.0,
         ),
-<<<<<<< HEAD:lib/screens/home/components/home_appbar.dart
-        const Stack(
-          children: [
-=======
         Stack(
           children: const [
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983:lib/screens/home/product/home_appbar.dart
             Align(
               alignment: Alignment.center,
               child: Icon(

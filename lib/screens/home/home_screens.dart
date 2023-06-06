@@ -1,19 +1,10 @@
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:get/get.dart';
 import 'package:quanlyquantrasua/api/account_api/account_api.dart';
 
-import '../../api/category/api_category.dart';
 import 'components/home_appbar.dart';
 import 'components/listproduct_container.dart';
-=======
-import 'package:quanlyquantrasua/api/account_api/account_api.dart';
-
-import 'product/home_appbar.dart';
-import 'product/listproduct_container.dart';
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
 
 class HomeScreenView extends StatefulWidget {
   const HomeScreenView({Key? key}) : super(key: key);
@@ -25,23 +16,13 @@ class HomeScreenView extends StatefulWidget {
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _HomeScreenViewState extends State<HomeScreenView> {
-<<<<<<< HEAD
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final controller = Get.put(AccountApi());
-=======
-  final controller = Get.put(AccountController());
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       ////////////////MENU NAVIGATION BAR BEN TRAI O DAY//////////////
       appBar: CustomHomeAppBar(scaffoldKey: scaffoldKey),
-<<<<<<< HEAD
-      endDrawer:
-          CustomHomeAppBar(scaffoldKey: scaffoldKey).buildDrawer(context),
-=======
       drawer: CustomHomeAppBar(scaffoldKey: scaffoldKey).buildDrawer(context),
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
       body: ListView(
         children: [
           Column(
