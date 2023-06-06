@@ -1,6 +1,10 @@
 class AccountResponse {
   int? accountId;
+<<<<<<< HEAD
   String? imageUrl;
+=======
+  String? imageEncode;
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
   String? fullName;
   String? phoneNumber;
   String? email;
@@ -14,7 +18,11 @@ class AccountResponse {
       {this.accountId,
       this.fullName,
       this.phoneNumber,
+<<<<<<< HEAD
       this.imageUrl,
+=======
+      this.imageEncode,
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
       this.email,
       this.gender,
       this.birthday,
@@ -25,8 +33,12 @@ class AccountResponse {
   AccountResponse.fromJson(Map<String, dynamic> json) {
     accountId = json['accountId'];
     fullName = json['fullName'];
+<<<<<<< HEAD
     imageUrl = json['imageUrl'];
     phoneNumber = json['phoneNumber'];
+=======
+    imageEncode = phoneNumber = json['phoneNumber'];
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
     email = json['email'];
     gender = json['gender'];
     birthday = json['birthday'];

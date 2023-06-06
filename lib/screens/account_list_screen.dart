@@ -1,5 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+<<<<<<< HEAD
+=======
+import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
+import 'package:quanlyquantrasua/screens/sign_up/signUpScreen.dart';
+import 'package:quanlyquantrasua/utils/save_image.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
 import 'package:intl/intl.dart';
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/screens/sign_up/signup_screen.dart';
@@ -56,10 +65,16 @@ class AccountsListScreen extends StatelessWidget {
                   title: Text(account.username ?? ''),
                   subtitle: Row(
                     children: [
+<<<<<<< HEAD
                       CircleAvatar(
                         radius: 30,
                         backgroundImage:
                             Image.network('${account.imageUrl}').image,
+=======
+                      Image.file(
+                        File('${account.imageUrl}'),
+                        scale: 20,
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
                       ),
                       Column(
                         children: [

@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 // ignore_for_file: avoid_print
 
+=======
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -83,11 +86,19 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+<<<<<<< HEAD
               const Column(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+=======
+              Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
                       SizedBox(
                         height: 30,
                       ),

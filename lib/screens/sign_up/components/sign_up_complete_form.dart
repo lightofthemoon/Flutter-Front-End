@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 // ignore_for_file: use_build_context_synchronously, avoid_print
+=======
+// ignore_for_file: use_build_context_synchronously
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
 
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+<<<<<<< HEAD
 
 import 'package:quanlyquantrasua/controller/account_controller.dart';
 
 import 'package:quanlyquantrasua/model/account_model.dart';
+=======
+import 'package:image_picker/image_picker.dart';
+
+import 'package:quanlyquantrasua/model/account_model.dart';
+import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
+import 'package:quanlyquantrasua/utils/save_image.dart';
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
 import 'package:quanlyquantrasua/widgets/custom_widgets/gender_chose.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
 import '../../../api/account_api/account_api.dart';
@@ -73,7 +85,11 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
     super.dispose();
   }
 
+<<<<<<< HEAD
   File? image;
+=======
+  XFile? image;
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
   @override
   Widget build(BuildContext context) {
     DateTime? date;
@@ -177,12 +193,19 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
               return;
             }
 
+<<<<<<< HEAD
             accounts.imageUrl = await AccountController()
                 .uploadImageToFirebaseStorage(
                     '${accounts.email}_${accounts.phoneNumber}', image);
 
             accounts.username = fullNameController.text;
             accounts.address = addressController.text;
+=======
+            accounts.imageUrl = await saveImageToNewDirectory(
+                image!, 'siuuu', '${accounts.email}_${accounts.phoneNumber}');
+            accounts.username = fullNameController.text;
+
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
             accounts.accounttypeid = 3;
             if (date != null) {
               accounts.birthday = date;

@@ -3211,6 +3211,7 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\Administrator\\Desktop\\Java\\Flutter-Front-End\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
@@ -3247,6 +3248,8 @@
                     }
                 },
                 {
+=======
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
                     "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-3\\a7ca93a9c4e635b0106c2e44b94cd237\\transformed\\jetified-startup-runtime-1.1.1\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2",
@@ -3264,6 +3267,26 @@
                     }
                 },
                 {
+<<<<<<< HEAD
+=======
+                    "source": "C:\\Users\\Administrator\\Desktop\\Java\\Java_FrontEnd\\quanlyquantrasua\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,200,283,387,497,617,713",
+                        "endColumns": "144,82,103,109,119,95,72",
+                        "endOffsets": "195,278,382,492,612,708,781"
+                    },
+                    "to": {
+                        "startLines": "406,410,411,412,413,414,415",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "27618,27978,28061,28165,28275,28395,28491",
+                        "endColumns": "144,82,103,109,119,95,72",
+                        "endOffsets": "27758,28056,28160,28270,28390,28486,28559"
+                    }
+                },
+                {
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
                     "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-3\\c09964db0530223eea6d546c6ee4a1e5\\transformed\\jetified-appcompat-resources-1.3.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,29,36,47,74",
@@ -3353,6 +3376,28 @@
                     }
                 },
                 {
+<<<<<<< HEAD
+=======
+                    "source": "C:\\Users\\Administrator\\Desktop\\Java\\Java_FrontEnd\\quanlyquantrasua\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "176,832",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "483,998"
+                    },
+                    "to": {
+                        "startLines": "1513,1517",
+                        "startColumns": "4,4",
+                        "startOffsets": "98663,98844",
+                        "endLines": "1516,1519",
+                        "endColumns": "12,12",
+                        "endOffsets": "98839,99008"
+                    }
+                },
+                {
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
                     "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-3\\b6c1f650bc7bb7b8f15a3350f05e3214\\transformed\\fragment-1.3.4\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,10",
@@ -6280,7 +6325,11 @@
             "outputFile": "com.example.quanlyquantrasua.app-merged_res-32:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\Administrator\\Desktop\\Java\\Flutter-Front-End\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+=======
+                    "source": "C:\\Users\\Administrator\\Desktop\\Java\\Java_FrontEnd\\quanlyquantrasua\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

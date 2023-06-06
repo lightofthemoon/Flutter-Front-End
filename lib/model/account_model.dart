@@ -9,6 +9,7 @@ class Accounts {
   String? gender;
   String? phoneNumber;
   String? address;
+  String? imageUrl;
   int? accounttypeid;
   String? imageUrl;
   Accounts(

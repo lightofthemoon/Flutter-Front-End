@@ -44,6 +44,7 @@ void slideinTransitionNoBack(BuildContext context, Widget widget) async {
     ),
   );
 }
+<<<<<<< HEAD
 
 void fadeinTransitionNoBack(BuildContext context, Widget widget) async {
   Navigator.pushReplacement(
@@ -60,3 +61,5 @@ void fadeinTransitionNoBack(BuildContext context, Widget widget) async {
     ),
   );
 }
+=======
+>>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
