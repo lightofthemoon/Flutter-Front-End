@@ -35,6 +35,7 @@ class Accounts {
       accounttypeid: int.parse(json['accountTypeId'].toString()),
     );
   }
+
   Map<String, dynamic> toJson() {
     String birthdayDate =
         DateFormat('dd/MM/yyyy').format(birthday ?? DateTime.now());

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:quanlyquantrasua/api/user/create_accounts.dart';
+
 import 'package:quanlyquantrasua/model/account_model.dart';
 
 class UserController {
@@ -9,5 +9,4 @@ class UserController {
 
   set _listAccount(value) => listAccount = value;
 
-  
 }

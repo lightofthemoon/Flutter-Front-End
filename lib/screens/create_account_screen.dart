@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:quanlyquantrasua/api/user/create_accounts.dart';
+import 'package:quanlyquantrasua/api/account_api/account_api.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 
 import '../model/account_model.dart';
 import '../widgets/custom_widgets/messages_widget.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({super.key});
-  final controller = Get.find<FetchApiController>();
+  final controller = Get.find<AccountController>();
   @override
   Widget build(BuildContext context) {
     TextEditingController usernameController = TextEditingController();
@@ -20,8 +21,10 @@ class CreateAccountScreen extends StatelessWidget {
     TextEditingController birthdayController = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
+      appBar: CustomAppBar(
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -112,13 +115,14 @@ class CreateAccountScreen extends StatelessWidget {
                   context, 'Thêm tài khoản thành công', 2,
                   backgroundColor: Colors.blue);
               Navigator.pop(context);
+              controller.getAllAccounts();
             });
           },
           backgroundColor: Colors.blue,
           shape: const StadiumBorder(),
-          child: const Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: const [
               Icon(Icons.add),
               SizedBox(width: 5.0),
               Text("Tạo"),
