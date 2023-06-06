@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quanlyquantrasua/api/account_api/account_api.dart';
 
-import 'product/home_appbar.dart';
-import 'product/listproduct_container.dart';
+import '../../api/category/api_category.dart';
+import 'components/home_appbar.dart';
+import 'components/listproduct_container.dart';
 
 class HomeScreenView extends StatefulWidget {
   const HomeScreenView({Key? key}) : super(key: key);
@@ -24,7 +25,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
       key: scaffoldKey,
       ////////////////MENU NAVIGATION BAR BEN TRAI O DAY//////////////
       appBar: CustomHomeAppBar(scaffoldKey: scaffoldKey),
-      drawer: CustomHomeAppBar(scaffoldKey: scaffoldKey).buildDrawer(context),
+      endDrawer:
+          CustomHomeAppBar(scaffoldKey: scaffoldKey).buildDrawer(context),
       body: ListView(
         children: [
           Column(

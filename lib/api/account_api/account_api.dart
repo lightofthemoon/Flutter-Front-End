@@ -68,11 +68,17 @@ class AccountApi extends GetxController {
     if (response.statusCode == 200) {
       final accountResponseResult =
           AccountResponse.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
-      accountRespone.value =
-          await AccountController().getUserFromSharedPreferences();
+      accountRespone.value = accountResponseResult;
+      await AccountController()
+          .storedUserToSharedRefererces(accountResponseResult);
       return accountResponseResult;
     } else {
       throw Exception('Lỗi: ${response.statusCode}');
     }
+  }
+
+  Future<void> logout() async {
+    await AccountController().logout();
+    accountRespone.value = null;
   }
 }

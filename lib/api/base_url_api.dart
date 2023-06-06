@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 class ApiUrl {
-  static const baseUrl = 'http://10.10.116.60:7071/api/';
+  static const baseUrl = 'http://192.168.1.44:7071/api/';
 
   static const apiGetAllAccount = '${baseUrl}accounts/all';
 
