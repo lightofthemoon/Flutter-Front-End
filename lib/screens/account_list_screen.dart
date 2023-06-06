@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:quanlyquantrasua/model/account_response.dart';
 import 'package:quanlyquantrasua/screens/create_account_screen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
-import 'package:intl/intl.dart';
 import '../api/user/create_accounts.dart';
-import '../model/account_model.dart';
 
 class AccountsListScreen extends StatelessWidget {
   AccountsListScreen({super.key});
@@ -40,14 +38,14 @@ class AccountsListScreen extends StatelessWidget {
                           Text(account.email ?? ''),
                         ],
                       ),
-                      Row(
-                        children: [
-                          account.birthday != null
-                              ? Text(DateFormat('dd/MM/yyyy')
-                                  .format(account.birthday!.toLocal()))
-                              : const Text('Chưa cập nhật'),
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     account.birthday != null
+                      //         ? Text(DateFormat('dd/MM/yyyy')
+                      //             .format(account.birthday!).t)
+                      //         : const Text('Chưa cập nhật'),
+                      //   ],
+                      // ),
                     ],
                   ),
                   trailing: Text(account.phoneNumber ?? ''),
