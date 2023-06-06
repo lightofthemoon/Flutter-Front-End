@@ -25,7 +25,11 @@ class MyDrawerHeader extends StatelessWidget {
             height: 80,
             width: 80,
             child: CircleAvatar(
+<<<<<<< HEAD
               backgroundImage: AssetImage(avatarUrl),
+=======
+              backgroundImage: Image.network(avatarUrl).image,
+>>>>>>> dat
             ),
           ),
           const SizedBox(height: 8),

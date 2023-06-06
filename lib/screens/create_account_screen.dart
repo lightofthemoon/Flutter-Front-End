@@ -9,7 +9,11 @@ import '../widgets/custom_widgets/messages_widget.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({super.key});
+<<<<<<< HEAD
   final controller = Get.find<AccountController>();
+=======
+  final controller = Get.find<AccountApi>();
+>>>>>>> dat
   @override
   Widget build(BuildContext context) {
     TextEditingController usernameController = TextEditingController();
@@ -108,9 +112,13 @@ class CreateAccountScreen extends StatelessWidget {
             accounts.birthday = birthday;
             accounts.address = addressController.text;
             accounts.accounttypeid = 3;
+<<<<<<< HEAD
             await controller
                 .createAccount(context, accounts.toJson())
                 .whenComplete(() {
+=======
+            await controller.createAccount(accounts.toJson()).whenComplete(() {
+>>>>>>> dat
               CustomSnackBar.showCustomSnackBar(
                   context, 'Thêm tài khoản thành công', 2,
                   backgroundColor: Colors.blue);
