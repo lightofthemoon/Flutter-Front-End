@@ -18,8 +18,8 @@ class GroceryContainer extends StatelessWidget {
       child: Column(
         children: [
           ///// HIEN THI DANH MUC TU WIDGET CATEGORY O DAY ////
-          Column(
-            children: const [
+          const Column(
+            children: [
               MenuCategoryList(),
             ],
           ),
@@ -27,8 +27,8 @@ class GroceryContainer extends StatelessWidget {
             height: 19.0,
           ),
           //WIDGET HIEN THI BANNER VOUCHER O DAY//
-          Column(
-            children: const [
+          const Column(
+            children: [
               BannerList(),
             ],
           ),

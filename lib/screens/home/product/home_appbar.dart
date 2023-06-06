@@ -66,11 +66,11 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         "Home",
         style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
       ),
-      actions: [
-        const SizedBox(
+      actions: const [
+        SizedBox(
           width: 23.0,
         ),
-        const Stack(
+        Stack(
           children: [
             Align(
               alignment: Alignment.center,
@@ -94,10 +94,10 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
-        const SizedBox(
+        SizedBox(
           width: 23.0,
         ),
-        const Stack(
+        Stack(
           children: [
             Align(
               alignment: Alignment.center,
@@ -121,10 +121,10 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
-        const SizedBox(
+        SizedBox(
           width: 23.0,
         ),
-        const SizedBox(
+        SizedBox(
           width: 23.0,
         ),
       ],

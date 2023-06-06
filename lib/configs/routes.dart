@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/sign_up/signUpScreen.dart';
+import '../screens/sign_up/signup_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
 //   RootApp.routeName: (context) => const RootApp(),

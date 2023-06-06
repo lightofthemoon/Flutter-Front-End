@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 
 import '../../configs/constant.dart';
-import '../../screens/sign_up/signUpScreen.dart';
+import '../../screens/sign_up/signup_screen.dart';
 
 class NoAccountText extends StatelessWidget {
   const NoAccountText({

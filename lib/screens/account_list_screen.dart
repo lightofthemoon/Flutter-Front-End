@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
-import 'package:quanlyquantrasua/screens/sign_up/signUpScreen.dart';
+import 'package:quanlyquantrasua/screens/sign_up/signup_screen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 
 import '../api/account_api/account_api.dart';

@@ -21,7 +21,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           scaffoldKey.currentState?.openDrawer();
         },
       ),
-      backgroundColor: Color(0xff06AB8D),
+      backgroundColor: const Color(0xff06AB8D),
       title: Text(
         "Home",
         style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
@@ -94,50 +94,50 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   Widget buildDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          MyDrawerHeader(
+          const MyDrawerHeader(
             fullName: "Nguyen Trong Quy",
             email: "nguyentrongquy@gmail.com",
             avatarUrl: "assets/icon/avatar.png",
           ),
           ListTile(
-            title: Text('Cập nhật thông tin'),
+            title: const Text('Cập nhật thông tin'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: Text('Đổi mật khẩu'),
+            title: const Text('Đổi mật khẩu'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: Text('Đơn hàng'),
+            title: const Text('Đơn hàng'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: Text('Voucher'),
+            title: const Text('Voucher'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: Text('Món yêu thích'),
+            title: const Text('Món yêu thích'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: Text('Đăng xuất'),
+            title: const Text('Đăng xuất'),
             onTap: () {
               Navigator.pop(context);
             },
