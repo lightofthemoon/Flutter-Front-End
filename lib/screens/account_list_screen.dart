@@ -9,6 +9,7 @@ import 'package:quanlyquantrasua/screens/sign_up/signUpScreen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import 'package:intl/intl.dart';
 import '../api/account_api/account_api.dart';
+import '../api/user/create_accounts.dart';
 
 class AccountsListScreen extends StatelessWidget {
   AccountsListScreen({super.key});
@@ -36,9 +37,9 @@ class AccountsListScreen extends StatelessWidget {
                   onPressed: () {
                     slideinTransition(context, const SignInScreen());
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Icon(Icons.login),
                       SizedBox(width: 5.0),
                       Text("Đăng nhập"),
@@ -74,6 +75,7 @@ class AccountsListScreen extends StatelessWidget {
                           Text(account.email ?? ''),
                         ],
                       ),
+<<<<<<< HEAD
                       Row(
                         children: [
                           account.birthday != null
@@ -111,6 +113,16 @@ class AccountsListScreen extends StatelessWidget {
 >>>>>>> dat
                         ],
                       ),
+=======
+                      // Row(
+                      //   children: [
+                      //     account.birthday != null
+                      //         ? Text(DateFormat('dd/MM/yyyy')
+                      //             .format(account.birthday!).t)
+                      //         : const Text('Chưa cập nhật'),
+                      //   ],
+                      // ),
+>>>>>>> 0d1a94ef0fa615b683d5a2d0b3753a0eaa147429
                     ],
                   ),
                   trailing: Text(account.phoneNumber ?? ''),
@@ -130,9 +142,9 @@ class AccountsListScreen extends StatelessWidget {
           },
           backgroundColor: Colors.blue,
           shape: const StadiumBorder(),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Icon(Icons.add),
               SizedBox(width: 5.0),
               Text("Tạo tài khoản mới"),

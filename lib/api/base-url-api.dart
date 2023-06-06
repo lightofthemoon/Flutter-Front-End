@@ -1,6 +1,10 @@
 class ApiUrl {
 <<<<<<< HEAD
+<<<<<<< HEAD
   static const baseUrl = 'http://localhost:7071/api/';
+=======
+  static const baseUrl = 'http://10.14.122.72:7071/api/';
+>>>>>>> 0d1a94ef0fa615b683d5a2d0b3753a0eaa147429
 
   static const apiLogin = baseUrl;
 =======
