@@ -1,23 +1,13 @@
-<<<<<<< HEAD
-import 'package:flutter/material.dart';
-import 'package:quanlyquantrasua/api/base-url-api.dart';
-=======
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:quanlyquantrasua/api/base-url-api.dart';
 import 'package:quanlyquantrasua/controller/account_controller.dart';
->>>>>>> dat
 
 import '../../model/account_model.dart';
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-<<<<<<< HEAD
-class AccountController extends GetxController {
-  Rx<List<Accounts>?> listaccounts = Rx<List<Accounts>?>([]);
-  // var account = Accounts().obs;
-=======
 import '../../model/account_response.dart';
 
 class AccountApi extends GetxController {
@@ -34,7 +24,6 @@ class AccountApi extends GetxController {
         await AccountController().getUserFromSharedPreferences();
   }
 
->>>>>>> dat
   var lateEmail = ''.obs;
   Future getAllAccounts() async {
     try {
@@ -52,12 +41,7 @@ class AccountApi extends GetxController {
     }
   }
 
-<<<<<<< HEAD
-  Future<Accounts?> createAccount(
-      BuildContext context, Map<String, dynamic> accountToJson) async {
-=======
   Future<Accounts?> createAccount(Map<String, dynamic> accountToJson) async {
->>>>>>> dat
     final response = await http.post(
       Uri.parse(ApiUrl.apiCreateAccount),
       headers: <String, String>{
@@ -73,8 +57,6 @@ class AccountApi extends GetxController {
     }
     return null;
   }
-<<<<<<< HEAD
-=======
 
   Future<AccountResponse> login(Map<String, dynamic> accountToJson) async {
     final url = Uri.parse(ApiUrl.apiLogin);
@@ -93,5 +75,4 @@ class AccountApi extends GetxController {
       throw Exception('Lỗi: ${response.statusCode}');
     }
   }
->>>>>>> dat
 }

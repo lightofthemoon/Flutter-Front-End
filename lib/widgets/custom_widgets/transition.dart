@@ -22,8 +22,6 @@ void slideinTransition(BuildContext context, Widget widget) async {
     (route) => true,
   );
 }
-<<<<<<< HEAD
-=======
 
 void slideinTransitionNoBack(BuildContext context, Widget widget) async {
   Navigator.pushReplacement(
@@ -62,4 +60,3 @@ void fadeinTransitionNoBack(BuildContext context, Widget widget) async {
     ),
   );
 }
->>>>>>> dat

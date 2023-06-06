@@ -2,32 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quanlyquantrasua/api/account_api/account_api.dart';
 import 'package:quanlyquantrasua/screens/sign_up/sign_up_complete_screen.dart';
-<<<<<<< HEAD
-=======
-
->>>>>>> dat
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_input_textformfield.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 
 import '../../../widgets/custom_widgets/default_button.dart';
 
 class SignUpForm extends StatefulWidget {
-<<<<<<< HEAD
-  SignUpForm({super.key});
-=======
   const SignUpForm({super.key});
->>>>>>> dat
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-<<<<<<< HEAD
-  final controller = Get.find<AccountController>();
-=======
   final controller = Get.find<AccountApi>();
->>>>>>> dat
 
   late TextEditingController emailController;
 

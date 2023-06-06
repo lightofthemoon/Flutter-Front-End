@@ -9,17 +9,11 @@ class Accounts {
   String? gender;
   String? phoneNumber;
   String? address;
-<<<<<<< HEAD
   int? accounttypeid;
-  Accounts(
-      {this.id,
-=======
   String? imageUrl;
-  int? accounttypeid;
   Accounts(
       {this.id,
       this.imageUrl,
->>>>>>> dat
       this.password,
       this.birthday,
       this.gender,
@@ -32,10 +26,7 @@ class Accounts {
   factory Accounts.fromJson(Map<String, dynamic> json) {
     return Accounts(
       id: json['accountId'] as int,
-<<<<<<< HEAD
-=======
       imageUrl: json['imageUrl'],
->>>>>>> dat
       username: json['fullName'] as String,
       email: json['email'] as String,
       gender: json['gender'] as String,
@@ -53,10 +44,7 @@ class Accounts {
         DateFormat('dd/MM/yyyy').format(birthday ?? DateTime.now());
     return {
       'fullName': username,
-<<<<<<< HEAD
-=======
       'imageUrl': imageUrl,
->>>>>>> dat
       'password': password,
       'phoneNumber': phoneNumber,
       'email': email,
@@ -66,8 +54,6 @@ class Accounts {
       'accountTypeId': accounttypeid,
     };
   }
-<<<<<<< HEAD
-=======
 
   Map<String, dynamic> loginToJson() {
     return {
@@ -75,5 +61,4 @@ class Accounts {
       'password': password,
     };
   }
->>>>>>> dat
 }

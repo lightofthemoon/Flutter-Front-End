@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 // ignore_for_file: file_names
 
->>>>>>> dat
 import 'package:flutter/material.dart';
 import 'package:quanlyquantrasua/screens/sign_up/components/signUpForm.dart';
 

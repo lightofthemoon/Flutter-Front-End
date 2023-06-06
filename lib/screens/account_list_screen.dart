@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-<<<<<<< HEAD
-import 'package:quanlyquantrasua/screens/create_account_screen.dart';
-=======
->>>>>>> dat
+import 'package:intl/intl.dart';
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/screens/sign_up/signUpScreen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
-import 'package:intl/intl.dart';
+
 import '../api/account_api/account_api.dart';
-import '../api/user/create_accounts.dart';
 
 class AccountsListScreen extends StatelessWidget {
   AccountsListScreen({super.key});
-<<<<<<< HEAD
-  final controller = Get.put(AccountController());
-=======
   final controller = Get.put(AccountApi());
->>>>>>> dat
   @override
   Widget build(BuildContext context) {
     controller.getAllAccounts();
@@ -62,27 +54,6 @@ class AccountsListScreen extends StatelessWidget {
 
                 return ListTile(
                   title: Text(account.username ?? ''),
-<<<<<<< HEAD
-                  subtitle: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text('Quyền: ${account.accounttypeid}'),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(account.email ?? ''),
-                        ],
-                      ),
-<<<<<<< HEAD
-                      Row(
-                        children: [
-                          account.birthday != null
-                              ? Text(DateFormat('dd/MM/yyyy')
-                                  .format(account.birthday!.toLocal()))
-                              : const Text('Chưa cập nhật'),
-=======
                   subtitle: Row(
                     children: [
                       CircleAvatar(
@@ -110,10 +81,8 @@ class AccountsListScreen extends StatelessWidget {
                                   : const Text('Chưa cập nhật'),
                             ],
                           ),
->>>>>>> dat
                         ],
                       ),
-=======
                       // Row(
                       //   children: [
                       //     account.birthday != null
@@ -122,7 +91,6 @@ class AccountsListScreen extends StatelessWidget {
                       //         : const Text('Chưa cập nhật'),
                       //   ],
                       // ),
->>>>>>> 0d1a94ef0fa615b683d5a2d0b3753a0eaa147429
                     ],
                   ),
                   trailing: Text(account.phoneNumber ?? ''),

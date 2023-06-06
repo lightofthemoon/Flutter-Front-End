@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
->>>>>>> dat
 
 import '../../configs/constant.dart';
 import '../../screens/sign_up/signUpScreen.dart';
@@ -26,11 +23,7 @@ class NoAccountText extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-<<<<<<< HEAD
-            Navigator.pushNamed(context, SignUpScreen.routeName);
-=======
             slideinTransition(context, const SignUpScreen());
->>>>>>> dat
           },
           child: const Text(
             'Đăng ký',
