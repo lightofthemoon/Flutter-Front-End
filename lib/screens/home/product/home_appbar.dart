@@ -19,66 +19,58 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      leading: Obx(() {
-        if (controller.accountRespone.value == null) {
-          return Container(
-            height: 30,
-            width: 30,
-            margin: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              image: DecorationImage(
-                image: Image.asset(
-                  'assets/images/profile.png',
-                  scale: 1,
-                ).image,
-                fit: BoxFit.fill,
+      leading: SizedBox(
+        width: 50,
+        height: 50,
+        child: Obx(() {
+          if (controller.accountRespone.value == null) {
+            return Container(
+              height: 30,
+              width: 30,
+              margin: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+                  image: Image.asset(
+                    'assets/images/profile.png',
+                    scale: 1,
+                  ).image,
+                  fit: BoxFit.fill,
+                ),
               ),
-            ),
-            child: InkWell(
+              child: InkWell(
+                onTap: () {
+                  slideinTransition(context, const SignInScreen());
+                },
+              ),
+            );
+          } else {
+            String? imageUrl = controller.accountRespone.value?.imageUrl;
+            return GestureDetector(
               onTap: () {
-                slideinTransition(context, const SignInScreen());
+                scaffoldKey.currentState?.openDrawer();
               },
-            ),
-          );
-        } else {
-          String? imageUrl = controller.accountRespone.value?.imageUrl;
-          return GestureDetector(
-            onTap: () {
-              scaffoldKey.currentState?.openDrawer();
-            },
-            child: CircleAvatar(
-              radius: 30,
-              backgroundImage: imageUrl != null
+              child: imageUrl != null
                   ? Image.network(
                       imageUrl,
-                      width: 100,
-                      height: 100,
-                    ).image
+                    )
                   : Image.asset(
                       'assets/images/profile.png',
-                      width: 100,
-                      height: 100,
-                    ).image,
-            ),
-          );
-        }
-      }),
+                    ),
+            );
+          }
+        }),
+      ),
       backgroundColor: const Color(0xff06AB8D),
       title: Text(
         "Home",
         style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
       ),
-      actions: const [
-        Icon(
-          Icons.message,
-          size: 24.0,
-          color: Colors.white,
-        ),
-        SizedBox(
+      actions: [
+        const SizedBox(
           width: 23.0,
         ),
-        Stack(
+        const Stack(
           children: [
             Align(
               alignment: Alignment.center,
@@ -102,10 +94,10 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           width: 23.0,
         ),
-        Stack(
+        const Stack(
           children: [
             Align(
               alignment: Alignment.center,
@@ -129,7 +121,10 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
+          width: 23.0,
+        ),
+        const SizedBox(
           width: 23.0,
         ),
       ],

@@ -21,22 +21,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           scaffoldKey.currentState?.openDrawer();
         },
       ),
-      backgroundColor: const Color(0xff06AB8D),
+      backgroundColor: Color(0xff06AB8D),
       title: Text(
         "Home",
         style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
       ),
-      actions: [
-        const Icon(
+      actions: const [
+        Icon(
           Icons.message,
           size: 24.0,
           color: Colors.white,
         ),
-        const SizedBox(
+        SizedBox(
           width: 23.0,
         ),
         Stack(
-          children: const [
+          children: [
             Align(
               alignment: Alignment.center,
               child: Icon(
@@ -59,11 +59,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
-        const SizedBox(
+        SizedBox(
           width: 23.0,
         ),
         Stack(
-          children: const [
+          children: [
             Align(
               alignment: Alignment.center,
               child: Icon(
@@ -86,7 +86,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
-        const SizedBox(
+        SizedBox(
           width: 23.0,
         ),
       ],
@@ -94,50 +94,50 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 
   Widget buildDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const MyDrawerHeader(
+          MyDrawerHeader(
             fullName: "Nguyen Trong Quy",
             email: "nguyentrongquy@gmail.com",
             avatarUrl: "assets/icon/avatar.png",
           ),
           ListTile(
-            title: const Text('Cập nhật thông tin'),
+            title: Text('Cập nhật thông tin'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: const Text('Đổi mật khẩu'),
+            title: Text('Đổi mật khẩu'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: const Text('Đơn hàng'),
+            title: Text('Đơn hàng'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: const Text('Voucher'),
+            title: Text('Voucher'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: const Text('Món yêu thích'),
+            title: Text('Món yêu thích'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            title: const Text('Đăng xuất'),
+            title: Text('Đăng xuất'),
             onTap: () {
               Navigator.pop(context);
             },

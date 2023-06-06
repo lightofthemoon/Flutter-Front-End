@@ -20,11 +20,10 @@ class CustomPasswordTextfield extends StatefulWidget {
   final FocusNode? nextfocusNode;
   final TextEditingController controller;
   @override
-  _CustomPasswordTextfieldState createState() =>
-      _CustomPasswordTextfieldState();
+  CustomPasswordTextfieldState createState() => CustomPasswordTextfieldState();
 }
 
-class _CustomPasswordTextfieldState extends State<CustomPasswordTextfield> {
+class CustomPasswordTextfieldState extends State<CustomPasswordTextfield> {
   late TextEditingController _controller;
   late String? _errorText;
   bool _passwordVisible = false;
