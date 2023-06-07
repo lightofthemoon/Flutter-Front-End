@@ -66,8 +66,8 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         const SizedBox(
           width: 23.0,
         ),
-        Stack(
-          children: const [
+        const Stack(
+          children: [
             Align(
               alignment: Alignment.center,
               child: Icon(
@@ -93,8 +93,8 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         const SizedBox(
           width: 23.0,
         ),
-        Stack(
-          children: const [
+        const Stack(
+          children: [
             Align(
               alignment: Alignment.center,
               child: Icon(
@@ -120,7 +120,6 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         const SizedBox(
           width: 23.0,
         ),
-<<<<<<< HEAD:lib/screens/home/components/home_appbar.dart
         SizedBox(
           width: 45,
           child: Obx(() {
@@ -175,8 +174,6 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         const SizedBox(
           width: 23.0,
         ),
-=======
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983:lib/screens/home/product/home_appbar.dart
       ],
     );
   }
@@ -185,68 +182,6 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   Widget buildDrawer(BuildContext context) {
-<<<<<<< HEAD:lib/screens/home/components/home_appbar.dart
-    return Obx(() {
-      if (controller.accountRespone.value != null) {
-        final accounts = controller.accountRespone.value;
-        return Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              MyDrawerHeader(
-                fullName: '${accounts?.fullName}',
-                email: '${accounts?.email}',
-                avatarUrl: '${accounts?.imageUrl}',
-              ),
-              ListTile(
-                title: const Text('Cập nhật thông tin'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Đổi mật khẩu'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Đơn hàng'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Voucher'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Món yêu thích'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Đăng xuất'),
-                onTap: () {
-                  controller.logout();
-                  Navigator.pop(context);
-                  slideinTransitionNoBack(context, const HomeScreenView());
-                },
-              ),
-            ],
-          ),
-        );
-      } else {
-        controller.fetchCurrent();
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-    });
-=======
     final accounts = controller.accountRespone.value;
     return Drawer(
       child: ListView(
@@ -296,6 +231,5 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
     );
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983:lib/screens/home/product/home_appbar.dart
   }
 }
