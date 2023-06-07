@@ -22,7 +22,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     return Scaffold(
       ////////////////MENU NAVIGATION BAR BEN TRAI O DAY//////////////
       appBar: CustomHomeAppBar(scaffoldKey: scaffoldKey),
-      drawer: CustomHomeAppBar(scaffoldKey: scaffoldKey).buildDrawer(context),
+      endDrawer:
+          CustomHomeAppBar(scaffoldKey: scaffoldKey).buildDrawer(context),
       body: ListView(
         children: [
           Column(

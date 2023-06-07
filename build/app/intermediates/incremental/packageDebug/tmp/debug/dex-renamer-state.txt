@@ -1,36 +1,16 @@
-<<<<<<< HEAD
-#Tue Jun 06 20:29:57 ICT 2023
-=======
-#Fri Jun 02 15:22:49 ICT 2023
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
+#Wed Jun 07 12:20:13 ICT 2023
 path.4=7/classes.dex
 path.3=1/classes.dex
 path.2=0/classes.dex
 path.1=0/classes.dex
-<<<<<<< HEAD
-path.5=classes2.dex
 path.0=classes.dex
 base.4=C\:\\Users\\Administrator\\Desktop\\Java\\Flutter-Front-End\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
 base.3=C\:\\Users\\Administrator\\Desktop\\Java\\Flutter-Front-End\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
 base.2=C\:\\Users\\Administrator\\Desktop\\Java\\Flutter-Front-End\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.1=C\:\\Users\\Administrator\\Desktop\\Java\\Flutter-Front-End\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.0=C\:\\Users\\Administrator\\Desktop\\Java\\Flutter-Front-End\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-=======
-path.0=classes.dex
-base.4=C\:\\Users\\Administrator\\Desktop\\Java\\Java_FrontEnd\\quanlyquantrasua\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
-base.3=C\:\\Users\\Administrator\\Desktop\\Java\\Java_FrontEnd\\quanlyquantrasua\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.2=C\:\\Users\\Administrator\\Desktop\\Java\\Java_FrontEnd\\quanlyquantrasua\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.1=C\:\\Users\\Administrator\\Desktop\\Java\\Java_FrontEnd\\quanlyquantrasua\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
-base.0=C\:\\Users\\Administrator\\Desktop\\Java\\Java_FrontEnd\\quanlyquantrasua\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-<<<<<<< HEAD
-renamed.5=classes6.dex
 renamed.4=classes5.dex
-base.5=C\:\\Users\\Administrator\\Desktop\\Java\\Flutter-Front-End\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-=======
-renamed.4=classes5.dex
->>>>>>> dd73c3cd0c8237c7ff366b5cd53d449511f67983

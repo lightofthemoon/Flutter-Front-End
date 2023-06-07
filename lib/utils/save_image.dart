@@ -1,8 +1,6 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 import 'dart:io';
-
-import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<String> saveImageToNewDirectory(

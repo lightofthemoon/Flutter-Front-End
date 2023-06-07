@@ -1,4 +1,7 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
+import 'package:quanlyquantrasua/controller/account_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../model/account_model.dart';
 import 'dart:convert';
 import 'package:get/get.dart';
@@ -10,7 +13,17 @@ import '../base_url_api.dart';
 class AccountApi extends GetxController {
   Rx<List<Accounts>?> listaccounts = Rx<List<Accounts>?>([]);
   Rx<AccountResponse?> accountRespone = Rx<AccountResponse?>(null);
-  var lateEmail = ''.obs;
+  @override
+  void onInit() {
+    super.onInit();
+    fetchCurrent();
+  }
+
+  Future fetchCurrent() async {
+    accountRespone.value =
+        await AccountController().getUserFromSharedPreferences();
+  }
+
   Future getAllAccounts() async {
     try {
       final response = await http.get(Uri.parse(ApiUrl.apiGetAllAccount));
@@ -55,9 +68,17 @@ class AccountApi extends GetxController {
       final accountResponseResult =
           AccountResponse.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
       accountRespone.value = accountResponseResult;
+      await AccountController()
+          .storedUserToSharedRefererces(accountResponseResult);
       return accountResponseResult;
     } else {
       throw Exception('Lỗi: ${response.statusCode}');
     }
+  }
+
+  Future logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('currrent_account');
+    accountRespone.value = null;
   }
 }

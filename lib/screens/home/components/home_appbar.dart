@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quanlyquantrasua/api/account_api/account_api.dart';
+import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
-
-import '../../../controller/account_controller.dart';
 import 'draw_header_bar.dart';
 
 class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -18,40 +17,15 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      leading: Obx(() {
-        if (controller.accountRespone.value == null) {
-          return Container(
-            height: 30,
-            width: 30,
-            margin: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              image: DecorationImage(
-                image: Image.asset(
-                  'assets/images/profile.png',
-                  scale: 1,
-                ).image,
-                fit: BoxFit.fill,
-              ),
-            ),
-            child: InkWell(
-              onTap: () {
-                slideinTransition(context, const SignInScreen());
-              },
-            ),
-          );
-        } else {
-          return IconButton(
-            icon: const Icon(
-              Icons.menu,
-              size: 24.0,
-            ),
-            onPressed: () {
-              scaffoldKey.currentState?.openDrawer();
-            },
-          );
-        }
-      }),
+      leading: GestureDetector(
+        child: const Icon(
+          Icons.home_outlined,
+          size: 30,
+        ),
+        onTap: () {
+          slideinTransition(context, const HomeScreenView());
+        },
+      ),
       backgroundColor: const Color(0xff06AB8D),
       title: Text(
         "Home",
@@ -225,6 +199,7 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ListTile(
             title: const Text('Đăng xuất'),
             onTap: () {
+              controller.logout();
               Navigator.pop(context);
             },
           ),
