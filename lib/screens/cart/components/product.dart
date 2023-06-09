@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+
+/// Dishes 
 class product {
   final String name;
   final int price;
@@ -22,7 +24,11 @@ List<product> products = [
   product(name: 'Product 7', price: 30500, img: "img1"),
 ];
 
+/// Cart Item bao gồm list Dish
 class ProductCart {
-  late List<product> products;
-  late bool? isSelected;
+  late List<product> products;   /// Đây là List Dish
+  late bool? isSelected;         /// Select
+  /////// số lượng 
+  ///////  topping
 }
+//////e
