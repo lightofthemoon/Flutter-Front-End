@@ -6,7 +6,6 @@ import 'package:quanlyquantrasua/screens/sign_up/signUpScreen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import 'package:intl/intl.dart';
 import '../api/account_api/account_api.dart';
-import '../api/user/create_accounts.dart';
 
 class AccountsListScreen extends StatelessWidget {
   AccountsListScreen({super.key});
