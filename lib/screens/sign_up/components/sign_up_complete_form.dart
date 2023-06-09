@@ -1,13 +1,11 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print
-
+// ignore_for_file: use_build_context_synchronously
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:quanlyquantrasua/controller/account_controller.dart';
-
 import 'package:quanlyquantrasua/model/account_model.dart';
+import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
+import 'package:quanlyquantrasua/utils/save_image.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/gender_chose.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
 import '../../../api/account_api/account_api.dart';
@@ -16,7 +14,6 @@ import '../../../widgets/custom_widgets/custom_input_textformfield.dart';
 import '../../../widgets/custom_widgets/datetime_picker.dart';
 import '../../../widgets/custom_widgets/default_button.dart';
 import '../../../widgets/custom_widgets/transition.dart';
-import '../../sign_in/sign_in_screen.dart';
 
 class SignUpCompleteForm extends StatefulWidget {
   const SignUpCompleteForm(
@@ -177,12 +174,10 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
               return;
             }
 
-            accounts.imageUrl = await AccountController()
-                .uploadImageToFirebaseStorage(
-                    '${accounts.email}_${accounts.phoneNumber}', image);
-
+            accounts.imageUrl = await saveImageToNewDirectory(
+                image!, 'siuuu', '${accounts.email}_${accounts.phoneNumber}');
             accounts.username = fullNameController.text;
-            accounts.address = addressController.text;
+
             accounts.accounttypeid = 3;
             if (date != null) {
               accounts.birthday = date;

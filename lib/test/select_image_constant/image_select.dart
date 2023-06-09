@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -18,10 +16,10 @@ class ImagePickerWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  ImagePickerWidgetState createState() => ImagePickerWidgetState();
+  _ImagePickerWidgetState createState() => _ImagePickerWidgetState();
 }
 
-class ImagePickerWidgetState extends State<ImagePickerWidget>
+class _ImagePickerWidgetState extends State<ImagePickerWidget>
     with SingleTickerProviderStateMixin {
   File? image;
   late AnimationController _animationController;
@@ -91,7 +89,7 @@ class ImagePickerWidgetState extends State<ImagePickerWidget>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: 1000),
     );
     _inanimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(

@@ -1,12 +1,9 @@
-// ignore_for_file: avoid_print
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../select_image_constant/common_buttons.dart';
 import '../select_image_constant/constants.dart';
 import 'select_photo_options_screen.dart';

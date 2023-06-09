@@ -5,7 +5,8 @@ import 'package:quanlyquantrasua/api/category/api_category.dart';
 
 class MenuCategoryList extends StatelessWidget {
   MenuCategoryList({Key? key}) : super(key: key);
-  final controller = Get.put(CategoryApi());
+
+  final controller = Get.find<CategoryApi>();
   @override
   Widget build(BuildContext context) {
     controller.getAllCategory();

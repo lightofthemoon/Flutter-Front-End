@@ -9,8 +9,9 @@ class Accounts {
   String? gender;
   String? phoneNumber;
   String? address;
-  int? accounttypeid;
   String? imageUrl;
+  int? accounttypeid;
+
   Accounts(
       {this.id,
       this.imageUrl,

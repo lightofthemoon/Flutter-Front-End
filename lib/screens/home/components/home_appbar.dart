@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quanlyquantrasua/api/account_api/account_api.dart';
-
 import 'package:quanlyquantrasua/screens/home/home_screens.dart';
+
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
-
 import 'draw_header_bar.dart';
 
 class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -19,18 +18,25 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       leading: GestureDetector(
-          onTap: () => slideinTransition(context, const HomeScreenView()),
-          child: const Icon(
-            Icons.home_outlined,
-            color: Color.fromARGB(255, 229, 199, 111),
-            size: 30,
-          )),
+        child: const Icon(
+          Icons.home_outlined,
+          size: 30,
+        ),
+        onTap: () {
+          slideinTransition(context, const HomeScreenView());
+        },
+      ),
       backgroundColor: const Color(0xff06AB8D),
       title: Text(
         "Home",
         style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
       ),
       actions: [
+        const Icon(
+          Icons.message,
+          size: 24.0,
+          color: Colors.white,
+        ),
         const SizedBox(
           width: 23.0,
         ),
@@ -150,65 +156,55 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   Widget buildDrawer(BuildContext context) {
-    return Obx(() {
-      if (controller.accountRespone.value != null) {
-        final accounts = controller.accountRespone.value;
-        return Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              MyDrawerHeader(
-                fullName: '${accounts?.fullName}',
-                email: '${accounts?.email}',
-                avatarUrl: '${accounts?.imageUrl}',
-              ),
-              ListTile(
-                title: const Text('Cập nhật thông tin'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Đổi mật khẩu'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Đơn hàng'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Voucher'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Món yêu thích'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Đăng xuất'),
-                onTap: () {
-                  controller.logout();
-                  Navigator.pop(context);
-                  slideinTransitionNoBack(context, const HomeScreenView());
-                },
-              ),
-            ],
+    final accounts = controller.accountRespone.value;
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          MyDrawerHeader(
+            fullName: '${accounts?.fullName}',
+            email: '${accounts?.email}',
+            avatarUrl: '${accounts?.birthday}',
           ),
-        );
-      } else {
-        controller.fetchCurrent();
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-    });
+          ListTile(
+            title: const Text('Cập nhật thông tin'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text('Đổi mật khẩu'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text('Đơn hàng'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text('Voucher'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text('Món yêu thích'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text('Đăng xuất'),
+            onTap: () {
+              controller.logout();
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:quanlyquantrasua/api/base_url_api.dart';
@@ -24,7 +22,6 @@ class CategoryApi extends GetxController {
           jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
       listCategory.value =
           jsonData.map((data) => CategoryModel.fromJson(data)).toList();
-      print(listCategory.value?.length);
       if (response.statusCode != 200) {
         throw Exception('Load Account thất bại: ${response.body}');
       }

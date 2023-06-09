@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
-
-import 'package:quanlyquantrasua/api/base_url_api.dart';
 import 'package:quanlyquantrasua/controller/account_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../model/account_model.dart';
 import 'dart:convert';
@@ -9,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../model/account_response.dart';
+import '../base_url_api.dart';
 
 class AccountApi extends GetxController {
   Rx<List<Accounts>?> listaccounts = Rx<List<Accounts>?>([]);
@@ -19,12 +19,11 @@ class AccountApi extends GetxController {
     fetchCurrent();
   }
 
-  Future<void> fetchCurrent() async {
+  Future fetchCurrent() async {
     accountRespone.value =
         await AccountController().getUserFromSharedPreferences();
   }
 
-  var lateEmail = ''.obs;
   Future getAllAccounts() async {
     try {
       final response = await http.get(Uri.parse(ApiUrl.apiGetAllAccount));
@@ -77,8 +76,9 @@ class AccountApi extends GetxController {
     }
   }
 
-  Future<void> logout() async {
-    await AccountController().logout();
+  Future logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('currrent_account');
     accountRespone.value = null;
   }
 }

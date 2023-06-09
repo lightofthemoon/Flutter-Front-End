@@ -4,8 +4,6 @@ import '../../widgets/custom_widgets/custom_appbar.dart';
 import 'components/sign_up_complete_body.dart';
 
 class SignUpCompleteScreen extends StatelessWidget {
-  static String routeName = "/sign_in";
-
   const SignUpCompleteScreen(
       {super.key, required this.email, required this.password});
   final String email;

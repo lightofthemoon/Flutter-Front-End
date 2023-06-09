@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quanlyquantrasua/api/product/api_product.dart';
+import 'package:quanlyquantrasua/screens/product-detail/product-detail.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import '../banner/banner_list.dart';
 import 'list_category.dart';
-import '../data/list_dish.dart';
 
 class GroceryContainer extends StatelessWidget {
   const GroceryContainer({Key? key}) : super(key: key);
@@ -62,51 +65,69 @@ class GroceryContainer extends StatelessWidget {
           const SizedBox(
             height: 13.87,
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 5,
-                crossAxisSpacing: 2,
-                childAspectRatio: 160.06 / 190.42,
-              ),
-              itemCount: ListDataTemp.products.length,
-              shrinkWrap: true,
-              physics: const ScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                var item = ListDataTemp.products[index];
-                double discount = (item['price'] * 10) / 100;
-                double totalDiscount = item['price'] - discount;
-                return InkWell(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => DetailProductView(
-                    //       item: item,
-                    //     ),
-                    //   ),
-                    // );
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: const BoxDecoration(
-                      color: Color(0xffFFFDFD),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12.0),
-                      ),
+          ListDishView(),
+        ],
+      ),
+    );
+  }
+}
+
+class ListDishView extends StatelessWidget {
+  ListDishView({Key? key}) : super(key: key);
+
+  final controller = Get.find<DishApi>();
+
+  @override
+  Widget build(BuildContext context) {
+    controller.getAllDish();
+    return Obx(() {
+      if (controller.listDish.value != null) {
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 2,
+              childAspectRatio: 160.06 / 190.42,
+            ),
+            itemCount: controller.listDish.value!.length,
+            shrinkWrap: true,
+            physics: const ScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) {
+              var item = controller.listDish.value![index];
+              var price = item.price ?? 0.0;
+              double discount = (price * 10) / 100;
+              double totalDiscount = price - discount;
+              return InkWell(
+                onTap: () {
+                  slideinTransition(
+                    context,
+                    ProductDetailScreen(
+                      dish: item,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
+                  );
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: const BoxDecoration(
+                    color: Color(0xffFFFDFD),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12.0),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Container(
                           height: 97.0,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage(
-                                "${item['photo']}",
-                              ),
+                              image: Image.network(
+                                "${item.image}",
+                                scale: 20,
+                              ).image,
                               fit: BoxFit.cover,
                             ),
                             borderRadius: const BorderRadius.vertical(
@@ -116,93 +137,82 @@ class GroceryContainer extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 11.35,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 11.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${item['product_name']}",
-                                style: GoogleFonts.poppins(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                      ),
+                      const SizedBox(
+                        height: 11.35,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 11.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${item.dishName}",
+                              style: GoogleFonts.poppins(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8.65,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "${item.categories?.categoryName}",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xff8B9E9E),
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 8.65,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "${item['category']}",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w500,
-                                      color: const Color(0xff8B9E9E),
-                                    ),
+                                const SizedBox(
+                                  width: 22.0,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 13.2,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  price.toString(),
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xff02A88A),
                                   ),
-                                  const Spacer(),
-                                  const Icon(
-                                    Icons.star,
-                                    size: 14.0,
-                                    color: Colors.orange,
+                                ),
+                                const SizedBox(
+                                  width: 6.66,
+                                ),
+                                Text(
+                                  "$totalDiscount",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                    decoration: TextDecoration.lineThrough,
+                                    color: const Color(0xffF25822),
                                   ),
-                                  Text(
-                                    "4.5",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.normal,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 22.0,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 13.2,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "${item['price']}",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: const Color(0xff02A88A),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 6.66,
-                                  ),
-                                  Text(
-                                    "$totalDiscount",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                      decoration: TextDecoration.lineThrough,
-                                      color: const Color(0xffF25822),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
-        ],
-      ),
-    );
+        );
+      }
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    });
   }
 }

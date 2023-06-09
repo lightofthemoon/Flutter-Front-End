@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 class ApiUrl {
   static const baseUrl = 'http://192.168.1.44:7071/api/';
 
@@ -11,12 +9,11 @@ class ApiUrl {
   ///// Api của Tính
   static const apiGetAllCategory = '${baseUrl}categories/list';
 
-  static const apiGetAllProduct = '${baseUrl}product/list';
+  static const apiGetAllProduct = '${baseUrl}dish/list';
 
   //// Api của Quý
   static const apiLogin = '${baseUrl}accounts/login';
 
-  ///
   ///
   ///
   ///
