@@ -51,7 +51,6 @@ class AccountsListScreen extends StatelessWidget {
               itemCount: controller.listaccounts.value!.length,
               itemBuilder: (context, index) {
                 final account = controller.listaccounts.value![index];
-
                 return ListTile(
                   title: Text(account.username ?? ''),
                   subtitle: Row(
