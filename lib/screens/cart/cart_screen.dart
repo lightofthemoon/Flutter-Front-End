@@ -19,16 +19,15 @@ class CartScreen extends StatelessWidget {
         leading: IconButton(
           padding: EdgeInsets.zero,
           icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () {
-            
-          },
+          onPressed: () {},
         ),
         automaticallyImplyLeading: false,
         title: const Text('My Cart'),
         centerTitle: true,
       ),
       body: const Body(),
-      bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
+  ////////Flutter errorrrrrrrrrrrrrrrrrrrrr
 }
