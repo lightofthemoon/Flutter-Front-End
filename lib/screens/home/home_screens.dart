@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:quanlyquantrasua/api/account_api/account_api.dart';
 import 'package:quanlyquantrasua/api/product/api_product.dart';
 
-import '../../api/category/api_category.dart';
 import 'components/home_appbar.dart';
 import 'components/listproduct_container.dart';
 
@@ -29,7 +28,6 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       ////////////////MENU NAVIGATION BAR BEN TRAI O DAY//////////////
       appBar: CustomHomeAppBar(scaffoldKey: scaffoldKey),
       endDrawer:
