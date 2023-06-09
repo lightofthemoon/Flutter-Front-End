@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quanlyquantrasua/screens/sign_in/components/sign_in_form.dart';
 
-import '../../../widgets/custom_widgets/noAccountText.dart';
+import '../../../widgets/custom_widgets/no_account_text.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});

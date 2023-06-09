@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../data/list_data.dart';
+import '../data/list_dish.dart';
 
 class BannerList extends StatelessWidget {
   const BannerList({Key? key}) : super(key: key);

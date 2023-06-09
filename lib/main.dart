@@ -1,16 +1,23 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:quanlyquantrasua/screens/account_list_screen.dart';
 
 import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FirebaseAuth.instance.signInAnonymously();
   runApp(
     MaterialApp(
-      initialRoute: 'introduction_screen',
+      initialRoute: 'home_screen',
       debugShowCheckedModeBanner: false,
       routes: {
-        'introduction_screen': (context) => HomeScreenView(),
+        'account_list': (context) => AccountsListScreen(),
+        'home_screen': (context) => HomeScreenView(),
       },
     ),
   );

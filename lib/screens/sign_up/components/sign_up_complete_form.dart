@@ -1,18 +1,27 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quanlyquantrasua/configs/constant.dart';
+
+import 'package:quanlyquantrasua/controller/account_controller.dart';
+
 import 'package:quanlyquantrasua/model/account_model.dart';
-import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/gender_chose.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
 import '../../../api/account_api/account_api.dart';
+import '../../../test/select_image_constant/image_select.dart';
 import '../../../widgets/custom_widgets/custom_input_textformfield.dart';
 import '../../../widgets/custom_widgets/datetime_picker.dart';
 import '../../../widgets/custom_widgets/default_button.dart';
 import '../../../widgets/custom_widgets/transition.dart';
+import '../../sign_in/sign_in_screen.dart';
 
 class SignUpCompleteForm extends StatefulWidget {
-  SignUpCompleteForm({Key? key, required this.email, required this.password});
+  const SignUpCompleteForm(
+      {Key? key, required this.email, required this.password})
+      : super(key: key);
   final String email;
   final String password;
 
@@ -21,7 +30,7 @@ class SignUpCompleteForm extends StatefulWidget {
 }
 
 class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
-  final controller = Get.find<AccountController>();
+  final controller = Get.find<AccountApi>();
 
   late TextEditingController fullNameController;
 
@@ -64,12 +73,20 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
     super.dispose();
   }
 
+  File? image;
   @override
   Widget build(BuildContext context) {
     DateTime? date;
     String? selectedGender;
     return Form(
       child: Column(children: [
+        ImagePickerWidget(
+          onImageSelected: (value) {
+            setState(() {
+              image = value;
+            });
+          },
+        ),
         BirthdayDatePickerWidget(
           initialDate: DateTime.now(),
           onChanged: (value) {
@@ -149,6 +166,7 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
           press: () async {
             Accounts accounts = Accounts();
             accounts.email = widget.email;
+            accounts.phoneNumber = phonenumberController.text;
             accounts.password = widget.password;
             if (selectedGender != null) {
               accounts.gender = selectedGender;
@@ -158,9 +176,13 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
                   backgroundColor: Colors.red);
               return;
             }
-            accounts.address = addressController.text;
+
+            accounts.imageUrl = await AccountController()
+                .uploadImageToFirebaseStorage(
+                    '${accounts.email}_${accounts.phoneNumber}', image);
+
             accounts.username = fullNameController.text;
-            accounts.phoneNumber = phonenumberController.text;
+            accounts.address = addressController.text;
             accounts.accounttypeid = 3;
             if (date != null) {
               accounts.birthday = date;
@@ -171,10 +193,8 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
               return;
             }
             print(accounts.toJson());
-            await controller
-                .createAccount(context, accounts.toJson())
-                .whenComplete(() {
-              slideinTransition(context, SignInScreen());
+            await controller.createAccount(accounts.toJson()).whenComplete(() {
+              slideinTransition(context, const SignInScreen());
             });
           },
         )

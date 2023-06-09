@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quanlyquantrasua/screens/create_account_screen.dart';
-import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
-import 'package:quanlyquantrasua/screens/sign_up/signUpScreen.dart';
-import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import 'package:intl/intl.dart';
+import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
+import 'package:quanlyquantrasua/screens/sign_up/signup_screen.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
+
 import '../api/account_api/account_api.dart';
 
 class AccountsListScreen extends StatelessWidget {
   AccountsListScreen({super.key});
-  final controller = Get.put(AccountController());
+  final controller = Get.put(AccountApi());
   @override
   Widget build(BuildContext context) {
     controller.getAllAccounts();
@@ -51,19 +51,35 @@ class AccountsListScreen extends StatelessWidget {
               itemCount: controller.listaccounts.value!.length,
               itemBuilder: (context, index) {
                 final account = controller.listaccounts.value![index];
-
                 return ListTile(
                   title: Text(account.username ?? ''),
-                  subtitle: Column(
+                  subtitle: Row(
                     children: [
-                      Row(
-                        children: [
-                          Text('Quyền: ${account.accounttypeid}'),
-                        ],
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundImage:
+                            Image.network('${account.imageUrl}').image,
                       ),
-                      Row(
+                      Column(
                         children: [
-                          Text(account.email ?? ''),
+                          Row(
+                            children: [
+                              Text('Quyền: ${account.accounttypeid}'),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(account.email ?? ''),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              account.birthday != null
+                                  ? Text(DateFormat('dd/MM/yyyy')
+                                      .format(account.birthday!.toLocal()))
+                                  : const Text('Chưa cập nhật'),
+                            ],
+                          ),
                         ],
                       ),
                       // Row(

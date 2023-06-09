@@ -1,6 +1,6 @@
 class Product {
   int? dishid;
-  String? dish_name;
+  String? dishname;
   String? image;
   double? price;
   int? categoryid;
@@ -8,7 +8,7 @@ class Product {
 
   Product({
     this.dishid,
-    this.dish_name,
+    this.dishname,
     this.image,
     this.price,
     this.categoryid,
@@ -18,7 +18,7 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       dishid: json['dishid'] as int,
-      dish_name: json['dish_name'] as String,
+      dishname: json['dishname'] as String,
       image: json['image'] as String,
       price: json['price'] as double,
       categoryid: json['categoryid'] as int,
@@ -29,7 +29,7 @@ class Product {
   Map<String, dynamic> toJson() {
     return {
       'dishid': dishid,
-      'dish_name': dish_name,
+      'dishname': dishname,
       'image': image,
       'price': price,
       'categoryid': categoryid,

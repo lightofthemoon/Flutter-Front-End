@@ -1,14 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:quanlyquantrasua/api/base-url-api.dart';
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
+import 'package:quanlyquantrasua/api/base_url_api.dart';
+import 'package:quanlyquantrasua/controller/account_controller.dart';
 
 import '../../model/account_model.dart';
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-class AccountController extends GetxController {
+import '../../model/account_response.dart';
+
+class AccountApi extends GetxController {
   Rx<List<Accounts>?> listaccounts = Rx<List<Accounts>?>([]);
-  // var account = Accounts().obs;
+  Rx<AccountResponse?> accountRespone = Rx<AccountResponse?>(null);
+  @override
+  void onInit() {
+    super.onInit();
+    fetchCurrent();
+  }
+
+  Future<void> fetchCurrent() async {
+    accountRespone.value =
+        await AccountController().getUserFromSharedPreferences();
+  }
+
   var lateEmail = ''.obs;
   Future getAllAccounts() async {
     try {
@@ -26,8 +41,7 @@ class AccountController extends GetxController {
     }
   }
 
-  Future<Accounts?> createAccount(
-      BuildContext context, Map<String, dynamic> accountToJson) async {
+  Future<Accounts?> createAccount(Map<String, dynamic> accountToJson) async {
     final response = await http.post(
       Uri.parse(ApiUrl.apiCreateAccount),
       headers: <String, String>{
@@ -42,5 +56,29 @@ class AccountController extends GetxController {
       return accounts;
     }
     return null;
+  }
+
+  Future<AccountResponse> login(Map<String, dynamic> accountToJson) async {
+    final url = Uri.parse(ApiUrl.apiLogin);
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(accountToJson),
+    );
+    if (response.statusCode == 200) {
+      final accountResponseResult =
+          AccountResponse.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+      accountRespone.value = accountResponseResult;
+      await AccountController()
+          .storedUserToSharedRefererces(accountResponseResult);
+      return accountResponseResult;
+    } else {
+      throw Exception('Lỗi: ${response.statusCode}');
+    }
+  }
+
+  Future<void> logout() async {
+    await AccountController().logout();
+    accountRespone.value = null;
   }
 }

@@ -1,8 +1,11 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quanlyquantrasua/api/account_api/account_api.dart';
 
-import 'product/app-bar.dart';
-import 'product/listproduct_container.dart';
+import '../../api/category/api_category.dart';
+import 'components/home_appbar.dart';
+import 'components/listproduct_container.dart';
 
 class HomeScreenView extends StatefulWidget {
   const HomeScreenView({Key? key}) : super(key: key);
@@ -14,13 +17,16 @@ class HomeScreenView extends StatefulWidget {
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _HomeScreenViewState extends State<HomeScreenView> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final controller = Get.put(AccountApi());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       ////////////////MENU NAVIGATION BAR BEN TRAI O DAY//////////////
-      appBar: CustomAppBar(scaffoldKey: scaffoldKey),
-      drawer: CustomAppBar(scaffoldKey: scaffoldKey).buildDrawer(context),
+      appBar: CustomHomeAppBar(scaffoldKey: scaffoldKey),
+      endDrawer:
+          CustomHomeAppBar(scaffoldKey: scaffoldKey).buildDrawer(context),
       body: ListView(
         children: [
           Column(
@@ -108,8 +114,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   ],
                 ),
               ),
-              Column(
-                children: const [
+              const Column(
+                children: [
                   SizedBox(height: 10),
                   GroceryContainer(),
                 ],

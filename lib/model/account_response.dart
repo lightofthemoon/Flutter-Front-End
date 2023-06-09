@@ -1,5 +1,6 @@
-class ListAccountResponse {
+class AccountResponse {
   int? accountId;
+  String? imageUrl;
   String? fullName;
   String? phoneNumber;
   String? email;
@@ -9,10 +10,11 @@ class ListAccountResponse {
   int? accountTypeId;
   String? status;
 
-  ListAccountResponse(
+  AccountResponse(
       {this.accountId,
       this.fullName,
       this.phoneNumber,
+      this.imageUrl,
       this.email,
       this.gender,
       this.birthday,
@@ -20,9 +22,10 @@ class ListAccountResponse {
       this.accountTypeId,
       this.status});
 
-  ListAccountResponse.fromJson(Map<String, dynamic> json) {
+  AccountResponse.fromJson(Map<String, dynamic> json) {
     accountId = json['accountId'];
     fullName = json['fullName'];
+    imageUrl = json['imageUrl'];
     phoneNumber = json['phoneNumber'];
     email = json['email'];
     gender = json['gender'];
@@ -37,6 +40,7 @@ class ListAccountResponse {
     data['accountId'] = accountId;
     data['fullName'] = fullName;
     data['phoneNumber'] = phoneNumber;
+    data['imageUrl'] = imageUrl;
     data['email'] = email;
     data['gender'] = gender;
     data['birthday'] = birthday;

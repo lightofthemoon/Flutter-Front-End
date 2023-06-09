@@ -6,13 +6,15 @@ class GenderSelectionWidget extends StatefulWidget {
   final String? gender;
   final ValueChanged<String>? onChanged;
   final double? size;
-  GenderSelectionWidget({this.gender, this.onChanged, this.size});
+  const GenderSelectionWidget(
+      {Key? key, this.gender, this.onChanged, this.size})
+      : super(key: key);
 
   @override
-  _GenderSelectionWidgetState createState() => _GenderSelectionWidgetState();
+  GenderSelectionWidgetState createState() => GenderSelectionWidgetState();
 }
 
-class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
+class GenderSelectionWidgetState extends State<GenderSelectionWidget> {
   String? _selectedGender;
 
   @override
