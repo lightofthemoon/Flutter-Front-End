@@ -8,8 +8,10 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: size.height * 0.2625,
+      width: size.width,
       child: AspectRatio(
         aspectRatio: 1,
         child: CachedNetworkImage(
