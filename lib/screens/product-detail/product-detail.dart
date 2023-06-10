@@ -10,7 +10,6 @@ import '../../widgets/custom_widgets/show_loading_animation.dart';
 import 'components/body.dart';
 import 'components/rouded-container-desciption.dart';
 import 'components/rounded-iconBtn.dart';
-import 'components/size_choices.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key, required this.dish});
@@ -45,7 +44,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           //       selectedSize = value;
           //     });
           //   },
-          // ),
+          // )
         ],
       ),
       bottomNavigationBar: SizedBox(

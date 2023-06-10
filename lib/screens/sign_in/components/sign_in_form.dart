@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quanlyquantrasua/api/account_api/account_api.dart';
+import 'package:quanlyquantrasua/api/account/account_api.dart';
 import 'package:quanlyquantrasua/model/account_model.dart';
 
 import 'package:quanlyquantrasua/screens/home/home_screens.dart';

@@ -1,125 +1,20 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quanlyquantrasua/controller/cart_controller.dart';
+import 'package:quanlyquantrasua/model/cart_model.dart';
 import 'package:quanlyquantrasua/model/dish_model.dart';
+import 'package:quanlyquantrasua/model/size_model.dart';
+import 'package:quanlyquantrasua/model/topping_model.dart';
+import 'package:quanlyquantrasua/screens/product-detail/components/quantity_select.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/default_button.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
 import 'package:scroll_edge_listener/scroll_edge_listener.dart';
 
 import '../components/size_choices.dart';
-
-class DishBottomSheet extends StatefulWidget {
-  const DishBottomSheet({super.key});
-
-  @override
-  DishBottomSheetState createState() => DishBottomSheetState();
-}
-
-class DishBottomSheetState extends State<DishBottomSheet> {
-  String _selectedSize = 'Small';
-  List<String> _selectedToppings = [];
-
-  final List<String> _sizes = ['Small', 'Medium', 'Large'];
-  final List<String> _toppings = [
-    'Pepperoni',
-    'Mushrooms',
-    'Onions',
-    'Sausage',
-    'Bacon',
-    'Extra cheese',
-    'Black olives',
-    'Green peppers',
-    'Pineapple',
-    'Spinach'
-  ];
-
-  void _toggleTopping(String topping) {
-    setState(() {
-      if (_selectedToppings.contains(topping)) {
-        _selectedToppings.remove(topping);
-      } else {
-        _selectedToppings.add(topping);
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.8,
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('Chọn size',
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8.0),
-          Row(
-            children: [
-              for (String size in _sizes)
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedSize = size;
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      decoration: BoxDecoration(
-                        color: _selectedSize == size
-                            ? Colors.blue
-                            : Colors.grey[300],
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Center(child: Text(size)),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-          const SizedBox(height: 16.0),
-          const Text('Choose toppings',
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8.0),
-          Wrap(
-            spacing: 8.0,
-            runSpacing: 8.0,
-            children: [
-              for (String topping in _toppings)
-                GestureDetector(
-                  onTap: () {
-                    _toggleTopping(topping);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0, vertical: 8.0),
-                    decoration: BoxDecoration(
-                      color: _selectedToppings.contains(topping)
-                          ? Colors.blue
-                          : Colors.grey[300],
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Text(topping),
-                  ),
-                ),
-            ],
-          ),
-          const SizedBox(height: 16.0),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                // Handle button press
-              },
-              child: const Text('Add to cart'),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+import '../components/topping_choices.dart';
 
 class OrderDetailsBottomSheet extends StatefulWidget {
   final DishModel dish;
@@ -130,10 +25,12 @@ class OrderDetailsBottomSheet extends StatefulWidget {
 }
 
 class OrderDetailsBottomSheetState extends State<OrderDetailsBottomSheet> {
-  String? selectedSize = '';
+  final cartControler = Get.find<CartController>();
+  SizeModel? selectedSize;
+  int numOfItem = 0;
+  List<ToppingModel>? listChosenTopping;
   @override
   Widget build(BuildContext context) {
-    double total = 0;
     final size = MediaQuery.of(context).size;
     return SizedBox(
       height: size.height * 0.91,
@@ -172,7 +69,9 @@ class OrderDetailsBottomSheetState extends State<OrderDetailsBottomSheet> {
               continuous: false,
               dispatch: true,
               listener: () {
-                Navigator.pop(context);
+                //Đóng bottom sheet khi người dùng kéo hết cạnh trên của nó
+                //Hoạt động không như mong đợi vì 1 số lỗi
+                // Navigator.pop(context);
               },
               child: GlowingOverscrollIndicator(
                 axisDirection: AxisDirection.down,
@@ -188,11 +87,23 @@ class OrderDetailsBottomSheetState extends State<OrderDetailsBottomSheet> {
                         thickness: 3,
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        height: size.height / 18,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 5),
+                        height: size.height / 14,
                         width: size.width,
                         child: StyledGradienButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (selectedSize == null) {
+                              CustomErrorMessage.showMessage(
+                                  'Bạn chưa chọn kích cỡ!');
+                              return;
+                            }
+                            cartControler.addToCart(CartItem(
+                                dish: widget.dish,
+                                quantity: numOfItem,
+                                size: selectedSize!,
+                                toppings: listChosenTopping ?? []));
+                          },
                           buttonText: 'Thêm vào giỏ',
                           buttonIconAssets: 'assets/images/cart_add.png',
                         ),
@@ -220,6 +131,23 @@ class OrderDetailsBottomSheetState extends State<OrderDetailsBottomSheet> {
                                 });
                               },
                             ),
+                            const Divider(
+                              thickness: 2,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Số lượng',
+                                  style: GoogleFonts.nunito(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                            QuantitySelector(
+                              initialValue: 1,
+                              onValueChanged: (quantity) {
+                                numOfItem = quantity;
+                              },
+                            ),
                             const SizedBox(
                               height: 10,
                             ),
@@ -228,6 +156,25 @@ class OrderDetailsBottomSheetState extends State<OrderDetailsBottomSheet> {
                       ),
                       const Divider(
                         thickness: 3,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Thêm topping',
+                              style: GoogleFonts.nunito(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ToppingChoiceWidget(
+                        onToppingsSelected: (selectedToppings) {
+                          listChosenTopping = selectedToppings;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                       const SizedBox(
                         height: 40,

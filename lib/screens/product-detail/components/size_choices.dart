@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quanlyquantrasua/api/size/api_size.dart';
+import 'package:quanlyquantrasua/model/size_model.dart';
 
 class SizeChoiceWidget extends StatefulWidget {
-  final void Function(String) onSizeSelected;
+  final void Function(SizeModel?) onSizeSelected;
 
   const SizeChoiceWidget({Key? key, required this.onSizeSelected})
       : super(key: key);
@@ -45,7 +46,7 @@ class SizeChoiceWidgetState extends State<SizeChoiceWidget> {
                       setState(() {
                         _selectedSize = size.sizeName;
                       });
-                      widget.onSizeSelected(size.sizeName!);
+                      widget.onSizeSelected(size);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),

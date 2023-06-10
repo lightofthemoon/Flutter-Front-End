@@ -1,34 +1,47 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+// import 'package:quanlyquantrasua/model/category_model.dart';
+// import 'package:quanlyquantrasua/model/dish_model.dart';
+// import 'package:quanlyquantrasua/model/size_model.dart';
 
-/// Dishes 
-class product {
-  final String name;
-  final int price;
-  final String img;
+// /// Dishes
 
-  product({
-    required this.name,
-    required this.price,
-    required this.img,
-  });
-}
+// List<DishModel> products = [
+//   DishModel(
+//       dishID: 1,
+//       dishName: 'Product 1',
+//       price: 120000,
+//       image:
+//           "https://firebasestorage.googleapis.com/v0/b/trasua5anhem.appspot.com/o/dishesimage%2FTest.jpg?alt=media",
+//       categories: CategoryModel(
+//           categoryName: 'Trà sữa',
+//           id: 1,
+//           image:
+//               "https://firebasestorage.googleapis.com/v0/b/trasua5anhem.appspot.com/o/categoriesimage%2Fditmequy.jpg?alt=media"),
+//       sizes: SizeModel(sizeID: 1, sizeName: "S")),
+//   DishModel(
+//       dishID: 2,
+//       dishName: 'Product 2',
+//       price: 20000,
+//       image:
+//           "https://firebasestorage.googleapis.com/v0/b/trasua5anhem.appspot.com/o/dishesimage%2FM%E1%BB%9Bi.jpg?alt=media",
+//       categories: CategoryModel(
+//           categoryName: 'Trà sữa',
+//           id: 2,
+//           image:
+//               "https://firebasestorage.googleapis.com/v0/b/trasua5anhem.appspot.com/o/categoriesimage%2FBurger.jpg?alt=media"),
+//       sizes: SizeModel(sizeID: 2, sizeName: "L")),
+// ];
 
-List<product> products = [
-  product(name: 'Product 1', price: 120000, img: "img11"),
-  product(name: 'Product 2', price: 20000, img: "img1"),
-  product(name: 'Product 3', price: 120000, img: "img13"),
-  product(name: 'Product 4', price: 500000, img: "img14"),
-  product(name: 'Product 5', price: 80000, img: "img18"),
-  product(name: 'Product 6', price: 10000, img: "img6"),
-  product(name: 'Product 7', price: 30500, img: "img1"),
-];
+// /// Cart Item bao gồm list Dish
+// class ProductCart {
+//   late List<DishModel> products;
 
-/// Cart Item bao gồm list Dish
-class ProductCart {
-  late List<product> products;   /// Đây là List Dish
-  late bool? isSelected;         /// Select
-  /////// số lượng 
-  ///////  topping
-}
-//////e
+//   /// Đây là List Dish
+//   late bool? isSelected;
+
+//   /// Select
+//   /////// số lượng
+//   ///////  topping
+// }
+// //////e

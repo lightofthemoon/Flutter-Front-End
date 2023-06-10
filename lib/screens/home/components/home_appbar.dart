@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quanlyquantrasua/api/account_api/account_api.dart';
+import 'package:quanlyquantrasua/api/account/account_api.dart';
+import 'package:quanlyquantrasua/screens/cart/cart_screen.dart';
 import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
+import '../../cart/cart_view.dart';
 import 'draw_header_bar.dart';
 
 class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -32,14 +34,6 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
       ),
       actions: [
-        const Icon(
-          Icons.message,
-          size: 24.0,
-          color: Colors.white,
-        ),
-        const SizedBox(
-          width: 23.0,
-        ),
         const Stack(
           children: [
             Align(
@@ -67,17 +61,22 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         const SizedBox(
           width: 23.0,
         ),
-        const Stack(
+        Stack(
           children: [
             Align(
               alignment: Alignment.center,
-              child: Icon(
-                Icons.shopping_cart_outlined,
-                size: 30.0,
-                color: Colors.white,
+              child: GestureDetector(
+                onTap: () {
+                  slideinTransition(context, const CartScreen());
+                },
+                child: const Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 30.0,
+                  color: Colors.white,
+                ),
               ),
             ),
-            Positioned(
+            const Positioned(
               top: 8,
               right: 0,
               child: CircleAvatar(
@@ -156,16 +155,30 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   Widget buildDrawer(BuildContext context) {
-    final accounts = controller.accountRespone.value;
+    controller.fetchCurrent();
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          MyDrawerHeader(
-            fullName: '${accounts?.fullName}',
-            email: '${accounts?.email}',
-            avatarUrl: '${accounts?.birthday}',
-          ),
+          Obx(() {
+            if (controller.accountRespone.value != null) {
+              final accounts = controller.accountRespone.value!;
+              return MyDrawerHeader(
+                fullName: '${accounts.fullName}',
+                email: '${accounts.email}',
+                avatarUrl: '${accounts.imageUrl}',
+              );
+            }
+            return const CircularProgressIndicator();
+          }),
+          // if (accounts != null) ...[
+          //   MyDrawerHeader(
+          //     fullName: '${accounts.fullName}',
+          //     email: '${accounts.email}',
+          //     avatarUrl: '${accounts.imageUrl}',
+          //   ),
+          // ],
           ListTile(
             title: const Text('Cập nhật thông tin'),
             onTap: () {
