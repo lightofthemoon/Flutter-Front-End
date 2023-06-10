@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quanlyquantrasua/api/product/api_product.dart';
 import 'package:quanlyquantrasua/screens/product-detail/product-detail.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
+import '../../product-detail/product_bottom_sheet/details_bottom_sheet.dart';
 import '../banner/banner_list.dart';
 import 'list_category.dart';
 
@@ -101,11 +102,32 @@ class ListDishView extends StatelessWidget {
               double totalDiscount = price - discount;
               return InkWell(
                 onTap: () {
-                  slideinTransition(
-                    context,
-                    ProductDetailScreen(
-                      dish: item,
+                  // slideinTransition(
+                  //   context,
+                  //   ProductDetailScreen(
+                  //     dish: item,
+                  //   ),
+                  // );
+
+                  // showModalBottomSheet(
+                  //   context: context,
+                  //   builder: (BuildContext context) => DishBottomSheet(),
+                  // );
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
                     ),
+                    backgroundColor: Colors.white,
+                    builder: (BuildContext context) {
+                      return OrderDetailsBottomSheet(
+                        dish: item,
+                      );
+                    },
                   );
                 },
                 child: Container(

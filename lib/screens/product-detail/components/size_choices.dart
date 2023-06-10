@@ -2,60 +2,71 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quanlyquantrasua/api/size/api_size.dart';
 
-class SizesChoice extends StatefulWidget {
-  const SizesChoice({Key? key, required this.onSizeSelected}) : super(key: key);
-  final Function(String) onSizeSelected;
+class SizeChoiceWidget extends StatefulWidget {
+  final void Function(String) onSizeSelected;
+
+  const SizeChoiceWidget({Key? key, required this.onSizeSelected})
+      : super(key: key);
+
   @override
-  SizesChoiceState createState() => SizesChoiceState();
+  SizeChoiceWidgetState createState() => SizeChoiceWidgetState();
 }
 
-class SizesChoiceState extends State<SizesChoice> {
+class SizeChoiceWidgetState extends State<SizeChoiceWidget> {
+  String? _selectedSize = '';
   final sizeController = Get.find<SizeApi>();
-  String _selectedSize = 'S';
   @override
   void initState() {
     super.initState();
-    sizeController.getAllSize();
+    fetchListSize();
   }
 
-  void _selectSize(String sizeName) {
-    setState(() {
-      _selectedSize = sizeName;
-    });
-    widget.onSizeSelected(sizeName);
+  fetchListSize() async {
+    await sizeController.getAllSize();
+    if (sizeController.listSize != null) {
+      _selectedSize = sizeController.listSize?.first.sizeName ?? '';
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: sizeController.listSize.map((size) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: GestureDetector(
-            onTap: () => _selectSize(size.sizeName ?? ''),
-            child: Container(
-              decoration: BoxDecoration(
-                color: _selectedSize == size.sizeName
-                    ? Colors.black
-                    : Colors.grey[200],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Text(
-                "${size.sizeName}",
-                style: TextStyle(
-                  color: _selectedSize == size.sizeName
-                      ? Colors.white
-                      : Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 8.0),
+        Row(
+          children: [
+            if (sizeController.listSize != null) ...[
+              for (var size in sizeController.listSize!) ...[
+                SizedBox(
+                  width: 60,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedSize = size.sizeName;
+                      });
+                      widget.onSizeSelected(size.sizeName!);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      decoration: BoxDecoration(
+                        color: _selectedSize == size.sizeName
+                            ? Colors.blue
+                            : Colors.grey[300],
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Center(child: Text(size.sizeName!)),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        );
-      }).toList(),
+                const SizedBox(
+                  width: 10,
+                ),
+              ]
+            ]
+          ],
+        ),
+      ],
     );
   }
 }

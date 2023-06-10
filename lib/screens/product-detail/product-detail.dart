@@ -39,13 +39,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           Body(
             dish: widget.dish,
           ),
-          SizesChoice(
-            onSizeSelected: (value) {
-              setState(() {
-                selectedSize = value;
-              });
-            },
-          ),
+          // SizesChoice(
+          //   onSizeSelected: (value) {
+          //     setState(() {
+          //       selectedSize = value;
+          //     });
+          //   },
+          // ),
         ],
       ),
       bottomNavigationBar: SizedBox(

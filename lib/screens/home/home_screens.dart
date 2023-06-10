@@ -30,6 +30,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       ////////////////MENU NAVIGATION BAR BEN TRAI O DAY//////////////
       appBar: CustomHomeAppBar(scaffoldKey: scaffoldKey),
       endDrawer:
