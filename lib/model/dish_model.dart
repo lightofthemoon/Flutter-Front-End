@@ -24,7 +24,6 @@ class DishModel {
     SizeModel? sizeModel = SizeModel.fromJson(sizeJson);
 
     Map<String, dynamic> categoryJson = json['categories'];
-
     CategoryModel categoryModel = CategoryModel.fromJson(categoryJson);
 
     return DishModel(

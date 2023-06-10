@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:quanlyquantrasua/api/account_api/account_api.dart';
 import 'package:quanlyquantrasua/api/product/api_product.dart';
+import 'package:quanlyquantrasua/api/size/api_size.dart';
 
 import '../../api/category/api_category.dart';
 import 'components/home_appbar.dart';
@@ -20,7 +21,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   final accountController = Get.put(AccountApi());
   final categoryController = Get.put(CategoryApi());
   final dishController = Get.put(DishApi());
-
+  final sizeController = Get.put(SizeApi());
   Future<void> _refesh() async {
     await categoryController.getAllCategory();
     await dishController.getAllDish();
@@ -63,7 +64,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                               height: 20,
                             ),
                             Text(
-                              "33/39 Vạn Kiếp, Bình Thạnh, TP.HCM",
+                              accountController.accountRespone.value?.address ??
+                                  'Chọn địa điểm',
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.normal,
                                 fontSize: 14.5,
