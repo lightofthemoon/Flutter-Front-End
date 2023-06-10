@@ -446,6 +446,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "scroll_edge_listener",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/scroll_edge_listener-0.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "shared_preferences",
       "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.1.1",
       "packageUri": "lib/",
@@ -608,7 +614,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-06-09T15:51:40.392594Z",
+  "generated": "2023-06-10T03:11:32.915350Z",
   "generator": "pub",
   "generatorVersion": "3.0.2"
 }
