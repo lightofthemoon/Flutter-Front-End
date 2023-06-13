@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quanlyquantrasua/api/product/api_product.dart';
-import 'package:quanlyquantrasua/screens/product-detail/product-detail.dart';
-import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import '../../product-detail/product_bottom_sheet/details_bottom_sheet.dart';
 import '../banner/banner_list.dart';
 import 'list_category.dart';

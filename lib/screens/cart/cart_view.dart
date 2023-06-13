@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quanlyquantrasua/screens/product-detail/components/quantity_select.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 import '../../controller/cart_controller.dart';
 
@@ -53,7 +52,7 @@ class CartScreenState extends State<CartScreen> {
                       });
                     },
                   ),
-                  Text('Check All'),
+                  const Text('Check All'),
                 ],
               ),
               Expanded(
@@ -115,10 +114,8 @@ class CartScreenState extends State<CartScreen> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  // TODO: Implement checkout logic
-                },
-                child: Text('Checkout'),
+                onPressed: () {},
+                child: const Text('Checkout'),
               ),
             ],
           );

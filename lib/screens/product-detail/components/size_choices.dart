@@ -19,7 +19,6 @@ class SizeChoiceWidgetState extends State<SizeChoiceWidget> {
   @override
   void initState() {
     super.initState();
-    fetchListSize();
   }
 
   fetchListSize() async {
@@ -34,39 +33,42 @@ class SizeChoiceWidgetState extends State<SizeChoiceWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 8.0),
-        Row(
-          children: [
-            if (sizeController.listSize != null) ...[
-              for (var size in sizeController.listSize!) ...[
-                SizedBox(
-                  width: 60,
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedSize = size.sizeName;
-                      });
-                      widget.onSizeSelected(size);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      decoration: BoxDecoration(
-                        color: _selectedSize == size.sizeName
-                            ? Colors.blue
-                            : Colors.grey[300],
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Center(child: Text(size.sizeName!)),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-              ]
-            ]
-          ],
+        const SizedBox(
+          height: 8.0,
         ),
+        if (sizeController.listSize != null) ...[
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 40,
+            child: ListView.builder(
+              itemCount: sizeController.listSize!.length,
+              itemExtent: 100,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final item = sizeController.listSize![index];
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedSize = item.sizeName;
+                    });
+                    widget.onSizeSelected(item);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: _selectedSize == item.sizeName
+                          ? Colors.blue
+                          : Colors.grey[300],
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Center(child: Text(item.sizeName!)),
+                  ),
+                );
+              },
+            ),
+          ),
+        ]
       ],
     );
   }

@@ -174,11 +174,11 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
               return;
             }
 
-            accounts.imageUrl = await saveImageToNewDirectory(
-                image!, 'siuuu', '${accounts.email}_${accounts.phoneNumber}');
+            accounts.imageUrl = await saveImage(
+                image!, '${accounts.email}_${accounts.phoneNumber}');
             accounts.username = fullNameController.text;
-
             accounts.accounttypeid = 3;
+            accounts.address = addressController.text;
             if (date != null) {
               accounts.birthday = date;
             } else {
@@ -187,8 +187,8 @@ class _SignUpCompleteFormState extends State<SignUpCompleteForm> {
                   backgroundColor: Colors.red);
               return;
             }
-            print(accounts.toJson());
-            await controller.createAccount(accounts.toJson()).whenComplete(() {
+
+            await controller.createAccount(accounts).whenComplete(() {
               slideinTransition(context, const SignInScreen());
             });
           },

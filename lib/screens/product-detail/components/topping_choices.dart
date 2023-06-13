@@ -8,6 +8,7 @@ class ToppingChoiceWidget extends StatefulWidget {
   final void Function(List<ToppingModel>) onToppingsSelected;
 
   const ToppingChoiceWidget({
+    super.key,
     required this.onToppingsSelected,
   });
 

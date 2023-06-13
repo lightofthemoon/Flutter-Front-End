@@ -7,6 +7,12 @@ import '../base_url_api.dart';
 
 class SizeApi extends GetxController {
   List<SizeModel>? listSize = <SizeModel>[].obs();
+  @override
+  void onInit() {
+    super.onInit();
+    getAllSize();
+  }
+
   Future getAllSize() async {
     try {
       final url = Uri.parse(ApiUrl.apiGetAllSize);
