@@ -108,7 +108,7 @@ class CreateAccountScreen extends StatelessWidget {
             accounts.birthday = birthday;
             accounts.address = addressController.text;
             accounts.accounttypeid = 3;
-            await controller.createAccount(accounts.toJson()).whenComplete(() {
+            await controller.createAccount(accounts).whenComplete(() {
               CustomSnackBar.showCustomSnackBar(
                   context, 'Thêm tài khoản thành công', 2,
                   backgroundColor: Colors.blue);

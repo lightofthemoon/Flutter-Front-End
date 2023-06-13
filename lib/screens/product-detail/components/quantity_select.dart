@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quanlyquantrasua/screens/product-detail/components/rounded-iconBtn.dart';
 
 class QuantitySelector extends StatefulWidget {
   final int initialValue;

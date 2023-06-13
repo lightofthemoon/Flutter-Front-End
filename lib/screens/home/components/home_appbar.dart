@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quanlyquantrasua/api/account/account_api.dart';
-import 'package:quanlyquantrasua/screens/cart/cart_screen.dart';
 import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';

@@ -1,19 +1,16 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
-
 import 'dart:io';
-import 'package:path_provider/path_provider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-Future<String> saveImageToNewDirectory(
-    File? imageFile, String directoryName, String imageName) async {
+Future<String> saveImage(File? imageFile, String userInfo) async {
   if (imageFile != null) {
-    Directory appDocumentsDirectory = await getApplicationDocumentsDirectory();
-    String newDirectoryPath = '${appDocumentsDirectory.path}/$directoryName';
-    Directory newDirectory =
-        await Directory(newDirectoryPath).create(recursive: true);
-    String targetPath = '${newDirectory.path}/$imageName.jpg';
-    await File(imageFile.path).copy(targetPath);
-
-    return targetPath;
+    final fileName = 'user_${userInfo}.jpg';
+    final Reference storageReference =
+        FirebaseStorage.instance.ref().child('userimage/$fileName');
+    final UploadTask uploadTask = storageReference.putFile(imageFile);
+    final TaskSnapshot downloadUrl = (await uploadTask);
+    final String url = await downloadUrl.ref.getDownloadURL();
+    return url;
   }
   return '';
 }

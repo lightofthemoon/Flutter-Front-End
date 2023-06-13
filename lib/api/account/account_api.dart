@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
+import 'package:intl/intl.dart';
 import 'package:quanlyquantrasua/controller/account_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,15 +41,26 @@ class AccountApi extends GetxController {
     }
   }
 
-  Future<Accounts?> createAccount(Map<String, dynamic> accountToJson) async {
+  Future<Accounts?> createAccount(Accounts account) async {
+    final body = <String, String>{
+      "password": account.password!,
+      "fullName": account.username!,
+      "phoneNumber": account.phoneNumber!,
+      "email": account.email!,
+      "gender": account.gender!,
+      "birthday": DateFormat('yyyy-MM-dd').format(account.birthday!),
+      "address": account.address!,
+      "accountTypeId": account.accounttypeid!.toString(),
+      "imageUrl": account.imageUrl!
+    };
     final response = await http.post(
       Uri.parse(ApiUrl.apiCreateAccount),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(accountToJson),
+      body: jsonEncode(body),
     );
-
+    print(body);
     if (response.statusCode == 200) {
       Accounts accounts = Accounts.fromJson(jsonDecode(response.body));
 

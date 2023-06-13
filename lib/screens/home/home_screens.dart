@@ -26,6 +26,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   final sizeController = Get.put(SizeApi());
   final toppingController = Get.put(ToppingApi());
   final cartController = Get.put(CartController());
+
   Future<void> _refesh() async {
     await categoryController.getAllCategory();
     await dishController.getAllDish();
