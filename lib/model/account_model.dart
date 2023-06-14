@@ -11,6 +11,7 @@ class Accounts {
   String? address;
   String? imageUrl;
   int? accounttypeid;
+
   Accounts(
       {this.id,
       this.imageUrl,

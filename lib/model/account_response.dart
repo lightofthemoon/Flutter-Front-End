@@ -1,6 +1,5 @@
 class AccountResponse {
   int? accountId;
-  String? imageUrl;
   String? fullName;
   String? phoneNumber;
   String? email;
@@ -9,14 +8,14 @@ class AccountResponse {
   String? address;
   int? accountTypeId;
   String? status;
-
+  String? imageUrl;
   AccountResponse(
       {this.accountId,
       this.fullName,
       this.phoneNumber,
-      this.imageUrl,
       this.email,
       this.gender,
+      this.imageUrl,
       this.birthday,
       this.address,
       this.accountTypeId,

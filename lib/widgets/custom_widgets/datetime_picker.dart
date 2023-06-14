@@ -6,14 +6,15 @@ class BirthdayDatePickerWidget extends StatefulWidget {
   final DateTime? initialDate;
   final ValueChanged<DateTime>? onChanged;
 
-  BirthdayDatePickerWidget({this.initialDate, this.onChanged});
+  const BirthdayDatePickerWidget({Key? key, this.initialDate, this.onChanged})
+      : super(key: key);
 
   @override
-  _BirthdayDatePickerWidgetState createState() =>
-      _BirthdayDatePickerWidgetState();
+  BirthdayDatePickerWidgetState createState() =>
+      BirthdayDatePickerWidgetState();
 }
 
-class _BirthdayDatePickerWidgetState extends State<BirthdayDatePickerWidget> {
+class BirthdayDatePickerWidgetState extends State<BirthdayDatePickerWidget> {
   DateTime? _selectedDate;
 
   @override

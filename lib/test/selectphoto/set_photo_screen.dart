@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../select_image_constant/common_buttons.dart';
 import '../select_image_constant/constants.dart';
 import 'select_photo_options_screen.dart';
@@ -32,8 +31,8 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
         _image = img;
         Navigator.of(context).pop();
       });
+      // ignore: unused_catch_clause
     } on PlatformException catch (e) {
-      print(e);
       Navigator.of(context).pop();
     }
   }
@@ -81,11 +80,11 @@ class _SetPhotoScreenState extends State<SetPhotoScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
+              const Column(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       SizedBox(
                         height: 30,
                       ),

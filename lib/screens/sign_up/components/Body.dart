@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:quanlyquantrasua/screens/sign_up/components/signUpForm.dart';
+import 'package:quanlyquantrasua/screens/sign_up/components/signup_form.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -34,7 +34,7 @@ class Body extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.07,
               ),
-              SignUpForm(),
+              const SignUpForm(),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
