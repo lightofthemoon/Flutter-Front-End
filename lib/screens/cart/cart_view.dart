@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quanlyquantrasua/screens/cart/components/edit_cartitem_button.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 import '../../controller/cart_controller.dart';
 
@@ -15,7 +18,7 @@ class CartScreen extends StatefulWidget {
 
 class CartScreenState extends State<CartScreen> {
   final cartController = Get.find<CartController>();
-  bool checkAll = false;
+
   @override
   void initState() {
     super.initState();
@@ -23,6 +26,7 @@ class CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: CustomAppBar(
         onPressed: () {
@@ -40,15 +44,13 @@ class CartScreenState extends State<CartScreen> {
               Row(
                 children: [
                   Checkbox(
-                    value: checkAll,
+                    value: checkedItemFromList.length == listItem.length
+                        ? checkedItemFromList.isNotEmpty
+                        : cartController.isCheckAll,
                     onChanged: (value) {
                       setState(() {
-                        checkAll = value!;
-                        if (value) {
-                          checkedItemFromList = List.from(listItem);
-                        } else {
-                          checkedItemFromList.clear();
-                        }
+                        cartController.isCheckAll = value ?? false;
+                        cartController.checkAll();
                       });
                     },
                   ),
@@ -85,27 +87,39 @@ class CartScreenState extends State<CartScreen> {
                       },
                       child: ListTile(
                         leading: Checkbox(
-                          value: checkedItemFromList.contains(item),
+                          value: cartController.queryChekedItemList(item) != -1
+                              ? true
+                              : cartController.isCheckAll,
                           onChanged: (value) {
                             setState(() {
-                              if (value!) {
-                                checkedItemFromList.add(item);
-                              } else {
-                                checkedItemFromList.remove(item);
-                              }
+                              cartController.isCheckAll = false;
+                              cartController.checkPerItem(item);
                             });
                           },
                         ),
-                        title: Text("${item.dish.dishName}"),
+                        title: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text:
+                                    "${item.quantity}x ${item.dish.dishName} - ",
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                              TextSpan(
+                                text: "${item.size.sizeName}",
+                                style: const TextStyle(color: Colors.blue),
+                              ),
+                            ],
+                          ),
+                        ),
                         subtitle: Text("${item.dish.categories?.categoryName}"),
                         trailing: Column(
                           children: [
+                            EditCartItemButton(
+                              onTap: () {},
+                            ),
                             Text(
                                 '\$${(item.quantity * (item.dish.price ?? 0.0)) + toppingTotal}'),
-                            Text("${item.quantity}")
-                            // QuantitySelector(initialValue: item.quantity, onValueChanged: (newquantity) {
-
-                            // },)
                           ],
                         ),
                       ),
