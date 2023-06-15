@@ -53,4 +53,22 @@ class CartController extends GetxController {
       checkedItem.add(item);
     }
   }
+
+  //Phương thức tính tổng sản phẩm đã chọn
+  double totalChosenItem() {
+    //Cộng dồn tổng tiền của toppings được chọn
+    double totalToppings = checkedItem.fold(
+        0.0,
+        (previousValue, element) => element.toppings.fold(
+            0.0,
+            (previousValue, toppings) =>
+                previousValue += (toppings.price ?? 0.0)));
+    //Trả về tổng tiền của tất cả item được chọn
+    return checkedItem.fold(
+        0.0,
+        (previousValue, element) => previousValue +=
+            ((element.dish.price ?? 0.0)) +
+                (element.size.price ?? 0.0) +
+                totalToppings);
+  }
 }

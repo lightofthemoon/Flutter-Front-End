@@ -82,10 +82,8 @@ flutter:
 
   assets:
     - assets/images/
-    - userimages/
     - assets/icon/
     - assets/icon/category/
     - assets/banner/
-    - assets/userimages/
     - assets/product/
  

@@ -25,6 +25,20 @@ class CustomSnackBar {
   }
 }
 
+class CustomToastMessage {
+  static void showMessage(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.blue[300],
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
+}
+
 class CustomErrorMessage {
   static void showMessage(String message) {
     Fluttertoast.showToast(
