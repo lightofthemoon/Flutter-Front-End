@@ -42,25 +42,21 @@ class AccountApi extends GetxController {
   }
 
   Future<Accounts?> createAccount(Accounts account) async {
-    final body = <String, String>{
-      "password": account.password!,
-      "fullName": account.username!,
-      "phoneNumber": account.phoneNumber!,
-      "email": account.email!,
-      "gender": account.gender!,
-      "birthday": DateFormat('yyyy-MM-dd').format(account.birthday!),
-      "address": account.address!,
-      "accountTypeId": account.accounttypeid!.toString(),
-      "imageUrl": account.imageUrl!
-    };
     final response = await http.post(
       Uri.parse(ApiUrl.apiCreateAccount),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
+      body: {
+        "password": account.password!,
+        "fullName": account.username!,
+        "phoneNumber": account.phoneNumber!,
+        "email": account.email!,
+        "gender": account.gender!,
+        "birthday": DateFormat('yyyy-MM-dd').format(account.birthday!),
+        "address": account.address!,
+        "accountTypeId": account.accounttypeid!.toString(),
+        "imageUrl": account.imageUrl!
       },
-      body: jsonEncode(body),
     );
-    print(body);
+
     if (response.statusCode == 200) {
       Accounts accounts = Accounts.fromJson(jsonDecode(response.body));
 
@@ -85,6 +81,35 @@ class AccountApi extends GetxController {
       return accountResponseResult;
     } else {
       throw Exception('Lỗi: ${response.statusCode}');
+    }
+  }
+
+  Future<String> sendOtpToEmail(String email) async {
+    final url = Uri.parse('${ApiUrl.apiSendOTP}?email=$email');
+    var response = await http.post(url);
+    if (response.statusCode == 200) {
+      print(response.body);
+      return 'Đã gửi mã xác nhận\nVui lòng kiểm tra hộp thư của bạn!';
+    } else if (response.statusCode == 400) {
+      print(response.body);
+      return 'Không tìm thấy tài khoản!';
+    } else {
+      print(response.body);
+      return 'Không thể gửi mã xác nhận do lỗi:${response.statusCode}!';
+    }
+  }
+
+  Future<String> changePassword(
+      String email, String otp, String newpassword) async {
+    final url = Uri.parse('${ApiUrl.apiChangePassword}/$email');
+    final response = await http.put(url, body: {
+      'otpValue': otp,
+      'newPassword': newpassword,
+    });
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
     }
   }
 

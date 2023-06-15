@@ -8,7 +8,6 @@ import 'package:quanlyquantrasua/model/cart_model.dart';
 import 'package:quanlyquantrasua/model/dish_model.dart';
 import 'package:quanlyquantrasua/model/size_model.dart';
 import 'package:quanlyquantrasua/model/topping_model.dart';
-import 'package:quanlyquantrasua/screens/product-detail/components/quantity_select.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/default_button.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
 import 'package:scroll_edge_listener/scroll_edge_listener.dart';
@@ -129,23 +128,6 @@ class OrderDetailsBottomSheetState extends State<OrderDetailsBottomSheet> {
                                 setState(() {
                                   selectedSize = value;
                                 });
-                              },
-                            ),
-                            const Divider(
-                              thickness: 2,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Số lượng',
-                                  style: GoogleFonts.nunito(fontSize: 16),
-                                ),
-                              ],
-                            ),
-                            QuantitySelector(
-                              initialValue: 1,
-                              onValueChanged: (quantity) {
-                                numOfItem = quantity;
                               },
                             ),
                             const SizedBox(

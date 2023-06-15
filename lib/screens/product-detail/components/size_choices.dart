@@ -73,3 +73,66 @@ class SizeChoiceWidgetState extends State<SizeChoiceWidget> {
     );
   }
 }
+
+class SizeRadioChosen extends StatefulWidget {
+  final SizeModel item;
+  const SizeRadioChosen({super.key, required this.item});
+
+  @override
+  SizeRadioChosenState createState() => SizeRadioChosenState();
+}
+
+class SizeRadioChosenState extends State<SizeRadioChosen> {
+  late SizeModel _selected;
+  final sizeController = Get.find<SizeApi>();
+  void queryCurrentItem() {
+    if (sizeController.listSize != null) {
+      _selected = sizeController.listSize!
+          .where((element) => element.sizeID == widget.item.sizeID)
+          .first;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    queryCurrentItem();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height / 5,
+      width: double.infinity,
+      child: ListView.builder(
+        itemCount: sizeController.listSize!.length,
+        itemBuilder: (context, index) {
+          final item = sizeController.listSize![index];
+          return Column(
+            children: [
+              RadioListTile(
+                title: Text("${item.sizeName}"),
+                value: item,
+                groupValue: _selected,
+                onChanged: (value) {
+                  setState(() {
+                    _selected = value as SizeModel;
+                  });
+                },
+              ),
+              const Divider(
+                thickness: 2,
+                indent: 15,
+                height: 10,
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  SizeModel getSelected() {
+    return _selected;
+  }
+}
