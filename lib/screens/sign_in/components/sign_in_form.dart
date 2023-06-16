@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quanlyquantrasua/api/account/account_api.dart';
+import 'package:quanlyquantrasua/controller/change_password_controller.dart';
 import 'package:quanlyquantrasua/model/account_model.dart';
 
 import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_input_textformfield.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/password_input.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/password_reset_popup.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import '../../../widgets/custom_widgets/default_button.dart';
 import '../../../widgets/custom_widgets/form_err.dart';
+import '../change_password_screen.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -73,17 +76,6 @@ class _SignInFormState extends State<SignInForm> {
           height: 30,
         ),
         CustomPasswordTextfield(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                isValidPassword = false;
-
-                return 'Bạn chưa nhập mật khẩu';
-              }
-
-              isValidPassword = true;
-
-              return null;
-            },
             onChanged: (value) {
               setState(() {
                 isValidPassword = _validatePassword(value ?? '');
@@ -104,7 +96,10 @@ class _SignInFormState extends State<SignInForm> {
             const Text('Nhớ mật khẩu'),
             const Spacer(),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Get.put(ChangePasswordController());
+                slideinTransition(context, ChangePasswordScreen());
+              },
               child: const Text(
                 'Quên mật khẩu',
                 style: TextStyle(decoration: TextDecoration.underline),
@@ -158,4 +153,13 @@ class _SignInFormState extends State<SignInForm> {
     }
     return true;
   }
+
+  // void showEmailPopup(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return ResetPasswordPopup();
+  //     },
+  //   );
+  // }
 }

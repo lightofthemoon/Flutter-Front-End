@@ -7,11 +7,9 @@ class CustomPasswordTextfield extends StatefulWidget {
     this.focusNode,
     this.nextfocusNode,
     this.labelText,
-    this.validator,
     required this.controller,
     this.onChanged,
   }) : super(key: key);
-  final String? Function(String?)? validator;
   final Function(String?)? onChanged;
   final String? hintText;
 
@@ -25,18 +23,21 @@ class CustomPasswordTextfield extends StatefulWidget {
 
 class CustomPasswordTextfieldState extends State<CustomPasswordTextfield> {
   late TextEditingController _controller;
-  late String? _errorText;
+  String? _errorText;
   bool _passwordVisible = false;
   @override
   void initState() {
     super.initState();
     _controller = widget.controller;
-    _errorText = '';
   }
 
   void checkOnchangedValidate(String? value) {
     setState(() {
-      _errorText = widget.onChanged?.call(value);
+      if (value != '' || value != null) {
+        _errorText = widget.onChanged?.call(value);
+      } else {
+        _errorText = null;
+      }
     });
   }
 
@@ -56,7 +57,6 @@ class CustomPasswordTextfieldState extends State<CustomPasswordTextfield> {
         }
       },
       onChanged: checkOnchangedValidate,
-      validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       obscureText: !_passwordVisible,
       controller: _controller,
