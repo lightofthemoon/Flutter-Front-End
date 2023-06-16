@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 
+import '../../controller/register_controller.dart';
 import 'components/Body.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -14,6 +16,7 @@ class SignUpScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
         onPressed: () {
+          // Get.delete<RegisterController>();
           Navigator.pop(context);
         },
         title: 'Đăng ký',

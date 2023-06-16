@@ -4,7 +4,7 @@ import 'package:quanlyquantrasua/api/size/api_size.dart';
 import 'package:quanlyquantrasua/model/size_model.dart';
 
 class SizeChoiceWidget extends StatefulWidget {
-  final void Function(SizeModel?) onSizeSelected;
+  final Function(SizeModel?) onSizeSelected;
 
   const SizeChoiceWidget({Key? key, required this.onSizeSelected})
       : super(key: key);
@@ -76,7 +76,9 @@ class SizeChoiceWidgetState extends State<SizeChoiceWidget> {
 
 class SizeRadioChosen extends StatefulWidget {
   final SizeModel item;
-  const SizeRadioChosen({super.key, required this.item});
+  final Function(SizeModel) onSizeSelected;
+  const SizeRadioChosen(
+      {super.key, required this.item, required this.onSizeSelected});
 
   @override
   SizeRadioChosenState createState() => SizeRadioChosenState();
@@ -102,9 +104,11 @@ class SizeRadioChosenState extends State<SizeRadioChosen> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 5,
+      height: MediaQuery.of(context).size.height /
+          (sizeController.listSize!.length * 1.6),
       width: double.infinity,
       child: ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: sizeController.listSize!.length,
         itemBuilder: (context, index) {
           final item = sizeController.listSize![index];
@@ -117,6 +121,8 @@ class SizeRadioChosenState extends State<SizeRadioChosen> {
                 onChanged: (value) {
                   setState(() {
                     _selected = value as SizeModel;
+                    widget.onSizeSelected(
+                        _selected); // call the callback function
                   });
                 },
               ),

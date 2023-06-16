@@ -33,10 +33,7 @@ class SignUpCompleteBody extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
               ),
-              SignUpCompleteForm(
-                email: email,
-                password: password,
-              ),
+              SignUpCompleteForm(),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
               ),

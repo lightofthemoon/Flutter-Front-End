@@ -7,6 +7,7 @@ class CartController extends GetxController {
   List<CartItem> cartItem = <CartItem>[].obs;
   List<CartItem> checkedItem = <CartItem>[].obs;
   bool isCheckAll = false;
+  RxDouble totalPrice = 0.0.obs;
   void addToCart(CartItem item) {
     //Kiểm tra đối tượng Cartitem giống phương thức bên dưới
     final existingIndex = cartItem.indexWhere(
@@ -21,6 +22,11 @@ class CartController extends GetxController {
       final updatedItem =
           existingItem.copyWith(quantity: existingItem.quantity + 1);
       cartItem[existingIndex] = updatedItem;
+      final indexCheckCart = checkedItem.indexOf(existingItem);
+      if (indexCheckCart != -1) {
+        checkedItem[indexCheckCart] = updatedItem;
+        updateTotalPrice();
+      }
     } else {
       cartItem.add(item.copyWith(quantity: 1));
     }
@@ -29,8 +35,10 @@ class CartController extends GetxController {
   void checkAll() {
     if (isCheckAll == true) {
       checkedItem = List.from(cartItem);
+      updateTotalPrice();
     } else {
       checkedItem.clear();
+      updateTotalPrice();
     }
   }
   //Phương thức kiểm tra đối tượng item trong List checkedItem
@@ -49,26 +57,43 @@ class CartController extends GetxController {
   void checkPerItem(CartItem item) {
     if (queryChekedItemList(item) != -1) {
       checkedItem.remove(item);
+      updateTotalPrice();
     } else {
       checkedItem.add(item);
+      updateTotalPrice();
     }
   }
 
+  double calculateItemTotal(CartItem item) {
+    final dishPrice = item.dish.price ?? 0.0;
+    final sizePrice = item.size.price ?? 0.0;
+    final toppingPrice = item.toppings.fold(0.0,
+        (previousValue, topping) => previousValue += (topping.price ?? 0.0));
+    final itemPrice = (dishPrice + toppingPrice + sizePrice) * item.quantity;
+    return itemPrice;
+  }
+
   //Phương thức tính tổng sản phẩm đã chọn
-  double totalChosenItem() {
-    //Cộng dồn tổng tiền của toppings được chọn
-    double totalToppings = checkedItem.fold(
-        0.0,
-        (previousValue, element) => element.toppings.fold(
-            0.0,
-            (previousValue, toppings) =>
-                previousValue += (toppings.price ?? 0.0)));
-    //Trả về tổng tiền của tất cả item được chọn
-    return checkedItem.fold(
-        0.0,
-        (previousValue, element) => previousValue +=
-            ((element.dish.price ?? 0.0)) +
-                (element.size.price ?? 0.0) +
-                totalToppings);
+  void updateTotalPrice() {
+    totalPrice.value = checkedItem.fold(0.0, (previousValue, item) {
+      final dishPrice = item.dish.price ?? 0.0;
+      final sizePrice = item.size.price ?? 0.0;
+      final toppingPrice = item.toppings.fold(0.0,
+          (previousValue, topping) => previousValue += (topping.price ?? 0.0));
+      final itemPrice = (dishPrice + toppingPrice + sizePrice) * item.quantity;
+      return previousValue + itemPrice;
+    });
+  }
+
+  void updateCartItem(CartItem oldItem, CartItem newItem) {
+    final index = cartItem.indexOf(oldItem);
+    if (index != -1) {
+      cartItem[index] = newItem;
+      final indexCheckCart = checkedItem.indexOf(oldItem);
+      if (indexCheckCart != -1) {
+        checkedItem[indexCheckCart] = newItem;
+        updateTotalPrice();
+      }
+    }
   }
 }

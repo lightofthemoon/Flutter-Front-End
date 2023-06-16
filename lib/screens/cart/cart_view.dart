@@ -63,15 +63,6 @@ class CartScreenState extends State<CartScreen> {
                   itemCount: listItem.length,
                   itemBuilder: (BuildContext context, int index) {
                     final item = listItem[index];
-                    double toppingTotal = item.toppings.fold(
-                        0.0,
-                        (previousValue, element) =>
-                            previousValue + (element.price ?? 0.0));
-                    double totalPrice =
-                        (item.quantity * (item.dish.price ?? 0.0)) +
-                            (item.size.price ?? 0.0) +
-                            toppingTotal;
-
                     return Dismissible(
                       key: Key(item.hashCode.toString()),
                       direction: DismissDirection.endToStart,
@@ -169,7 +160,8 @@ class CartScreenState extends State<CartScreen> {
                                 );
                               },
                             ),
-                            Text(' ${formatCurrency(totalPrice)}'),
+                            Text(
+                                ' ${formatCurrency(cartController.calculateItemTotal(item))}'),
                           ],
                         ),
                       ),
@@ -187,9 +179,11 @@ class CartScreenState extends State<CartScreen> {
           ),
         );
       }),
-      bottomNavigationBar: CartBottomNavigation(
-          onPaymentPressed: () {},
-          totalPrice: cartController.totalChosenItem()),
+      bottomNavigationBar: Obx(
+        () => CartBottomNavigation(
+            onPaymentPressed: () {},
+            totalPrice: cartController.totalPrice.value),
+      ),
     );
   }
 }

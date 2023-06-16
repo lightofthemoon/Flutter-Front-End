@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quanlyquantrasua/controller/register_controller.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 
 import '../../configs/constant.dart';
@@ -23,6 +25,7 @@ class NoAccountText extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
+            Get.put(RegisterController());
             slideinTransition(context, const SignUpScreen());
           },
           child: const Text(
