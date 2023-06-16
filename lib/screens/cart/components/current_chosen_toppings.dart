@@ -43,6 +43,7 @@ class CurrentToppingChoiceWidgetState
           if (toppingController.listTopping != null) ...[
             Expanded(
               child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: toppingController.listTopping!.length,
                 itemBuilder: (BuildContext context, int index) {
                   final topping = toppingController.listTopping![index];

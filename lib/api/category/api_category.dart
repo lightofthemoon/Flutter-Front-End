@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:quanlyquantrasua/api/base_url_api.dart';
 import 'package:quanlyquantrasua/model/category_model.dart';
+import 'package:quanlyquantrasua/model/dish_model.dart';
 
 class CategoryApi extends GetxController {
   Rx<List<CategoryModel>?> listCategory = Rx<List<CategoryModel>?>([]);
@@ -27,6 +29,20 @@ class CategoryApi extends GetxController {
       }
     } catch (e) {
       throw Exception('Không thể kết nối đến server: $e');
+    }
+  }
+
+  Future<List<DishModel>?> loadDishByCategory(int categoryId) async {
+    print(categoryId);
+    final response = await http
+        .get(Uri.parse('${ApiUrl.apiGetDishesByCategory}/$categoryId'));
+    if (response.statusCode == 200) {
+      List<dynamic> dishesJson = json.decode(utf8.decode(response.bodyBytes));
+      List<DishModel> dishes =
+          dishesJson.map((dishJson) => DishModel.fromJson(dishJson)).toList();
+      return dishes;
+    } else {
+      return null;
     }
   }
 }

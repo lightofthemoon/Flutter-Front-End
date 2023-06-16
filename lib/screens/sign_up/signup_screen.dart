@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
-
-import '../../controller/register_controller.dart';
 import 'components/Body.dart';
 
 class SignUpScreen extends StatelessWidget {

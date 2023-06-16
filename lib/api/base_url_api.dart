@@ -1,5 +1,6 @@
 class ApiUrl {
-  static const baseUrl = 'http://10.10.116.60:7071/api/';
+  //192.168.1.44
+  static const baseUrl = 'http://192.168.1.44:7071/api/';
 
   static const apiGetAllAccount = '${baseUrl}accounts/all';
 
@@ -7,6 +8,7 @@ class ApiUrl {
   static const apiCreateAccount = '${baseUrl}accounts';
   static const apiSendOTP = '${baseUrl}accounts/otp';
   static const apiChangePassword = '${baseUrl}accounts/changepassword';
+  static const apiGetDishesByCategory = '${baseUrl}dish/getByCategory';
   // static const apiCreateCategory = '${baseUrl}user/id/';
   ///// Api của Tính
   static const apiGetAllCategory = '${baseUrl}categories';

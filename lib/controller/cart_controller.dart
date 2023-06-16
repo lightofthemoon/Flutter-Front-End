@@ -41,6 +41,14 @@ class CartController extends GetxController {
       updateTotalPrice();
     }
   }
+
+  //Phương thức xoá giỏ hàng
+  void clearCart() {
+    cartItem.clear();
+    checkedItem.clear();
+    totalPrice.value = 0;
+    isCheckAll = false;
+  }
   //Phương thức kiểm tra đối tượng item trong List checkedItem
   //Nếu kết quả trả về -1 -> đối tượng tồn tại, ngược lại thì đối tượng không tồn tại
 

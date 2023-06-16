@@ -7,6 +7,7 @@ import 'package:quanlyquantrasua/utils/format_currency.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import '../../controller/cart_controller.dart';
+import '../../widgets/custom_widgets/default_button.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({
@@ -43,19 +44,37 @@ class CartScreenState extends State<CartScreen> {
           return Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Checkbox(
-                    value: checkedItemFromList.length == listItem.length
-                        ? checkedItemFromList.isNotEmpty
-                        : cartController.isCheckAll,
-                    onChanged: (value) {
-                      setState(() {
-                        cartController.isCheckAll = value ?? false;
-                        cartController.checkAll();
-                      });
-                    },
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: checkedItemFromList.length == listItem.length
+                            ? checkedItemFromList.isNotEmpty
+                            : cartController.isCheckAll,
+                        onChanged: (value) {
+                          setState(() {
+                            cartController.isCheckAll = value ?? false;
+                            cartController.checkAll();
+                          });
+                        },
+                      ),
+                      const Text('Chọn tất cả'),
+                    ],
                   ),
-                  const Text('Chọn tất cả'),
+                  const Spacer(),
+                  Container(
+                    width: size.width / 2.8,
+                    height: size.height / 24,
+                    margin: const EdgeInsets.only(right: 10),
+                    child: DefaultButton(
+                      enabled: cartController.isCheckAll,
+                      press: () {
+                        cartController.clearCart();
+                      },
+                      text: 'Xoá giỏ hàng',
+                    ),
+                  ),
                 ],
               ),
               Expanded(
@@ -142,6 +161,9 @@ class CartScreenState extends State<CartScreen> {
                         trailing: Column(
                           children: [
                             EditCartItemButton(
+                              isEnabled:
+                                  cartController.queryChekedItemList(item) ==
+                                      -1,
                               onTap: () {
                                 showModalBottomSheet(
                                   context: context,

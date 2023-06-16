@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quanlyquantrasua/api/account/account_api.dart';
+import 'package:quanlyquantrasua/controller/cart_controller.dart';
 import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
@@ -12,6 +13,7 @@ import 'draw_header_bar.dart';
 class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final controller = Get.find<AccountApi>();
+  final cartController = Get.find<CartController>();
   CustomHomeAppBar({Key? key, required this.scaffoldKey}) : super(key: key);
 
   @override
@@ -24,7 +26,7 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           size: 30,
         ),
         onTap: () {
-          slideinTransition(context, const HomeScreenView());
+          slideinTransitionNoBack(context, const HomeScreenView());
         },
       ),
       backgroundColor: const Color(0xff06AB8D),
@@ -33,33 +35,6 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
       ),
       actions: [
-        const Stack(
-          children: [
-            Align(
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.notifications_outlined,
-                size: 30.0,
-                color: Colors.white,
-              ),
-            ),
-            Positioned(
-              top: 8,
-              right: 0,
-              child: CircleAvatar(
-                radius: 8,
-                backgroundColor: Colors.red,
-                child: Text(
-                  "2",
-                  style: TextStyle(fontSize: 10),
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(
-          width: 23.0,
-        ),
         Stack(
           children: [
             Align(
@@ -75,15 +50,17 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 8,
               right: 0,
               child: CircleAvatar(
                 radius: 8,
                 backgroundColor: Colors.red,
-                child: Text(
-                  "2",
-                  style: TextStyle(fontSize: 10),
+                child: Obx(
+                  () => Text(
+                    '${cartController.cartItem.length}',
+                    style: const TextStyle(fontSize: 10),
+                  ),
                 ),
               ),
             ),
@@ -155,7 +132,6 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget buildDrawer(BuildContext context) {
     controller.fetchCurrent();
-
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,

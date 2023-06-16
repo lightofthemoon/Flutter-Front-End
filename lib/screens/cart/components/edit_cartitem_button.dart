@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 
 class EditCartItemButton extends StatefulWidget {
   final VoidCallback onTap;
-
+  final bool? isEnabled;
   const EditCartItemButton({
     super.key,
     required this.onTap,
+    this.isEnabled = true,
   });
 
   @override
@@ -37,13 +38,16 @@ class _EditCartItemButtonState extends State<EditCartItemButton> {
             isIconPressed = false;
           });
         },
-        onTap: widget.onTap,
+        onTap: widget.isEnabled! ? widget.onTap : null,
+        splashColor: Colors.white,
         child: Row(
           children: [
             Icon(
               CupertinoIcons.pencil,
               key: const ValueKey<Color>(Colors.black),
-              color: isIconPressed ? Colors.green : Colors.black,
+              color: widget.isEnabled!
+                  ? Colors.green
+                  : Colors.black, // Only change color if isEnabled is true
             ),
             const Text(
               'Sửa',
