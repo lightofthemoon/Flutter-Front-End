@@ -24,7 +24,7 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           size: 30,
         ),
         onTap: () {
-          slideinTransition(context, const HomeScreenView());
+          slideinTransition(context, HomeScreenView());
         },
       ),
       backgroundColor: const Color(0xff06AB8D),
@@ -150,12 +150,13 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
+  late String? avt;
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   Widget buildDrawer(BuildContext context) {
     controller.fetchCurrent();
-
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -163,10 +164,15 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           Obx(() {
             if (controller.accountRespone.value != null) {
               final accounts = controller.accountRespone.value!;
+              if (accounts.imageUrl != null) {
+                avt = accounts.imageUrl;
+              } else {
+                avt = 'assets/images/avt.png';
+              }
               return MyDrawerHeader(
                 fullName: '${accounts.fullName}',
                 email: '${accounts.email}',
-                avatarUrl: '${accounts.imageUrl}',
+                avatarUrl: '$avt',
               );
             }
             return const CircularProgressIndicator();
