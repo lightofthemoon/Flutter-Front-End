@@ -8,6 +8,7 @@ class CartController extends GetxController {
   List<CartItem> checkedItem = <CartItem>[].obs;
   bool isCheckAll = false;
   RxDouble totalPrice = 0.0.obs;
+
   void addToCart(CartItem item) {
     //Kiểm tra đối tượng Cartitem giống phương thức bên dưới
     final existingIndex = cartItem.indexWhere(
@@ -96,4 +97,5 @@ class CartController extends GetxController {
       }
     }
   }
+  
 }

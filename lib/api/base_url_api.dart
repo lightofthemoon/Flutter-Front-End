@@ -1,5 +1,5 @@
 class ApiUrl {
-  static const baseUrl = 'http://10.10.116.60:7071/api/';
+  static const baseUrl = 'http://192.168.0.101:7071/api/';
 
   static const apiGetAllAccount = '${baseUrl}accounts/all';
 

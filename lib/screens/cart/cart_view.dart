@@ -172,11 +172,39 @@ class CartScreenState extends State<CartScreen> {
             ],
           );
         }
-        return Center(
-          child: Text(
-            'Chưa có sản phẩm trong giỏ :((',
-            style: GoogleFonts.roboto(fontSize: 22),
-          ),
+        return SizedBox(
+          width: Get.width,
+          height: Get.height,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              height: 80,
+              width: 80,
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.black, width: 2)),
+              child: const Center(
+                child: Icon(
+                  Icons.local_mall_outlined,
+                  size: 30,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: Get.height * 0.03,
+            ),
+            const Text(
+              "Giỏ hàng của bạn rỗng\nKhi bạn thêm sản phẩm,\n chúng sẽ xuất hiện ở đây",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  height: 1.2,
+                  fontWeight: FontWeight.w300,
+                  letterSpacing: 0.5),
+            )
+          ]),
         );
       }),
       bottomNavigationBar: Obx(
@@ -199,17 +227,17 @@ class CartBottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'Tổng cộng: ${formatCurrency(totalPrice)}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             ElevatedButton(
               onPressed: onPaymentPressed,
-              child: Text('Thanh toán', style: TextStyle(fontSize: 18)),
+              child: const Text('Thanh toán', style: TextStyle(fontSize: 18)),
             ),
           ],
         ),

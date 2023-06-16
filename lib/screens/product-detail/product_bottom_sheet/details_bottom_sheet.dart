@@ -12,6 +12,7 @@ import 'package:quanlyquantrasua/widgets/custom_widgets/default_button.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
 import 'package:scroll_edge_listener/scroll_edge_listener.dart';
 
+import '../../../widgets/custom_widgets/showLoading.dart';
 import '../components/size_choices.dart';
 import '../components/topping_choices.dart';
 
@@ -97,11 +98,16 @@ class OrderDetailsBottomSheetState extends State<OrderDetailsBottomSheet> {
                                   'Bạn chưa chọn kích cỡ!');
                               return;
                             }
+                            showLoadingAnimation(context);
                             cartControler.addToCart(CartItem(
                                 dish: widget.dish,
                                 quantity: numOfItem,
                                 size: selectedSize!,
                                 toppings: listChosenTopping ?? []));
+                            Future.delayed(const Duration(seconds: 2), () {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            });
                           },
                           buttonText: 'Thêm vào giỏ',
                           buttonIconAssets: 'assets/images/cart_add.png',
