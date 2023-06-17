@@ -101,7 +101,7 @@ class SignUpCompleteForm extends StatelessWidget {
 
                   accounts.username =
                       registerController.fullnameController.text;
-                  accounts.accounttypeid = 3;
+                  accounts.accounttypeid = 2;
                   accounts.address = registerController.addressController.text;
                   if (registerController.date != null) {
                     accounts.birthday = registerController.date;

@@ -5,8 +5,11 @@ import 'package:quanlyquantrasua/api/category/api_category.dart';
 import 'package:quanlyquantrasua/configs/mediaquery.dart';
 import 'package:quanlyquantrasua/model/category_model.dart';
 import 'package:quanlyquantrasua/model/dish_model.dart';
+import 'package:quanlyquantrasua/utils/format_currency.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_input_textformfield.dart';
+
+import '../../product-detail/product_bottom_sheet/details_bottom_sheet.dart';
 
 class DishByCategory extends StatefulWidget {
   final CategoryModel category;
@@ -17,16 +20,14 @@ class DishByCategory extends StatefulWidget {
 }
 
 class DishByCategoryState extends State<DishByCategory> {
-  List<DishModel> _dishes = []; // initialize an empty list of dishes
-  List<DishModel> _filteredDishes =
-      []; // initialize an empty list of filtered dishes
-  TextEditingController searchController =
-      TextEditingController(); // initialize a text controller for the search field
+  List<DishModel> _dishes = [];
+  List<DishModel> _filteredDishes = [];
+  TextEditingController searchController = TextEditingController();
   final categoryController = Get.find<CategoryApi>();
   @override
   void initState() {
     super.initState();
-    loadDishes(); // load the dishes when the screen is initialized
+    loadDishes();
   }
 
   Future<void> loadDishes() async {
@@ -47,21 +48,19 @@ class DishByCategoryState extends State<DishByCategory> {
       });
       return 'Không tìm thấy món :((';
     }
-    if (query != null || query != '') {
+    if (query == null || query == '') {
+      filteredDishes = _dishes;
+      return null;
+    } else {
       filteredDishes = _dishes
           .where((dish) =>
-              dish.dishName
-                  ?.toLowerCase()
-                  .contains(query?.toLowerCase() ?? '') ??
+              dish.dishName?.toLowerCase().contains(query.toLowerCase()) ??
               false)
           .toList();
       setState(() {
         _filteredDishes = filteredDishes;
       });
       return 'Tìm thấy ${_filteredDishes.length}';
-    } else {
-      filteredDishes = _dishes;
-      return null;
     }
   }
 
@@ -110,34 +109,55 @@ class DishesGridView extends StatelessWidget {
         crossAxisCount: 2,
         itemCount: dishes.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.network('${dishes[index].image}'),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${dishes[index].dishName}',
-                        style: const TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '${dishes[index].price}',
-                        style: const TextStyle(fontSize: 14.0),
-                      ),
-                      Text(
-                        '\$${dishes[index].categories?.categoryName}',
-                        style: const TextStyle(
-                            fontSize: 14.0, fontWeight: FontWeight.bold),
-                      ),
-                    ],
+          final item = dishes[index];
+          return InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                 ),
-              ],
+                backgroundColor: Colors.white,
+                builder: (BuildContext context) {
+                  return OrderDetailsBottomSheet(
+                    dish: item,
+                  );
+                },
+              );
+            },
+            child: Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.network('${item.image}'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${item.dishName}',
+                          style: const TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          formatCurrency(item.price ?? 0.0),
+                          style: const TextStyle(fontSize: 14.0),
+                        ),
+                        Text(
+                          '${dishes[index].categories?.categoryName}',
+                          style: const TextStyle(
+                              fontSize: 14.0, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
