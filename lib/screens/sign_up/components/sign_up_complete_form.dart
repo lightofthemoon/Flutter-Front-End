@@ -8,6 +8,7 @@ import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
 import 'package:quanlyquantrasua/utils/save_image.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/gender_chose.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/showLoading.dart';
 import '../../../api/account/account_api.dart';
 import '../../../test/select_image_constant/image_select.dart';
 import '../../../widgets/custom_widgets/custom_input_textformfield.dart';
@@ -98,7 +99,6 @@ class SignUpCompleteForm extends StatelessWidget {
                         registerController.image,
                         '${accounts.email}_${accounts.phoneNumber}');
                   }
-
                   accounts.username =
                       registerController.fullnameController.text;
                   accounts.accounttypeid = 2;
@@ -111,7 +111,7 @@ class SignUpCompleteForm extends StatelessWidget {
                         backgroundColor: Colors.red);
                     return;
                   }
-
+                  showLoadingAnimation(context);
                   await controller.createAccount(accounts).whenComplete(() {
                     slideinTransition(context, const SignInScreen());
                     registerController.onClose();

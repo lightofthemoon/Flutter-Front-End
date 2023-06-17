@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:quanlyquantrasua/api/category/api_category.dart';
 import 'package:quanlyquantrasua/configs/mediaquery.dart';
 import 'package:quanlyquantrasua/model/category_model.dart';
@@ -9,7 +11,11 @@ import 'package:quanlyquantrasua/utils/format_currency.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_input_textformfield.dart';
 
+import '../../../utils/normalize_vietnamese_string.dart';
 import '../../product-detail/product_bottom_sheet/details_bottom_sheet.dart';
+
+//enum theo sau là một tập hợp các giá trị hằng số được đặt trong dấu ngoặc nhọn {}
+enum SortBy { priceLowToHigh, priceHighToLow }
 
 class DishByCategory extends StatefulWidget {
   final CategoryModel category;
@@ -24,6 +30,7 @@ class DishByCategoryState extends State<DishByCategory> {
   List<DishModel> _filteredDishes = [];
   TextEditingController searchController = TextEditingController();
   final categoryController = Get.find<CategoryApi>();
+  SortBy _sortBy = SortBy.priceLowToHigh;
   @override
   void initState() {
     super.initState();
@@ -36,6 +43,22 @@ class DishByCategoryState extends State<DishByCategory> {
     setState(() {
       _dishes = dishes ?? [];
       _filteredDishes = dishes ?? [];
+    });
+  }
+
+  void sortDishes() {
+    setState(() {
+      //
+      switch (_sortBy) {
+        case SortBy.priceLowToHigh:
+          _filteredDishes
+              .sort((a, b) => (a.price ?? 0).compareTo(b.price ?? 0));
+          break;
+        case SortBy.priceHighToLow:
+          _filteredDishes
+              .sort((a, b) => (b.price ?? 0).compareTo(a.price ?? 0));
+          break;
+      }
     });
   }
 
@@ -52,16 +75,28 @@ class DishByCategoryState extends State<DishByCategory> {
       filteredDishes = _dishes;
       return null;
     } else {
-      filteredDishes = _dishes
-          .where((dish) =>
-              dish.dishName?.toLowerCase().contains(query.toLowerCase()) ??
-              false)
-          .toList();
+      filteredDishes = _dishes.where((dish) {
+        String dishName = dish.dishName.toString();
+        //Bỏ dấu ở tên món và từ khoá tìm kiếm để tìm kiếm dễ dàng hơn
+        String normalizedDishName = removeDiacritics(dishName.toLowerCase());
+        String normalizedSearch = removeDiacritics(query.toLowerCase());
+        return normalizedDishName.contains(normalizedSearch);
+      }).toList();
       setState(() {
         _filteredDishes = filteredDishes;
       });
+      if (_filteredDishes.isEmpty) {
+        setState(() {
+          _filteredDishes = _dishes;
+        });
+        return 'Không tìm thấy món :((';
+      }
       return 'Tìm thấy ${_filteredDishes.length}';
     }
+  }
+
+  Future<void> onRefresh() async {
+    await loadDishes();
   }
 
   @override
@@ -72,25 +107,59 @@ class DishByCategoryState extends State<DishByCategory> {
           Navigator.pop(context);
         },
         title: '${widget.category.categoryName}',
+        appBarBackgroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            SizedBox(
-              height: mediaHeight(context, 50),
-            ),
-            CustomInputTextField(
-              controller: searchController,
-              labelText: 'Tìm món',
-              hintText: 'Nhập gì đó đi...',
-              onChanged: searchDishes,
-            ),
-            SizedBox(
-              height: mediaHeight(context, 50),
-            ),
-            DishesGridView(dishes: _filteredDishes),
-          ],
+      body: RefreshIndicator(
+        onRefresh: onRefresh,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              SizedBox(
+                height: mediaHeight(context, 50),
+              ),
+              CustomInputTextField(
+                controller: searchController,
+                labelText: 'Tìm món',
+                hintText: 'Nhập gì đó đi...',
+                onChanged: searchDishes,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Text('Xếp theo'),
+                  PopupMenuButton<SortBy>(
+                    icon: Image.asset(
+                      'assets/icon/menu_icon.png',
+                      color: Colors.black,
+                      scale: 4,
+                    ),
+                    onSelected: (SortBy value) {
+                      setState(() {
+                        _sortBy = value;
+                        sortDishes();
+                      });
+                    },
+                    itemBuilder: (BuildContext context) =>
+                        <PopupMenuEntry<SortBy>>[
+                      const PopupMenuItem<SortBy>(
+                        value: SortBy.priceLowToHigh,
+                        child: Text('Giá: Thấp đến cao'),
+                      ),
+                      const PopupMenuItem<SortBy>(
+                        value: SortBy.priceHighToLow,
+                        child: Text('Giá: Cao đến thấp'),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: mediaHeight(context, 50),
+              ),
+              DishesGridView(dishes: _filteredDishes),
+            ],
+          ),
         ),
       ),
     );
@@ -130,6 +199,8 @@ class DishesGridView extends StatelessWidget {
               );
             },
             child: Card(
+              shadowColor: const Color.fromARGB(66, 52, 50, 50).withOpacity(1),
+              elevation: 5,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

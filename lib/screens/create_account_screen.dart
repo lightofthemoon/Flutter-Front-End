@@ -113,7 +113,6 @@ class CreateAccountScreen extends StatelessWidget {
                   context, 'Thêm tài khoản thành công', 2,
                   backgroundColor: Colors.blue);
               Navigator.pop(context);
-              controller.getAllAccounts();
             });
           },
           backgroundColor: Colors.blue,

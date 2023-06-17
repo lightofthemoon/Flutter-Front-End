@@ -7,6 +7,7 @@ import 'package:quanlyquantrasua/model/account_model.dart';
 import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_input_textformfield.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/showLoading.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import '../../../widgets/custom_widgets/default_button.dart';
 import '../../../widgets/custom_widgets/form_err.dart';
@@ -112,14 +113,16 @@ class _SignInFormState extends State<SignInForm> {
           enabled: isValidEmail && isValidPassword,
           text: 'Đăng nhập',
           press: () async {
+            showLoadingAnimation(context);
             Accounts accounts = Accounts();
             accounts.email = emailController.text;
             accounts.password = passwordController.text;
+
             await controller.login(accounts.loginToJson()).then((value) {
               if (value.status == 'Success') {
                 CustomSnackBar.showCustomSnackBar(
                     context, 'Đăng nhập thành công!', 2);
-                slideinTransitionNoBack(context, const HomeScreenView());
+                slideinTransitionNoBack(context, HomeScreenView());
               } else {
                 CustomSnackBar.showCustomSnackBar(
                     context, 'Đăng nhập thất bại! \nLỗi: ${value.status}', 1,

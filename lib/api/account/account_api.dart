@@ -12,7 +12,6 @@ import '../../model/account_response.dart';
 import '../base_url_api.dart';
 
 class AccountApi extends GetxController {
-  Rx<List<Accounts>?> listaccounts = Rx<List<Accounts>?>([]);
   Rx<AccountResponse?> accountRespone = Rx<AccountResponse?>(null);
   @override
   void onInit() {
@@ -23,22 +22,6 @@ class AccountApi extends GetxController {
   Future fetchCurrent() async {
     accountRespone.value =
         await AccountController().getUserFromSharedPreferences();
-  }
-
-  Future getAllAccounts() async {
-    try {
-      final response = await http.get(Uri.parse(ApiUrl.apiGetAllAccount));
-      final jsonData =
-          jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
-      listaccounts.value =
-          jsonData.map((data) => Accounts.fromJson(data)).toList();
-
-      if (response.statusCode != 200) {
-        throw Exception('Load Account thất bại: ${response.body}');
-      }
-    } catch (e) {
-      throw Exception('Không thể kết nối đến server: $e');
-    }
   }
 
   Future<Accounts?> createAccount(Accounts account) async {

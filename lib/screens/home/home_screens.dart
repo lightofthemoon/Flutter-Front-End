@@ -11,20 +11,21 @@ import '../../api/category/api_category.dart';
 import 'components/home_appbar.dart';
 import 'components/listproduct_container.dart';
 
-class HomeScreenView extends StatefulWidget {
-  const HomeScreenView({Key? key}) : super(key: key);
+class HomeScreenView extends StatelessWidget {
+  HomeScreenView({Key? key}) : super(key: key);
 
-  @override
-  State<HomeScreenView> createState() => _HomeScreenViewState();
-}
-
-class _HomeScreenViewState extends State<HomeScreenView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   final accountController = Get.put(AccountApi());
+
   final categoryController = Get.put(CategoryApi());
+
   final dishController = Get.put(DishApi());
+
   final sizeController = Get.put(SizeApi());
+
   final toppingController = Get.put(ToppingApi());
+
   final cartController = Get.put(CartController());
 
   Future<void> _refesh() async {

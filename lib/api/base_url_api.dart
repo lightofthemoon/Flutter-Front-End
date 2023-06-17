@@ -1,7 +1,5 @@
 class ApiUrl {
-  //192.168.1.44 ->Nhà Đạt
-  //10.15.58.135 ->Synary Coffee
-  static const baseUrl = 'http://10.15.58.135:7071/api/';
+  static const baseUrl = 'http://192.168.1.44:7071/api/';
 
   static const apiGetAllAccount = '${baseUrl}accounts/all';
 
@@ -19,6 +17,7 @@ class ApiUrl {
   //// Api của Quý
   static const apiLogin = '${baseUrl}accounts/login';
   static const apiGetAllToppings = '${baseUrl}topping';
+  static const apiCreateOrder = '${baseUrl}orders';
 
   ///
   ///

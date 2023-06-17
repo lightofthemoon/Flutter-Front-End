@@ -19,15 +19,19 @@ class DishApi extends GetxController {
           Uri.parse(ApiUrl.apiGetAllProduct); // Replace with your API endpoint
 
       final response = await http.get(url);
+
       final jsonData =
           jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
+      
       listDish.value =
           jsonData.map((data) => DishModel.fromJson(data)).toList();
+
       if (response.statusCode != 200) {
         throw Exception('Load món thất bại: ${response.body}');
       }
     } catch (e) {
-      throw Exception('Không thể kết nối đến server: $e');
+      print(e);
+      // throw Exception('Không thể kết nối đến server: $e');
     }
   }
 }
