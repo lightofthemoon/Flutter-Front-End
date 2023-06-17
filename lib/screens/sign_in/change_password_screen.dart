@@ -7,7 +7,6 @@ import 'package:quanlyquantrasua/widgets/custom_widgets/default_button.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
 
 import '../../widgets/custom_widgets/custom_input_textformfield.dart';
-import '../../widgets/custom_widgets/password_input.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();

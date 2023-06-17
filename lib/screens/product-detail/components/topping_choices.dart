@@ -64,10 +64,12 @@ class ToppingChoiceWidgetState extends State<ToppingChoiceWidget> {
                         const SizedBox(height: 4),
                         Row(
                           children: [
-                            Image.network(
-                              "${topping.image}",
-                              width: 30,
-                            ),
+                            topping.image != null
+                                ? Image.network(
+                                    "${topping.image}",
+                                    width: 30,
+                                  )
+                                : const Icon(Icons.category),
                             const SizedBox(width: 8),
                             Text(
                               '\$${topping.price?.toStringAsFixed(2)} / ${topping.unit}',

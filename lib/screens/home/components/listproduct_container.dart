@@ -100,17 +100,6 @@ class ListDishView extends StatelessWidget {
               double totalDiscount = price - discount;
               return InkWell(
                 onTap: () {
-                  // slideinTransition(
-                  //   context,
-                  //   ProductDetailScreen(
-                  //     dish: item,
-                  //   ),
-                  // );
-
-                  // showModalBottomSheet(
-                  //   context: context,
-                  //   builder: (BuildContext context) => DishBottomSheet(),
-                  // );
                   showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,

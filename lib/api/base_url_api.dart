@@ -7,6 +7,7 @@ class ApiUrl {
   static const apiCreateAccount = '${baseUrl}accounts';
   static const apiSendOTP = '${baseUrl}accounts/otp';
   static const apiChangePassword = '${baseUrl}accounts/changepassword';
+  static const apiGetDishesByCategory = '${baseUrl}dish/getByCategory';
   // static const apiCreateCategory = '${baseUrl}user/id/';
   ///// Api của Tính
   static const apiGetAllCategory = '${baseUrl}categories';

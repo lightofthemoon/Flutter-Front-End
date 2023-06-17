@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quanlyquantrasua/configs/mediaquery.dart';
@@ -102,7 +101,7 @@ class SignUpCompleteForm extends StatelessWidget {
                   }
                   accounts.username =
                       registerController.fullnameController.text;
-                  accounts.accounttypeid = 3;
+                  accounts.accounttypeid = 2;
                   accounts.address = registerController.addressController.text;
                   if (registerController.date != null) {
                     accounts.birthday = registerController.date;
