@@ -105,5 +105,30 @@ class CartController extends GetxController {
       }
     }
   }
-  
+
+  void removeCheckedItemsFromCart() {
+    for (CartItem item in checkedItem) {
+      cartItem.removeWhere((cartItem) =>
+          cartItem.dish == item.dish &&
+          cartItem.size == item.size &&
+          listEquals(cartItem.toppings, item.toppings));
+    }
+    // Clear the checkedItem list after removing items from cartItem
+    checkedItem.clear();
+    // Recalculate the total price
+    updateTotalPrice();
+  }
+
+  void removeItem(CartItem item) {
+    // Remove the item from cartItem
+    cartItem.remove(item);
+    // Check if the item is also in checkedItem
+    final index = checkedItem.indexOf(item);
+    if (index != -1) {
+      // Remove the item from checkedItem
+      checkedItem.removeAt(index);
+      // Recalculate the total price
+      updateTotalPrice();
+    }
+  }
 }

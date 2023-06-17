@@ -10,13 +10,15 @@ class CreateOrderController extends GetxController {
 
   Future createOrder(int userId, List<CartItem> listChoose) async {
     if (listChoose.isEmpty) return;
-    Logger().i('${listChoose.length} loggggggg');
+
     var listTemp = <DishOrder>[];
     var listTopping = <ToppingOrder>[];
     for (var i = 0; i < listChoose.length; i++) {
       var temp = DishOrder();
       temp.dishId = listChoose[i].dish.dishID;
       temp.quantity = listChoose[i].quantity;
+      temp.sizeId = listChoose[i].size.sizeID;
+      Logger().i('${temp.sizeId} log sizeId');
       for (var j = 0; j < listChoose[i].toppings.length; j++) {
         Logger().i('${listChoose[i].toppings.length} + log quantity Topping');
         var topping = ToppingOrder();

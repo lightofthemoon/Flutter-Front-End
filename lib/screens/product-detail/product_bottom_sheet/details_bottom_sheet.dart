@@ -104,7 +104,7 @@ class OrderDetailsBottomSheetState extends State<OrderDetailsBottomSheet> {
                                 quantity: numOfItem,
                                 size: selectedSize!,
                                 toppings: listChosenTopping ?? []));
-                            Future.delayed(const Duration(seconds: 2), () {
+                            Future.delayed(const Duration(seconds: 1), () {
                               Navigator.pop(context);
                               Navigator.pop(context);
                             });

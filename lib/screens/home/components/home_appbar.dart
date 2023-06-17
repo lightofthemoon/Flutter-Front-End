@@ -10,6 +10,7 @@ import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import '../../cart/cart_view.dart';
 import 'draw_header_bar.dart';
 
+// ignore: must_be_immutable
 class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final controller = Get.find<AccountApi>();

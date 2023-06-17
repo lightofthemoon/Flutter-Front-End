@@ -7,7 +7,9 @@ import 'package:quanlyquantrasua/screens/cart/components/edit_cartitem_button.da
 import 'package:quanlyquantrasua/utils/format_currency.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 import '../../controller/cart_controller.dart';
+import '../../controller/order_controller.dart';
 import '../../widgets/custom_widgets/default_button.dart';
+import '../../widgets/custom_widgets/showLoading.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({
@@ -100,8 +102,7 @@ class CartScreenState extends State<CartScreen> {
                       ),
                       onDismissed: (direction) {
                         setState(() {
-                          listItem.removeAt(index);
-                          cartController.checkedItem.remove(item);
+                          cartController.removeItem(item);
                         });
                       },
                       child: ListTile(
@@ -239,9 +240,10 @@ class CartScreenState extends State<CartScreen> {
                   '${userController.accountRespone.value?.accountId ?? 0} +  loggg user');
               Logger()
                   .i('${cartController.checkedItem.length} + log cart choose');
-              orderController.createOrder(
-                  userController.accountRespone.value?.accountId ?? 0,
-                  cartController.checkedItem);
+              // orderController.createOrder(
+              //     userController.accountRespone.value?.accountId ?? 0,
+              //     cartController.checkedItem);
+              cartController.removeCheckedItemsFromCart();
               Future.delayed(const Duration(seconds: 2), () {
                 Navigator.pop(context);
                 Navigator.pop(context);
@@ -263,7 +265,14 @@ class CartBottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      child: Padding(
+      elevation: 4.0,
+      child: Container(
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(16.0),
+              topRight: Radius.circular(16.0),
+            ),
+            color: Color.fromARGB(255, 210, 217, 221)),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -273,6 +282,12 @@ class CartBottomNavigation extends StatelessWidget {
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[40],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
               onPressed: onPaymentPressed,
               child: const Text('Thanh toán', style: TextStyle(fontSize: 18)),
             ),

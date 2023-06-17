@@ -34,12 +34,13 @@ class FetchApiOrderService {
   static Future<OrderResponse?> createOrder(
       int id, List<DishOrder> list) async {
     final body = <String, dynamic>{
-      "accountId": 88,
+      "accountId": id,
       "orderDate": '',
       "dishes": List.generate(list.length, (index) {
         return {
           "dishId": list[index].dishId,
           "quantity": list[index].quantity,
+          "sizeId": list[index].sizeId,
           "listTopping": List.generate(list[index].listTopping!.length, (i) {
             return {
               "toppingId": list[index].listTopping![i].toppingId,
@@ -65,17 +66,20 @@ class FetchApiOrderService {
 class DishOrder {
   int? dishId;
   int? quantity;
+  int? sizeId;
   List<ToppingOrder>? listTopping;
 
   DishOrder({
     this.dishId,
     this.quantity,
+    this.sizeId,
     this.listTopping,
   });
 
   DishOrder.fromJson(Map<String, dynamic> json) {
     dishId = json["productId"];
     quantity = json["quantity"];
+
     listTopping = json["listTopping"];
   }
 
