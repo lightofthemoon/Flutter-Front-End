@@ -1,5 +1,5 @@
 class ApiUrl {
-  static const baseUrl = 'http://192.168.0.101:7071/api/';
+  static const baseUrl = 'http://10.15.58.209:7071/api/';
 
   static const apiGetAllAccount = '${baseUrl}accounts/all';
 
@@ -16,6 +16,7 @@ class ApiUrl {
   //// Api của Quý
   static const apiLogin = '${baseUrl}accounts/login';
   static const apiGetAllToppings = '${baseUrl}topping';
+  static const apiCreateOrder = '${baseUrl}orders';
 
   ///
   ///

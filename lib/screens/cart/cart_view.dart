@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
+import 'package:quanlyquantrasua/api/account/account_api.dart';
 import 'package:quanlyquantrasua/screens/cart/components/edit_cartitem_bottomsheet.dart';
 import 'package:quanlyquantrasua/screens/cart/components/edit_cartitem_button.dart';
 import 'package:quanlyquantrasua/utils/format_currency.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
-import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import '../../controller/cart_controller.dart';
+import '../../controller/order_controller.dart';
+import '../../widgets/custom_widgets/showLoading.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({
@@ -19,6 +21,8 @@ class CartScreen extends StatefulWidget {
 
 class CartScreenState extends State<CartScreen> {
   final cartController = Get.find<CartController>();
+  final orderController = Get.put(CreateOrderController());
+  final userController = Get.find<AccountApi>();
 
   @override
   void initState() {
@@ -209,7 +213,20 @@ class CartScreenState extends State<CartScreen> {
       }),
       bottomNavigationBar: Obx(
         () => CartBottomNavigation(
-            onPaymentPressed: () {},
+            onPaymentPressed: () async {
+              showLoadingAnimation(context);
+              Logger().i(
+                  '${userController.accountRespone.value?.accountId ?? 0} +  loggg user');
+              Logger()
+                  .i('${cartController.checkedItem.length} + log cart choose');
+              orderController.createOrder(
+                  userController.accountRespone.value?.accountId ?? 0,
+                  cartController.checkedItem);
+              Future.delayed(const Duration(seconds: 2), () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              });
+            },
             totalPrice: cartController.totalPrice.value),
       ),
     );

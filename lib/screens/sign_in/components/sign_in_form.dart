@@ -118,6 +118,7 @@ class _SignInFormState extends State<SignInForm> {
             Accounts accounts = Accounts();
             accounts.email = emailController.text;
             accounts.password = passwordController.text;
+
             await controller.login(accounts.loginToJson()).then((value) {
               if (value.status == 'Success') {
                 CustomSnackBar.showCustomSnackBar(
