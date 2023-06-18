@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quanlyquantrasua/api/account/account_api.dart';
 import 'package:quanlyquantrasua/controller/cart_controller.dart';
 import 'package:quanlyquantrasua/model/cart_model.dart';
 import 'package:quanlyquantrasua/model/dish_model.dart';
@@ -26,6 +27,7 @@ class OrderDetailsBottomSheet extends StatefulWidget {
 
 class OrderDetailsBottomSheetState extends State<OrderDetailsBottomSheet> {
   final cartControler = Get.find<CartController>();
+  final accountController = Get.find<AccountApi>();
   SizeModel? selectedSize;
   int numOfItem = 0;
   List<ToppingModel>? listChosenTopping;
@@ -96,6 +98,12 @@ class OrderDetailsBottomSheetState extends State<OrderDetailsBottomSheet> {
                             if (selectedSize == null) {
                               CustomErrorMessage.showMessage(
                                   'Bạn chưa chọn kích cỡ!');
+                              return;
+                            }
+                            if (accountController.accountRespone.value ==
+                                null) {
+                              CustomErrorMessage.showMessage(
+                                  'Vui lòng đăng nhập để đặt hàng!');
                               return;
                             }
                             showLoadingAnimation(context);

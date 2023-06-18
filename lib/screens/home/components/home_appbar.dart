@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:quanlyquantrasua/api/account/account_api.dart';
 import 'package:quanlyquantrasua/controller/cart_controller.dart';
+import 'package:quanlyquantrasua/controller/change_password_controller.dart';
+import 'package:quanlyquantrasua/controller/profile_controller.dart';
 import 'package:quanlyquantrasua/screens/home/home_screens.dart';
+import 'package:quanlyquantrasua/screens/profile/profile_screen.dart';
+import 'package:quanlyquantrasua/screens/sign_in/change_password_screen.dart';
 
 import 'package:quanlyquantrasua/screens/sign_in/sign_in_screen.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/messages_widget.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 import '../../cart/cart_view.dart';
 import 'draw_header_bar.dart';
@@ -166,13 +172,21 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ListTile(
             title: const Text('Cập nhật thông tin'),
             onTap: () {
-              Navigator.pop(context);
+              if (controller.accountRespone.value == null) {
+                CustomErrorMessage.showMessage(
+                    'Có lỗi xảy ra!\nVui lòng đăng nhập lại để thực hiện thao tác này! ');
+                return;
+              }
+              Get.put(ProfileController(controller.accountRespone.value!));
+              slideinTransition(context,
+                  EditProfileScreen(account: controller.accountRespone.value!));
             },
           ),
           ListTile(
             title: const Text('Đổi mật khẩu'),
             onTap: () {
-              Navigator.pop(context);
+              Get.put(ChangePasswordController());
+              slideinTransition(context, ChangePasswordScreen());
             },
           ),
           ListTile(
@@ -181,18 +195,7 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               Navigator.pop(context);
             },
           ),
-          ListTile(
-            title: const Text('Voucher'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Món yêu thích'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
+
           ListTile(
             title: const Text('Đăng xuất'),
             onTap: () {

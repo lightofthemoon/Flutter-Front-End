@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:quanlyquantrasua/api/account/account_api.dart';
+import 'package:quanlyquantrasua/configs/mediaquery.dart';
 import 'package:quanlyquantrasua/screens/cart/components/edit_cartitem_bottomsheet.dart';
 import 'package:quanlyquantrasua/screens/cart/components/edit_cartitem_button.dart';
 import 'package:quanlyquantrasua/utils/format_currency.dart';
@@ -267,6 +268,7 @@ class CartBottomNavigation extends StatelessWidget {
     return BottomAppBar(
       elevation: 4.0,
       child: Container(
+        height: mediaHeight(context, 12),
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(16.0),
@@ -281,16 +283,11 @@ class CartBottomNavigation extends StatelessWidget {
               'Tổng cộng: ${formatCurrency(totalPrice)}',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue[40],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-              onPressed: onPaymentPressed,
-              child: const Text('Thanh toán', style: TextStyle(fontSize: 18)),
-            ),
+            SizedBox(
+                height: mediaHeight(context, 18),
+                width: mediaWidth(context, 3),
+                child:
+                    DefaultButton(text: 'Thanh toán', press: onPaymentPressed))
           ],
         ),
       ),
