@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quanlyquantrasua/screens/sign_in/components/body.dart';
+
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -8,13 +9,15 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
-        showLeading: false,
+        onPressed: () {
+          Navigator.pop(context);
+        },
         title: 'Đăng nhập',
       ),
-      body: Body(),
+      body: const Body(),
     );
   }
 }

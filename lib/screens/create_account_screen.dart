@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:quanlyquantrasua/api/account_api/account_api.dart';
+import 'package:quanlyquantrasua/api/account/account_api.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 
 import '../model/account_model.dart';
@@ -9,7 +9,7 @@ import '../widgets/custom_widgets/messages_widget.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({super.key});
-  final controller = Get.find<AccountController>();
+  final controller = Get.find<AccountApi>();
   @override
   Widget build(BuildContext context) {
     TextEditingController usernameController = TextEditingController();
@@ -108,19 +108,18 @@ class CreateAccountScreen extends StatelessWidget {
             accounts.birthday = birthday;
             accounts.address = addressController.text;
             accounts.accounttypeid = 3;
-            await controller.createAccount(accounts.toJson()).whenComplete(() {
+            await controller.createAccount(accounts).whenComplete(() {
               CustomSnackBar.showCustomSnackBar(
                   context, 'Thêm tài khoản thành công', 2,
                   backgroundColor: Colors.blue);
               Navigator.pop(context);
-              controller.getAllAccounts();
             });
           },
           backgroundColor: Colors.blue,
           shape: const StadiumBorder(),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Icon(Icons.add),
               SizedBox(width: 5.0),
               Text("Tạo"),

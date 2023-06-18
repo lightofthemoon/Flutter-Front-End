@@ -9,17 +9,17 @@ import 'package:quanlyquantrasua/configs/mediaquery.dart';
 import '../selectphoto/select_photo_options_screen.dart';
 
 class ImagePickerWidget extends StatefulWidget {
-  final Function(XFile?) onImageSelected;
+  final Function(File?) onImageSelected;
   final String? currentImageUrl;
   const ImagePickerWidget(
       {Key? key, required this.onImageSelected, this.currentImageUrl})
       : super(key: key);
 
   @override
-  _ImagePickerWidgetState createState() => _ImagePickerWidgetState();
+  ImagePickerWidgetState createState() => ImagePickerWidgetState();
 }
 
-class _ImagePickerWidgetState extends State<ImagePickerWidget>
+class ImagePickerWidgetState extends State<ImagePickerWidget>
     with SingleTickerProviderStateMixin {
   File? image;
   late AnimationController _animationController;
@@ -34,11 +34,11 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget>
       setState(() {
         this.image = img;
       });
-      widget.onImageSelected(image);
+      widget.onImageSelected(img);
       _animationController.forward(from: 0.0);
       Navigator.of(context).pop();
+      // ignore: unused_catch_clause
     } on PlatformException catch (e) {
-      print(e);
       Navigator.of(context).pop();
     }
   }
@@ -89,7 +89,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
     );
     _inanimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(

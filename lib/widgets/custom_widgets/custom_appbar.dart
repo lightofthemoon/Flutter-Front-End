@@ -4,13 +4,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final bool showLeading;
   final VoidCallback? onPressed;
+  final Color? appBarBackgroundColor;
   const CustomAppBar(
-      {super.key, this.title, this.showLeading = true, this.onPressed});
+      {super.key,
+      this.title,
+      this.showLeading = true,
+      this.onPressed,
+      this.appBarBackgroundColor});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.green,
+      backgroundColor: appBarBackgroundColor,
       elevation: 0,
       centerTitle: true,
       leading: showLeading

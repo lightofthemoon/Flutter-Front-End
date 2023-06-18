@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:quanlyquantrasua/api/account_api/account_api.dart';
+
 import 'package:quanlyquantrasua/screens/sign_up/components/sign_up_complete_form.dart';
 
 class SignUpCompleteBody extends StatelessWidget {
@@ -36,10 +33,7 @@ class SignUpCompleteBody extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
               ),
-              SignUpCompleteForm(
-                email: email,
-                password: password,
-              ),
+              SignUpCompleteForm(),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
               ),

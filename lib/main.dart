@@ -2,7 +2,6 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:quanlyquantrasua/screens/account_list_screen.dart';
 
 import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 
@@ -11,10 +10,9 @@ void main() async {
   await Firebase.initializeApp();
   runApp(
     MaterialApp(
-      initialRoute: 'account_list',
+      initialRoute: 'introduction_screen',
       debugShowCheckedModeBanner: false,
       routes: {
-        'account_list': (context) => AccountsListScreen(),
         'introduction_screen': (context) => HomeScreenView(),
       },
     ),
