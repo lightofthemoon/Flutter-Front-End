@@ -14,23 +14,6 @@ class FetchApiOrderService {
   }
   FetchApiOrderService._internal();
 
-  // code here
-  // Future<OrderResponse?> getOrderByUserId(String id) async {
-  //   var url = Uri.parse('${ApiUrl.apiGetOrderByUserId}$id');
-  //   try {
-  //     final response = await http.get(url, headers: header);
-
-  //     var order = OrderResponse.fromJson(jsonDecode(response.body));
-  //     Logger().i('Url: $url');
-
-  //     Logger().i('response: ${order.id}');
-
-  //     return order;
-  //   } catch (e) {
-  //     throw Exception(e);
-  //   }
-  // }
-
   static Future<OrderResponse?> createOrder(
       int id, List<DishOrder> list) async {
     final body = <String, dynamic>{
@@ -54,6 +37,8 @@ class FetchApiOrderService {
       final response = await http.post(url,
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(body));
+      // ignore: avoid_print
+      print(response.body);
       // var order = OrderResponse.fromJson(jsonDecode(response.body));
       // return order;
     } catch (e) {
