@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:quanlyquantrasua/api/account/account_api.dart';
 
 class ResetPasswordPopup extends StatefulWidget {
+  const ResetPasswordPopup({super.key});
+
   @override
   ResetPasswordPopupState createState() => ResetPasswordPopupState();
 }

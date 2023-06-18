@@ -1,15 +1,12 @@
+// ignore_for_file: prefer_collection_literals
+
 class OrderResponse {
   String? address;
   String? status;
   int? orderID;
   String? orderDate;
 
-  OrderResponse(
-      {
-      this.address,
-      this.status,
-      this.orderID,
-      this.orderDate});
+  OrderResponse({this.address, this.status, this.orderID, this.orderDate});
 
   OrderResponse.fromJson(Map<String, dynamic> json) {
     address = json['address'];
@@ -19,6 +16,7 @@ class OrderResponse {
   }
 
   Map<String, dynamic> toJson() {
+    // ignore: unnecessary_new
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['address'] = this.address;
     data['status'] = this.status;

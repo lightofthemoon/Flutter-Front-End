@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:quanlyquantrasua/api/base_url_api.dart';
@@ -33,7 +32,6 @@ class CategoryApi extends GetxController {
   }
 
   Future<List<DishModel>?> loadDishByCategory(int categoryId) async {
-    print(categoryId);
     final response = await http
         .get(Uri.parse('${ApiUrl.apiGetDishesByCategory}/$categoryId'));
     if (response.statusCode == 200) {

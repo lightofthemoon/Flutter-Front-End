@@ -22,7 +22,7 @@ class DishApi extends GetxController {
 
       final jsonData =
           jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
-      
+
       listDish.value =
           jsonData.map((data) => DishModel.fromJson(data)).toList();
 
@@ -30,6 +30,7 @@ class DishApi extends GetxController {
         throw Exception('Load món thất bại: ${response.body}');
       }
     } catch (e) {
+      // ignore: avoid_print
       print(e);
       // throw Exception('Không thể kết nối đến server: $e');
     }
