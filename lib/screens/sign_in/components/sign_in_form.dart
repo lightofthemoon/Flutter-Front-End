@@ -129,12 +129,6 @@ class _SignInFormState extends State<SignInForm> {
                     backgroundColor: Colors.red);
               }
             });
-
-            // if (_formKey.currentState!.validate() == true) {
-            //   _formKey.currentState?.save();
-            //   Navigator.pushNamed(context, CompleteProfileScreen.routeName,
-            //       arguments: {'username': username, 'password': password});
-            // }
           },
         )
       ]),

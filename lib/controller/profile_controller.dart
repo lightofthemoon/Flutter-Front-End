@@ -7,9 +7,9 @@ import 'package:quanlyquantrasua/model/account_response.dart';
 class ProfileController extends GetxController {
   final AccountResponse account;
   ProfileController(this.account);
-  var isValidFullname = false.obs;
-  var isValidPhonenumber = false.obs;
-  var isValidAddress = false.obs;
+  var isValidFullname = true.obs;
+  var isValidPhonenumber = true.obs;
+  var isValidAddress = true.obs;
   File? image;
   DateTime? date;
   String? selectedGender;

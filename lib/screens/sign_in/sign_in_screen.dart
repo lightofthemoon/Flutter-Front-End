@@ -17,7 +17,7 @@ class SignInScreen extends StatelessWidget {
         },
         title: 'Đăng nhập',
       ),
-      body: Body(),
+      body: const Body(),
     );
   }
 }

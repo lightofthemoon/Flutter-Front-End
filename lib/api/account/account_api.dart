@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 import 'package:intl/intl.dart';
 import 'package:quanlyquantrasua/controller/account_controller.dart';
+import 'package:quanlyquantrasua/model/account_update_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../model/account_model.dart';
@@ -93,6 +94,35 @@ class AccountApi extends GetxController {
       return response.body;
     } else {
       return response.body;
+    }
+  }
+
+  Future<AccountResponse> updateAccount(AccountUpdate account) async {
+    final url = Uri.parse(ApiUrl.apiUpdateAccount);
+    final response = await http.put(
+      url,
+      body: {
+        "accountId": account.accountId.toString(),
+        "fullName": account.fullName,
+        "phoneNumber": account.phoneNumber,
+        "birthday": DateFormat('yyyy-MM-dd').format(account.birthday!),
+        "address": account.address,
+        "imageUrl": account.imageUrl
+      },
+    );
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      await logout();
+      final accountResponseResult =
+          AccountResponse.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+
+      await AccountController()
+          .storedUserToSharedRefererces(accountResponseResult);
+      accountRespone.value =
+          await AccountController().getUserFromSharedPreferences();
+      return accountResponseResult;
+    } else {
+      throw Exception('Lỗi: ${response.statusCode}');
     }
   }
 

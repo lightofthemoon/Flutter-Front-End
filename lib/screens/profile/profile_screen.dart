@@ -1,19 +1,27 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quanlyquantrasua/api/account/account_api.dart';
 import 'package:quanlyquantrasua/configs/mediaquery.dart';
 import 'package:quanlyquantrasua/controller/profile_controller.dart';
 import 'package:quanlyquantrasua/model/account_response.dart';
+import 'package:quanlyquantrasua/model/account_update_model.dart';
+import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 import 'package:quanlyquantrasua/test/select_image_constant/image_select.dart';
+import 'package:quanlyquantrasua/utils/save_image.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_appbar.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/custom_input_textformfield.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/datetime_picker.dart';
 import 'package:quanlyquantrasua/widgets/custom_widgets/default_button.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/showLoading.dart';
+import 'package:quanlyquantrasua/widgets/custom_widgets/transition.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final AccountResponse account;
   EditProfileScreen({super.key, required this.account});
   final profileController = Get.find<ProfileController>();
-
+  final accountController = Get.find<AccountApi>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +101,34 @@ class EditProfileScreen extends StatelessWidget {
                     profileController.isValidAddress.value &&
                     profileController.isValidFullname.value,
                 text: 'Lưu',
-                press: () {},
+                press: () async {
+                  AccountUpdate accountUpdate = AccountUpdate();
+                  accountUpdate.accountId =
+                      accountController.accountRespone.value?.accountId;
+                  accountUpdate.fullName =
+                      profileController.fullnameController.text;
+                  accountUpdate.birthday = profileController.date ??
+                      DateTime.parse(
+                          accountController.accountRespone.value?.birthday ??
+                              '');
+                  accountUpdate.phoneNumber =
+                      profileController.phonenumberController.text;
+                  accountUpdate.address =
+                      profileController.addressController.text;
+                  if (profileController.image != null) {
+                    accountUpdate.imageUrl = await saveImage(
+                        profileController.image,
+                        "${accountController.accountRespone.value?.email}_${accountController.accountRespone.value?.phoneNumber}");
+                  } else {
+                    accountUpdate.imageUrl =
+                        accountController.accountRespone.value?.imageUrl;
+                  }
+                  showLoadingAnimation(context);
+                  await accountController.updateAccount(accountUpdate).then(
+                      (value) => Future.delayed(const Duration(seconds: 1), () {
+                            slideinTransitionNoBack(context, HomeScreenView());
+                          }));
+                },
               ),
             ),
           ),

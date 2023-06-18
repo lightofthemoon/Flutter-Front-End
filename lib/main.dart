@@ -8,7 +8,6 @@ import 'package:quanlyquantrasua/screens/home/home_screens.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(
     MaterialApp(
       initialRoute: 'introduction_screen',
